@@ -1,0 +1,121 @@
+.btn {
+    @apply flex justify-center items-center gap-2 text-base px-4 py-2 rounded cursor-pointer transition-all select-none;
+
+    /* VARIANTS */
+    &-main {
+        @apply bg-main text-white hover:bg-main/80;
+        &.btn-outline {
+            @apply bg-transparent text-main border border-main hover:bg-main hover:text-white hover:border-transparent;
+        }
+    }
+    &-primary {
+        @apply bg-primary text-white hover:bg-primary/80;
+        &.btn-outline {
+            @apply bg-transparent text-primary border border-primary hover:bg-primary hover:text-white hover:border-transparent;
+        }
+    }
+    &-secondary {
+        @apply bg-secondary text-white hover:bg-secondary/80;
+        &.btn-outline {
+            @apply bg-transparent text-secondary border border-secondary hover:bg-secondary hover:text-white hover:border-transparent;
+        }
+    }
+    &-success {
+        @apply bg-success text-white hover:bg-success/80;
+        &.btn-outline {
+            @apply bg-transparent text-success border border-success hover:bg-success hover:text-white hover:border-transparent;
+        }
+    }
+    &-info {
+        @apply bg-info text-white hover:bg-info/80;
+        &.btn-outline {
+            @apply bg-transparent text-info border border-info hover:bg-info hover:text-white hover:border-transparent;
+        }
+    }
+    &-neutral {
+        @apply bg-neutral text-white hover:bg-neutral/80;
+        &.btn-outline {
+            @apply bg-transparent text-neutral border border-neutral hover:bg-neutral hover:text-white hover:border-transparent;
+        }
+    }
+    &-accent {
+        @apply bg-accent text-white hover:bg-accent/80;
+        &.btn-outline {
+            @apply bg-transparent text-accent border border-accent hover:bg-accent hover:text-white hover:border-transparent;
+        }
+    }
+    &-error {
+        @apply bg-error text-white hover:bg-error/80;
+        &.btn-outline {
+            @apply bg-transparent text-error border border-error hover:bg-error hover:text-white hover:border-transparent;
+        }
+    }
+    &-warning {
+        @apply bg-warning text-white hover:bg-warning/80;
+        &.btn-outline {
+            @apply bg-transparent text-warning border border-warning hover:bg-warning hover:text-white hover:border-transparent;
+        }
+    }
+
+    &-disabled {
+        @apply !bg-base-content/50 text-base-25/50 cursor-default pointer-events-none;
+    }
+
+
+    /* BUTTON SHAPE */
+    &-icon, &-full-rounded {
+        @apply h-12 w-12 p-0;
+        /* SIZE */
+        &.btn-xs {
+            @apply h-8 w-8;
+        }
+        &.btn-sm {
+            @apply h-10 w-10;
+        }
+        &.btn-lg {
+            @apply h-12 w-12;
+        }
+        &.btn-xl {
+            @apply h-14 w-14;
+        }
+    }
+
+    &-icon {
+        @apply rounded;
+    }
+
+    &-full-rounded {
+        @apply rounded-full;
+    }
+    
+    &-block {
+        @apply w-full;
+        &.btn-xs {
+            @apply h-8 text-sm;
+        }
+        &.btn-sm {
+            @apply h-10 text-base;
+        }
+        &.btn-lg {
+            @apply h-12 text-base;
+        }
+        &.btn-xl {
+            @apply h-14 text-lg;
+        }
+    }
+
+
+    /* NORMAL SIZES */
+    &.btn-xs {
+        @apply text-xs;
+    }
+    &.btn-sm {
+        @apply  text-sm;
+    }
+    &.btn-lg {
+        @apply text-lg;
+    }
+    &.btn-xl {
+        @apply text-xl;
+    }
+}

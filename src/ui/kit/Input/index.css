@@ -1,0 +1,43 @@
+.input-group {
+    @apply w-full;
+
+    & .label {
+        @apply block text-base mb-2 px-4 text-base-25;
+    }
+
+    & .input {
+        @apply border rounded py-3 px-3 w-full text-sm border-base-content/40 text-base-25;
+    }
+
+    & .helper {
+        @apply text-xs mt-1 px-4 block;
+    }
+
+    &.error {
+        & .label {
+            @apply text-error;
+        }
+    
+        & .input {
+            @apply text-error border-error;
+        }
+    
+        & .helper {
+            @apply text-error;
+        }
+    }
+
+    &.disabled {
+        & .label {
+            @apply text-base-content;
+        }
+    
+        & .input {
+            @apply text-base-content border-base-content/30 select-none;
+        }
+    
+        & .helper {
+            @apply text-base-content;
+        }
+    }
+}
