@@ -26,7 +26,7 @@ const Button: FC<TButtonProps> = ({
   return (
     <button className={btnClass} {...attr}>
       {loading && <Loading ghost type="spinner" size={size} />}
-      {loadingText || 'درحال بارگزاری'}
+      {loading && (loadingText || 'درحال بارگزاری')}
       {!loading && children}
     </button>
   );

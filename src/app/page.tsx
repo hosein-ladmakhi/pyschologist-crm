@@ -1,6 +1,7 @@
 'use client';
 
-import Input from '@/ui/kit/Input';
+import Button from '@/ui/kit/Button';
+import ImagePicker from '@/ui/kit/ImagePicker';
 import { useState } from 'react';
 
 const MainPage = () => {
@@ -8,8 +9,12 @@ const MainPage = () => {
   return (
     <div className="container my-20">
       <div className="grid grid-cols-12 gap-3">
-        <div className="col-span-4"></div>
+        <div className="col-span-3"></div>
       </div>
+
+      <Button onClick={() => setError(true)} variant="accent">
+        کلیک کردن
+      </Button>
     </div>
   );
 };
