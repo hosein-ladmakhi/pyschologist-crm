@@ -6,6 +6,10 @@ interface IBasePagination {
   variant?: TComponentVariant;
   size?: TComponentSize;
   shape?: TPaginationShape;
+  totalPage: number;
+  additionalClass?: string;
+  activePage: number;
+  onChangePage: (page: number) => void;
 }
 
 export type TPaginationProps = IBasePagination;

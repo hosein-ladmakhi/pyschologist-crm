@@ -5,6 +5,7 @@ import './index.css';
 import { FC } from 'react';
 import { TTableProps } from './index.type';
 import classNames from 'classnames';
+import Pagination from '../Pagination';
 
 const Table: FC<TTableProps> = ({
   columns,
@@ -12,8 +13,10 @@ const Table: FC<TTableProps> = ({
   bordered = true,
   size = 'sm',
   variant = 'light',
+  activePage,
+  onChangePage = () => {},
+  totalPage,
 }) => {
-  console.log(variant);
   const classes = classNames('table', `text-${size}`, {
     bordered,
     'without-bordered': !bordered,
@@ -26,10 +29,9 @@ const Table: FC<TTableProps> = ({
           <tr className="group">
             {columns.map((column) => (
               <th
+                scope="col"
                 key={column.name}
-                className={`item ${
-                  column.width ? `w-[${column.width}px]` : ''
-                }`}
+                className={classNames('item', column.additionalClass || '')}
               >
                 {column.label}
               </th>
@@ -48,6 +50,16 @@ const Table: FC<TTableProps> = ({
           ))}
         </tbody>
       </table>
+
+      {activePage && totalPage && (
+        <Pagination
+          activePage={activePage}
+          onChangePage={onChangePage}
+          variant="primary"
+          totalPage={totalPage}
+          additionalClass="my-10"
+        />
+      )}
     </>
   );
 };

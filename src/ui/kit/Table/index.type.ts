@@ -2,7 +2,7 @@ import { TComponentSize } from '@/types/component.type';
 
 export interface IColumn {
   label: string;
-  width?: number;
+  additionalClass?: string;
   name: string;
 }
 
@@ -18,6 +18,9 @@ interface IBaseTable {
   bordered?: boolean;
   size?: TComponentSize;
   variant?: TTableVariant;
+  activePage?: number;
+  onChangePage?: (page: number) => void;
+  totalPage?: number;
 }
 
 export type TTableProps = IBaseTable;

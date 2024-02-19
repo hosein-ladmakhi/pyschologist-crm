@@ -1,28 +1,28 @@
 'use client';
 
 import Button from '@/ui/kit/Button';
-import Pagination from '@/ui/kit/Pagination';
 import Table from '@/ui/kit/Table';
 import { TColumns, TRows } from '@/ui/kit/Table/index.type';
 
 const columns: TColumns = [
   {
     label: 'شناسه',
-    width: 20,
+    additionalClass: 'min-w-[50px]',
     name: 'id',
   },
   {
     label: 'نام',
-    width: 150,
+    additionalClass: 'min-w-[50px]',
     name: 'firstName',
   },
   {
     label: 'توضیحات',
     name: 'bio',
+    additionalClass: 'min-w-[900px]',
   },
   {
     label: 'عملیات',
-    width: 320,
+    additionalClass: 'min-w-[320px]',
     name: 'action',
   },
 ];
@@ -105,8 +105,13 @@ const rows: TRows = [
 const MainPage = () => {
   return (
     <div className="container my-20">
-      <Table size="xs" rows={rows} columns={columns} />
-      <Pagination variant="error" />
+      <Table
+        totalPage={10}
+        activePage={1}
+        size="xs"
+        rows={rows}
+        columns={columns}
+      />
     </div>
   );
 };
