@@ -1,0 +1,143 @@
+.pagination {
+    @apply flex justify-center items-center w-full gap-4;
+
+    .item {
+        @apply cursor-pointer select-none h-10 w-10 flex justify-center items-center;
+    }
+
+
+    /* Variant */
+    &-primary {
+        .item {
+            @apply border border-primary text-primary;
+
+            &.active {
+                @apply bg-primary text-white;
+            }
+        }
+    }
+
+    &-main {
+        .item {
+            @apply border border-main text-main;
+
+            &.active {
+                @apply bg-main text-white;
+            }
+        }
+    }
+
+    &-info {
+        .item {
+            @apply border border-info text-info;
+
+            &.active {
+                @apply bg-info text-white;
+            }
+        }
+    }
+
+    &-warning {
+        .item {
+            @apply border border-warning text-warning;
+
+            &.active {
+                @apply bg-warning text-white;
+            }
+        }
+    }
+
+    &-error {
+        .item {
+            @apply border border-error text-error;
+
+            &.active {
+                @apply bg-error text-white;
+            }
+        }
+    }
+
+    &-success {
+        .item {
+            @apply border border-success text-success;
+
+            &.active {
+                @apply bg-success text-white;
+            }
+        }
+    }
+
+    &-accent {
+        .item {
+            @apply border border-accent text-accent;
+
+            &.active {
+                @apply bg-accent text-white;
+            }
+        }
+    }
+
+    &-neutral {
+        .item {
+            @apply border border-neutral text-neutral;
+
+            &.active {
+                @apply bg-neutral text-white;
+            }
+        }
+    }
+
+    &-secondary {
+        .item {
+            @apply border border-secondary text-secondary;
+
+            &.active {
+                @apply bg-secondary text-white;
+            }
+        }
+    }
+
+    /* shape */
+    &-round {
+        .item {
+            @apply rounded;
+        }
+    }
+
+    &-circle {
+        .item {
+            @apply rounded-full;
+        }
+    }
+
+    &-square {
+        .item {
+            @apply rounded-none;
+        }
+    }
+
+    /* size */
+    &-xs {
+        .item {
+            @apply h-5 w-5 text-xs;
+        }
+    }
+
+    &-sm {
+        .item {
+            @apply h-8 w-8 text-sm;
+        }
+    }
+
+    &-lg {
+        .item {
+            @apply h-12 w-12 text-lg;
+        }
+    }
+
+    &-xl {
+        .item {
+            @apply h-14 w-14 text-xl;
+        }
+    }
+}

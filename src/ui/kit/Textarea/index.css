@@ -1,0 +1,43 @@
+.textarea-group {
+    @apply w-full;
+
+    .label {
+        @apply block text-base mb-2 px-4 text-base-25;
+    }
+
+    .textarea {
+        @apply w-full text-sm border border-base-content/40 text-base-25 p-5 rounded appearance-none resize-none;
+    }
+
+    .helper {
+        @apply text-xs mt-1 px-4 block;
+    }
+
+    &.error {
+        .label {
+            @apply text-error;
+        }
+
+        .textarea {
+            @apply border-error text-error;
+        }
+
+        .helper {
+            @apply text-error;
+        }
+    }
+
+    &.disabled {
+        & .label {
+            @apply text-base-content;
+        }
+    
+        & .input {
+            @apply text-base-content border-base-content/30 select-none;
+        }
+    
+        & .helper {
+            @apply text-base-content;
+        }
+    }
+}

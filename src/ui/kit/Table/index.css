@@ -1,0 +1,41 @@
+.table {
+    @apply w-full text-center text-base-25 transition-all;
+
+    &.light {
+        @apply bg-white;
+    }
+
+    &.dark {
+        @apply bg-base-25 text-white;
+    }
+
+    .item {
+        @apply p-4;
+    }
+
+    .group {
+        &:hover {
+            @apply bg-base-content/10;
+        }
+    }
+
+    &.bordered {
+        .group {
+            @apply border border-base-content/50;
+        }
+
+        .item {
+            @apply border-l border-base-content/50;
+        }
+    }
+
+    &.without-bordered {
+        .group {
+            @apply border border-base-content/50;
+        }
+
+        .item {
+            @apply border-0;
+        }
+    }
+}
