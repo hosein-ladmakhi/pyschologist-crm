@@ -5,7 +5,7 @@ import HomeBestTherapists from './components/HomeBestTherapists';
 import HomeCategories from './components/HomeCategories';
 
 const HomeScreen: FC = async () => {
-  const categories = await fetch('http://localhost:4000/categories').then(
+  const categories = await fetch('http://localhost:3000/api/categories').then(
     (res) => res.json(),
   );
   return (
