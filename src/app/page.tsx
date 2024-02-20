@@ -1,6 +1,5 @@
 'use client';
 
-import Table from '@/ui/kit/Table';
 import Link from 'next/link';
 
 const MainPage = () => {

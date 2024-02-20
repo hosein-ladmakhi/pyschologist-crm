@@ -34,7 +34,7 @@ const LoginPage = () => {
         <form onSubmit={onSubmit} className="mt-10">
           <Input
             control={control}
-            helperText=""
+            helperText="آدرس ایمیلی که در سایت ثبت شده است"
             label="آدرس ایمیل"
             name="email"
             additionalClass="my-4"
@@ -42,7 +42,7 @@ const LoginPage = () => {
           <Input
             additionalClass="my-4"
             control={control}
-            helperText=""
+            helperText="گذرواژه کلید ورود شما به سایت میباشد"
             label="گذرواژه"
             name="password"
             type="password"
