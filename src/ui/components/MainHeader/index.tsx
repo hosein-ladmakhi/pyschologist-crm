@@ -20,6 +20,7 @@ const items = [
 
 const MainHeader: FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
+  console.log(isOpen);
 
   return (
     <header className="container flex justify-between items-center">
@@ -34,8 +35,8 @@ const MainHeader: FC = () => {
       </div>
       <div
         className={classNames(
-          'absolute top-0 right-0 h-full w-full bg-neutral/50 transition-all overflow-hidden',
-          { 'w-0 p-0 opacity-0': !isOpen },
+          'absolute top-0 right-0 h-full w-full bg-neutral/50 transition-all overflow-hidden z-50',
+          { 'w-0 p-0 opacity-0 pointer-events-none': !isOpen },
         )}
       >
         <nav className="flex justify-start items-start flex-col h-full w-10/12 bg-white p-10">
