@@ -5,6 +5,7 @@ const config: Config = {
   content: [
     './src/ui/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/screens/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     colors: colorThemes,

@@ -16,15 +16,22 @@ const Button: FC<TButtonProps> = ({
   loading = false,
   loadingText = '',
   isOutline = false,
+  className = '',
   ...attr
 }) => {
-  const btnClass = classNames('btn', `btn-${shape}`, `btn-${size}`, {
-    'btn-outline': isOutline,
-    'btn-disabled': disabled || loading,
-    [`btn-${variant}`]: variant && !disabled,
-  });
+  const btnClass = classNames(
+    'btn',
+    `btn-${shape}`,
+    `btn-${size}`,
+    {
+      'btn-outline': isOutline,
+      'btn-disabled': disabled || loading,
+      [`btn-${variant}`]: variant && !disabled,
+    },
+    className,
+  );
   return (
-    <button className={btnClass} {...attr}>
+    <button {...attr} className={btnClass}>
       {loading && <Loading ghost type="spinner" size={size} />}
       {loading && (loadingText || 'درحال بارگزاری')}
       {!loading && children}
