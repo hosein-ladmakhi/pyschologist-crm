@@ -4,7 +4,8 @@ import Button from '@/ui/kits/Button';
 import { IconMenu } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { FC, useEffect, useState } from 'react';
 
 const items = [
   { href: '/', text: 'صفحه اصلی' },
@@ -20,7 +21,11 @@ const items = [
 
 const MainHeader: FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
-  console.log(isOpen);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header className="container flex justify-between items-center">

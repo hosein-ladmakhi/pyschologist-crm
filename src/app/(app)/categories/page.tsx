@@ -1,10 +1,7 @@
-import MainHeader from '@/ui/components/MainHeader';
+import CategoriesScreen from '@/screens/App/Categories';
 import { FC } from 'react';
-import HomeLanding from './components/HomeLanding';
-import HomeBestTherapists from './components/HomeBestTherapists';
-import HomeCategories from './components/HomeCategories';
 
-const HomeScreen: FC = async () => {
+const CategoriesPage: FC = () => {
   const categories = {
     content: [
       {
@@ -70,13 +67,7 @@ const HomeScreen: FC = async () => {
     ],
     count: 18,
   };
-  return (
-    <div>
-      <HomeLanding />
-      <HomeBestTherapists />
-      <HomeCategories categories={categories} />
-    </div>
-  );
+  return <CategoriesScreen categories={categories.content} />;
 };
 
-export default HomeScreen;
+export default CategoriesPage;
