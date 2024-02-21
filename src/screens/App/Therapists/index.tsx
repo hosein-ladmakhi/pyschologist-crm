@@ -11,6 +11,7 @@ import Button from '@/ui/kits/Button';
 import Input from '@/ui/kits/Input';
 import { useForm } from 'react-hook-form';
 import Select from '@/ui/kits/Select';
+import Link from 'next/link';
 
 const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
   const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false);
@@ -30,10 +31,18 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
               <IconCaretLeftFilled size="20px" />
             </div>
           </div>
-          <ReactSlick infinite={false} slidesToShow={3} slidesToScroll={3}>
+          <ReactSlick
+            slide="ul"
+            infinite={false}
+            slidesToShow={3}
+            slidesToScroll={3}
+          >
             {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="p-5">
-                <div className="flex justify-center items-center flex-col">
+              <li key={i} className="p-5">
+                <Link
+                  href="/therapists/1"
+                  className="flex justify-center items-center flex-col"
+                >
                   <div className="h-20 w-20 relative">
                     <Image
                       src="https://file.drsaina.com/image/Profile/90c7c083-53d4-4ece-bf3c-9a035d57de48/160.jpg"
@@ -43,8 +52,8 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
                     />
                   </div>
                   <h1 className="text-xs text-center mt-2">حسین لادمخی نژاد</h1>
-                </div>
-              </div>
+                </Link>
+              </li>
             ))}
           </ReactSlick>
         </div>
@@ -57,10 +66,13 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
               لیست پزشکان {categories[0].faName}
             </h1>
 
-            <div className="grid grid-cols-12 gap-3 mt-5 overflow-auto w-full flex-1">
+            <ul className="grid grid-cols-12 gap-3 mt-5 overflow-auto w-full flex-1">
               {Array.from({ length: 20 }).map((_, i) => (
-                <div key={i} className="col-span-4">
-                  <div className="flex justify-center items-center flex-col">
+                <li key={i} className="col-span-4">
+                  <Link
+                    href="/therapists/1"
+                    className="flex justify-center items-center flex-col"
+                  >
                     <div className="h-20 w-20 relative">
                       <Image
                         src="https://file.drsaina.com/image/Profile/90c7c083-53d4-4ece-bf3c-9a035d57de48/160.jpg"
@@ -70,10 +82,10 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
                       />
                     </div>
                     <h1 className="text-xs mt-2 font-bold">حسین لادمخی نژاد</h1>
-                  </div>
-                </div>
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
 
             <div className="py-2 w-full">
               <div className="grid grid-cols-12 gap-3">
