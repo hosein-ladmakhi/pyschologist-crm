@@ -61,7 +61,7 @@ const TicketsScreen = () => {
 
       {isOpenCreate && (
         <div className="fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end">
-          <div className="w-full h-5/6 bg-white p-5 pb-0 flex flex-col justify-start items-start overflow-auto">
+          <div className="w-full h-4/6 bg-white p-5 pb-0 flex flex-col justify-start items-start overflow-auto">
             <h1 className="font-bold text-base">ثبت رزرو جدید</h1>
             <form action="" className="w-full">
               <Input

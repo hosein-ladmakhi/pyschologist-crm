@@ -55,7 +55,7 @@ const MainHeader: FC = () => {
           </ul>
           <Button
             onClick={() => setOpen(false)}
-            variant="main"
+            variant="error"
             className="w-full !mt-auto"
             size="sm"
           >

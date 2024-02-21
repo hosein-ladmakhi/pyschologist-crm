@@ -85,7 +85,7 @@ const CategoriesScreen: FC<ICategoriesScreenProps> = ({ categories }) => {
             </ul>
             <div className="py-2 w-full">
               <Button
-                variant="main"
+                variant="error"
                 onClick={() => setOpen(false)}
                 size="sm"
                 className="w-full"
