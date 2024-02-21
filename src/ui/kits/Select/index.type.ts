@@ -4,6 +4,7 @@ interface IBaseSelect {
   emptyPlaceholder: string;
   error?: string;
   additionalClasses?: string;
+  multiSelect?: boolean;
 }
 
 export type TSelectProps = IBaseSelect;
