@@ -1,8 +1,11 @@
 'use client';
 
 import Button from '@/ui/kits/Button';
+import { useState } from 'react';
 
 const DashboardScreen = () => {
+  const [isOpenLocation, setIsOpenLocation] = useState<boolean>(false);
+
   return (
     <div className="container">
       <div className="p-5 border border-neutral/10 rounded">
@@ -52,6 +55,7 @@ const DashboardScreen = () => {
                 size="xs"
                 variant="main"
                 isOutline
+                onClick={() => setIsOpenLocation(true)}
               >
                 نمایش مکان
               </Button>
@@ -94,6 +98,7 @@ const DashboardScreen = () => {
                 size="xs"
                 variant="main"
                 isOutline
+                onClick={() => setIsOpenLocation(true)}
               >
                 نمایش مکان
               </Button>
@@ -136,6 +141,7 @@ const DashboardScreen = () => {
                 size="xs"
                 variant="main"
                 isOutline
+                onClick={() => setIsOpenLocation(true)}
               >
                 نمایش مکان
               </Button>
@@ -143,6 +149,37 @@ const DashboardScreen = () => {
           ))}
         </ul>
       </div>
+
+      {isOpenLocation && (
+        <div className="fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end">
+          <div className="w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto">
+            <div className="my-2">
+              <h1 className="text-base font-bold mb-1">شهر</h1>
+              <p className="text-sm">تهران</p>
+            </div>
+            <div className="my-2">
+              <h1 className="text-base font-bold mb-1">آدرس دقیق</h1>
+              <p className="text-sm">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله
+                در
+              </p>
+            </div>
+            <div className="my-2">
+              <h1 className="text-base font-bold mb-1">اتاق</h1>
+              <p className="text-sm">شماره 4</p>
+            </div>
+            <Button
+              variant="error"
+              className="w-full mt-5"
+              onClick={() => setIsOpenLocation(false)}
+              size="sm"
+            >
+              بستن آدرس
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
