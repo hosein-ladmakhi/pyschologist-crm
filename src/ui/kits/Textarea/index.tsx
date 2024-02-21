@@ -12,10 +12,16 @@ const Textarea: FC<TTextareaProps> = ({
   helper,
   error,
   disabled = false,
+  className = '',
   ...attr
 }) => {
   return (
-    <div className={classNames('textarea-group', { error: !!error, disabled })}>
+    <div
+      className={classNames('textarea-group', className, {
+        error: !!error,
+        disabled,
+      })}
+    >
       <label className="label">{label}</label>
       <textarea
         {...attr}
