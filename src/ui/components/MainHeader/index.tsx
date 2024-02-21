@@ -15,7 +15,7 @@ const items = [
   { href: '/auth/patient/signup', text: 'ثبت نام به عنوان کاربر' },
   { href: '/auth/patient/login', text: 'ورود به حساب کاربر' },
   { href: '/categories', text: 'زمینه های مشاوره' },
-  { href: '/categories', text: 'لیست پزشکان' },
+  { href: '/therapists', text: 'لیست پزشکان' },
   { href: '/tickets', text: 'تیکت' },
 ];
 

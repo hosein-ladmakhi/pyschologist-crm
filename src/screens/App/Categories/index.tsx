@@ -90,7 +90,7 @@ const CategoriesScreen: FC<ICategoriesScreenProps> = ({ categories }) => {
                 size="sm"
                 className="w-full"
               >
-                بستن منو
+                بستن جزئیات
               </Button>
             </div>
           </div>
