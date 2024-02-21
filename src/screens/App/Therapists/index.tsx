@@ -57,15 +57,6 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
               لیست پزشکان {categories[0].faName}
             </h1>
 
-            <Button
-              onClick={() => setIsOpenFilter(true)}
-              variant="secondary"
-              size="xs"
-              className="mt-4 w-full"
-            >
-              باز کردن فیلتر
-            </Button>
-
             <div className="grid grid-cols-12 gap-3 mt-5 overflow-auto w-full flex-1">
               {Array.from({ length: 20 }).map((_, i) => (
                 <div key={i} className="col-span-4">
@@ -85,14 +76,28 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
             </div>
 
             <div className="py-2 w-full">
-              <Button
-                onClick={() => setIsOpenDetail(false)}
-                className="w-full"
-                variant="main"
-                size="sm"
-              >
-                بستن جزئیات
-              </Button>
+              <div className="grid grid-cols-12 gap-3">
+                <div className="col-span-6">
+                  <Button
+                    onClick={() => setIsOpenFilter(true)}
+                    variant="secondary"
+                    className="w-full"
+                    size="sm"
+                  >
+                    باز کردن فیلتر
+                  </Button>
+                </div>
+                <div className="col-span-6">
+                  <Button
+                    onClick={() => setIsOpenDetail(false)}
+                    className="w-full"
+                    variant="error"
+                    size="sm"
+                  >
+                    بستن جزئیات
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
