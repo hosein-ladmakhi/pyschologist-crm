@@ -14,7 +14,7 @@
     }
 
     & .dropdown {
-        @apply transition-all bg-white border border-base-content/40 rounded p-2 absolute w-full top-[100%] translate-y-3 z-50 max-h-[305px] overflow-hidden;
+        @apply transition-all bg-white border border-base-content/40 rounded p-2 absolute w-full top-[100%] translate-y-3 z-50 max-h-[305px] overflow-auto;
 
         &-opened {
             @apply opacity-100;

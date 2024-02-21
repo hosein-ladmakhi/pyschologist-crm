@@ -34,7 +34,7 @@ const Select: FC<TSelectProps> = ({
     };
   }, []);
 
-  const onOpenedDropdown = () => setDropdownOpened(true);
+  const handleDropdownStatus = () => setDropdownOpened((prev) => !prev);
 
   return (
     <div
@@ -44,7 +44,7 @@ const Select: FC<TSelectProps> = ({
       })}
     >
       <label className="label">{label}</label>
-      <div onClick={onOpenedDropdown} className="input">
+      <div onClick={handleDropdownStatus} className="input">
         {emptyPlaceholder}
         {dropdownOpened ? (
           <IconCaretUpFilled size="16px" />
