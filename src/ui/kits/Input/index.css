@@ -6,7 +6,7 @@
     }
 
     & .input {
-        @apply border-2 rounded py-3 px-3 w-full text-sm border-base-content/40 text-base-25;
+        @apply border rounded py-3 px-3 w-full text-sm border-neutral/20 text-base-25;
     }
 
     & .helper {
