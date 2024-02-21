@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const items = [
   { href: '/', text: 'صفحه اصلی' },
@@ -28,42 +29,49 @@ const MainHeader: FC = () => {
   }, [pathname]);
 
   return (
-    <header className="container flex justify-between items-center">
-      <Link href="/">
-        <h1 className="font-bold text-lg">سایت روانشناسی</h1>
-      </Link>
-      <div
-        className="h-10 w-10 flex justify-end items-center"
-        onClick={() => setOpen(true)}
-      >
-        <IconMenu fontSize="35px" />
-      </div>
-      <div
-        className={classNames(
-          'absolute top-0 right-0 h-full w-full bg-neutral/50 transition-all overflow-hidden z-50',
-          { 'w-0 p-0 opacity-0 pointer-events-none': !isOpen },
+    <>
+      <header className="container flex justify-between items-center">
+        <Link href="/">
+          <h1 className="font-bold text-lg">سایت روانشناسی</h1>
+        </Link>
+        <div
+          className="h-10 w-10 flex justify-end items-center"
+          onClick={() => setOpen(true)}
+        >
+          <IconMenu fontSize="35px" />
+        </div>
+      </header>
+      <AnimatePresence mode="sync">
+        {isOpen && (
+          <div className="fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-start items-start">
+            <motion.nav
+              initial={{ translateX: 1000 }}
+              animate={{ translateX: 0 }}
+              exit={{ translateX: 1000 }}
+              transition={{ duration: 0.2 }}
+              className="flex justify-start items-start flex-col h-full w-10/12 bg-white p-10"
+            >
+              <h1 className="font-bold mb-5">سایت روانشناسی</h1>
+              <ul>
+                {items.map((item) => (
+                  <li className="text-sm my-2" key={item.href}>
+                    <Link href={item.href}>{item.text}</Link>
+                  </li>
+                ))}
+              </ul>
+              <Button
+                onClick={() => setOpen(false)}
+                variant="error"
+                className="w-full !mt-auto"
+                size="sm"
+              >
+                بستن منو
+              </Button>
+            </motion.nav>
+          </div>
         )}
-      >
-        <nav className="flex justify-start items-start flex-col h-full w-10/12 bg-white p-10">
-          <h1 className="font-bold mb-5">سایت روانشناسی</h1>
-          <ul>
-            {items.map((item) => (
-              <li className="text-sm my-2" key={item.href}>
-                <Link href={item.href}>{item.text}</Link>
-              </li>
-            ))}
-          </ul>
-          <Button
-            onClick={() => setOpen(false)}
-            variant="error"
-            className="w-full !mt-auto"
-            size="sm"
-          >
-            بستن منو
-          </Button>
-        </nav>
-      </div>
-    </header>
+      </AnimatePresence>
+    </>
   );
 };
 
