@@ -1,8 +1,7 @@
-import MainHeader from '@/ui/components/MainHeader';
 import { FC } from 'react';
-import HomeLanding from './components/HomeLanding';
-import HomeBestTherapists from './components/HomeBestTherapists';
-import HomeCategories from './components/HomeCategories';
+import HomeLanding from './components/Landing';
+import HomeBestTherapists from './components/BestTherapists';
+import CategoriesArchive from './components/Categories';
 
 const HomeScreen: FC = async () => {
   const categories = {
@@ -74,7 +73,7 @@ const HomeScreen: FC = async () => {
     <div>
       <HomeLanding />
       <HomeBestTherapists />
-      <HomeCategories categories={categories} />
+      <CategoriesArchive categories={categories} />
     </div>
   );
 };

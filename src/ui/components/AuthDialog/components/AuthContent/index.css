@@ -1,0 +1,24 @@
+.auth-content {
+    @apply flex justify-between items-center w-full gap-2 my-5;
+
+
+    .img {
+        @apply h-44 w-16 relative;
+    }
+
+    .content {
+        @apply flex-1;
+    }
+
+    .title {
+        @apply font-bold text-sm;
+    }
+
+    .text {
+        @apply text-xs mt-2 leading-5;
+    }
+
+    .action-group {
+        @apply flex justify-start items-center gap-3 mt-4;
+    }
+}
