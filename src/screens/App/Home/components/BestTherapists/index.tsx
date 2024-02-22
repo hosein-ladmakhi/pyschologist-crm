@@ -4,7 +4,7 @@ import { FC } from 'react';
 import HomeSectionHeader from '../SectionHeader';
 import HomeBestTherapistCard from '../BestTherapistCard';
 
-const HomeBestTherapists: FC = () => {
+const BestTherapistsArchive: FC = () => {
   return (
     <div className="container">
       <HomeSectionHeader
@@ -20,4 +20,4 @@ const HomeBestTherapists: FC = () => {
   );
 };
 
-export default HomeBestTherapists;
+export default BestTherapistsArchive;

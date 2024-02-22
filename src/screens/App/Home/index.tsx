@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import HomeLanding from './components/Landing';
-import HomeBestTherapists from './components/BestTherapists';
+import BestTherapistsArchive from './components/BestTherapists';
 import CategoriesArchive from './components/Categories';
 
 const HomeScreen: FC = async () => {
@@ -72,7 +72,7 @@ const HomeScreen: FC = async () => {
   return (
     <div>
       <HomeLanding />
-      <HomeBestTherapists />
+      <BestTherapistsArchive />
       <CategoriesArchive categories={categories} />
     </div>
   );
