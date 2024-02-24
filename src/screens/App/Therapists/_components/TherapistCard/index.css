@@ -1,0 +1,27 @@
+.therapist-card {
+    @apply col-span-4 list-none;
+
+    &__link {
+        @apply flex justify-center items-center flex-col;
+    }
+
+    &__avatar {
+        @apply h-20 w-20 relative;
+    }
+
+    &__img {
+        @apply object-cover object-center rounded;
+    }
+
+    &__title {
+        @apply text-xs mt-2 text-center font-medium;
+
+        &--normal {
+            @apply text-sm;
+        }
+
+        &--bold {
+            @apply font-bold;
+        }
+    }
+}

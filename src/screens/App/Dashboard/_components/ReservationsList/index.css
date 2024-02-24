@@ -1,0 +1,11 @@
+.reservations-list {
+    @apply mt-10;
+
+    &__title {
+        @apply font-bold text-base;
+    }
+
+    &__list {
+        @apply mt-5;
+    }
+}

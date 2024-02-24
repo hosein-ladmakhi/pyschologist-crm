@@ -1,0 +1,49 @@
+.ticket-detail {
+    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end;
+
+    &__card {
+        @apply w-full h-5/6 bg-white p-5 pb-0 flex flex-col justify-start items-start overflow-auto;
+    }
+
+    &__title {
+        @apply font-bold text-base pb-2;
+    }
+
+    &__content {
+        @apply flex-1 overflow-auto;
+    }
+
+    &__text {
+        @apply text-sm leading-7;
+    }
+
+    .admin-card {
+        @apply mt-3 bg-main/10 p-5 text-sm;
+
+        &__title {
+            @apply font-bold;
+        }
+
+        &__text {
+            @apply mt-2 leading-7;
+        }
+    }
+
+
+    &__action {
+        @apply py-2 w-full grid grid-cols-12 gap-3;
+    }
+
+
+    .related-ticket {
+        @apply mt-5;
+
+        &__title {
+            @apply text-sm font-bold;
+        }
+
+        &__list {
+            @apply mt-5;
+        }
+    }
+}

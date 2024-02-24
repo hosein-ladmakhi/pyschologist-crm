@@ -1,0 +1,15 @@
+.category-card {
+    @apply my-5 w-full;
+
+    &__content {
+        @apply flex justify-start items-center gap-3;
+    }
+
+    &__image {
+        @apply h-14 w-14 relative bg-main/10 rounded;
+    }
+
+    &__title {
+        @apply text-sm font-bold leading-7;
+    }
+}

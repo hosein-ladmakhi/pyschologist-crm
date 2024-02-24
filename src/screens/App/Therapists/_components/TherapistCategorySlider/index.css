@@ -1,0 +1,16 @@
+.therapist-category-slider {
+    @apply mb-5;
+
+    .card {
+        @apply flex justify-between items-center mb-3;
+
+
+        &__title {
+            @apply text-sm font-bold;
+        }
+
+        &__icon {
+            @apply h-10 w-10 flex justify-center items-center;
+        }
+    }
+}

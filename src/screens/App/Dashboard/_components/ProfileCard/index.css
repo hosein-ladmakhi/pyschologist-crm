@@ -1,0 +1,15 @@
+.profile-card {
+    @apply p-5 border border-neutral/10 rounded;
+
+    &__content {
+        @apply flex justify-between items-center;
+    }
+
+    &__username {
+        @apply text-sm font-bold text-neutral/80;
+    }
+
+    &__phone {
+        @apply text-sm text-neutral/50 mt-1;
+    }
+}

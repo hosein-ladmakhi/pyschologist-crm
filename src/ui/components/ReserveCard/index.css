@@ -1,0 +1,12 @@
+.reserve-card {
+    @apply p-5 rounded border border-neutral/10 my-5;
+
+    &__content {
+        @apply flex justify-between items-center text-sm my-2;
+
+    }
+
+    &__title {
+        @apply font-bold;
+    }
+}

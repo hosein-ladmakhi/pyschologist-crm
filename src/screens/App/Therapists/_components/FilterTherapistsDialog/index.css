@@ -1,0 +1,22 @@
+.filter-therapist {
+    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end;
+
+
+    &__card {
+        @apply w-full h-4/6 bg-white p-5 pb-0 flex flex-col justify-start items-start;
+    }
+
+    &__title {
+        @apply text-sm font-bold;
+    }
+
+    &__form {
+        @apply w-full flex-1 mt-4 overflow-auto;
+    }
+    &__actions {
+        @apply py-2 w-full grid grid-cols-12 gap-3;
+    }
+    &__action {
+        @apply col-span-6;
+    }
+}

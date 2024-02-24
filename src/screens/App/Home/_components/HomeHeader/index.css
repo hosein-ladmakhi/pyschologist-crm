@@ -1,0 +1,9 @@
+.home-header {
+    &__title {
+        @apply text-base font-bold;
+    }
+
+    &__content {
+        @apply text-sm mt-1;
+    }
+}

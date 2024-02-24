@@ -1,0 +1,7 @@
+.tickets-header {
+    @apply flex justify-between items-center;
+
+    &__title {
+        @apply text-base font-bold;
+    }
+}

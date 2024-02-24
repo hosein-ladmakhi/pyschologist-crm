@@ -1,0 +1,19 @@
+.category-card {
+    @apply my-5;
+
+    &__link {
+        @apply flex justify-start items-center gap-2;
+    }
+
+    &__avatar {
+        @apply relative h-14 w-14 bg-main/10 rounded;
+    }
+
+    &__title {
+        @apply text-xs font-bold;
+    }
+
+    &__desc {
+        @apply text-xs mt-1;
+    }
+}

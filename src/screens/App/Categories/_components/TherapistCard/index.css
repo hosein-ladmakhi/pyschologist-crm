@@ -1,0 +1,31 @@
+.therapist-card {
+    @apply my-4;
+
+    &__content {
+        @apply flex justify-start items-center gap-3;
+    }
+
+    &__avatar {
+        @apply h-20 w-20 relative;
+    }
+
+    &__img {
+        @apply rounded;
+    }
+
+    &__body {
+        @apply flex-1;
+    }
+
+    &__title {
+        @apply text-sm font-bold;
+    }
+
+    &__desc {
+        @apply text-xs line-clamp-1;
+    }
+
+    &__subdesc {
+        @apply text-xs text-neutral/60 mt-1;
+    }
+}

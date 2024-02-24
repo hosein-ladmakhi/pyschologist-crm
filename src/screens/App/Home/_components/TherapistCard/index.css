@@ -1,0 +1,31 @@
+.best-therapist {
+    @apply col-span-12 text-center;
+
+    &__title {
+        @apply font-bold text-sm mt-4;
+    }
+
+    &__bio {
+        @apply mt-2 text-xs text-neutral/50 line-clamp-3 leading-5;
+    }
+
+    &__categories {
+        @apply text-xs text-neutral/50 mt-1;
+    }
+
+    &__item {
+        @apply ml-2 inline-block border-l pl-2 last:border-l-0 border-neutral/10;
+    }
+
+    &__link {
+        @apply bg-main block text-sm mt-4 rounded text-white py-2;
+    }
+
+    &__avatar {
+        @apply h-24 w-24 relative mx-auto;
+
+    }
+    &__image {
+        @apply rounded object-cover object-center;
+    }
+}

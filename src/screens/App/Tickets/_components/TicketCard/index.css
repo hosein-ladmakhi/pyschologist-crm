@@ -1,0 +1,19 @@
+.ticket-card {
+    @apply p-4 border my-5 rounded border-neutral/10;
+
+    &__title {
+        @apply text-sm leading-6 mb-2 font-bold;
+    }
+
+    &__content {
+        @apply flex flex-wrap justify-start items-center gap-3 mt-5;
+    }
+
+    &__badge {
+        @apply flex justify-center items-center h-5 px-3 text-xs bg-main/10 text-main rounded-full;
+    }
+
+    &__btn {
+        @apply flex justify-end items-center mt-3;
+    }
+}
