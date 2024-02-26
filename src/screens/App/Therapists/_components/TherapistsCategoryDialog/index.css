@@ -20,5 +20,9 @@
         &__action {
             @apply col-span-6;
         }
+
+        &__content {
+            @apply flex-1 overflow-auto;
+        }
     }
 }

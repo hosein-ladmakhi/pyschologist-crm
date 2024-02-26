@@ -3,6 +3,8 @@
 import { FC, Suspense, useState } from 'react';
 import { ITherapistsScreenProps } from './index.type';
 import dynamic from 'next/dynamic';
+import { ICategory } from '@/types/category.type';
+import { usePathname, useRouter } from 'next/navigation';
 
 const FilterTherapistsDialog = dynamic(
   () => import('./_components/FilterTherapistsDialog'),
@@ -17,8 +19,32 @@ const TherapistCategorySlider = dynamic(
 );
 
 const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
+  const [selectedCategory, setSelectedCategory] = useState<ICategory>();
   const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false);
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleOpenCategoryDetail = (category: ICategory) => {
+    setIsOpenDetail(true);
+    setSelectedCategory(category);
+  };
+
+  const handleCloseCategoryDetail = () => {
+    setIsOpenDetail(false);
+    router.push(pathname);
+    setSelectedCategory(undefined);
+  };
+
+  const handleOpenFilter = () => {
+    setIsOpenFilter(true);
+  };
+
+  const handleCloseFilter = (isResetURL?: boolean) => {
+    setIsOpenFilter(false);
+    if (isResetURL) router.push(pathname);
+  };
 
   return (
     <div className="container">
@@ -26,23 +52,23 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
         <TherapistCategorySlider
           key={category.id}
           category={category}
-          handleOpenDialog={() => setIsOpenDetail(true)}
+          handleOpenDialog={handleOpenCategoryDetail}
         />
       ))}
 
-      {isOpenDetail && (
+      {isOpenDetail && selectedCategory && (
         <Suspense fallback={<></>}>
           <TherapistsCategoryDialog
-            category={categories[0]}
-            handleClose={() => setIsOpenDetail(false)}
-            handleOpenFilter={() => setIsOpenFilter(true)}
+            category={selectedCategory}
+            handleClose={handleCloseCategoryDetail}
+            handleOpenFilter={handleOpenFilter}
           />
         </Suspense>
       )}
 
       {isOpenFilter && (
         <Suspense fallback={<></>}>
-          <FilterTherapistsDialog handleClose={() => setIsOpenFilter(false)} />
+          <FilterTherapistsDialog handleClose={handleCloseFilter} />
         </Suspense>
       )}
     </div>

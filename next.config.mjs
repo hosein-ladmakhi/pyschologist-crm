@@ -13,6 +13,10 @@ const nextConfig = {
             {
                 hostname: "file.drsaina.com",
                 protocol: "https"
+            },
+            {
+                hostname: "localhost",
+                protocol: "http"
             }
         ]
     },

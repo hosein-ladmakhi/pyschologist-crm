@@ -7,17 +7,40 @@ import Input from '@/ui/kits/Input';
 import Select from '@/ui/kits/Select';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { IFilterTherapistsDialogProps } from './index.type';
+import {
+  IFilterTherapistsDialogProps,
+  TFilterFormValidation,
+} from './index.type';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { filterFormValidation } from './filter-form.validation';
+import { EDegtreeOfEducation, EGender } from '@/types/therapist.type';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
   handleClose,
 }) => {
-  const { control } = useForm();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const { control, handleSubmit } = useForm<TFilterFormValidation>({
+    resolver: zodResolver(filterFormValidation),
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    const url = new URLSearchParams(searchParams);
+    Object.keys(data)
+      .filter((key) => (data as any)[key])
+      .map((key) => url.set(key, (data as any)[key]));
+    router.push(pathname + '?' + url);
+    handleClose();
+  });
+
   return (
     <div className="filter-therapist">
       <div className="filter-therapist__card">
         <h1 className="filter-therapist__title">فیلتر پزشکان</h1>
-        <form action="" className="filter-therapist__form">
+        <form className="filter-therapist__form">
           <Input
             name="firstName"
             control={control}
@@ -33,44 +56,48 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
             additionalClass="my-3"
           />
           <Select
+            control={control}
+            name="gender"
             emptyPlaceholder="جنسیت پزشک"
             label="جنسیت"
             additionalClasses="my-3"
             options={[
               {
                 text: 'پزشک آقا',
-                value: 1,
+                value: EGender.male,
               },
               {
                 text: 'پزشک خانم',
-                value: 2,
+                value: EGender.female,
               },
             ]}
           />
           <Select
+            control={control}
+            name="degreeOfEducation"
             emptyPlaceholder="مدرک تحصیلی پزشک"
             label="مدرک تحصیلی"
             additionalClasses="my-3"
             options={[
               {
                 text: 'دیپلم',
-                value: 1,
+                value: EDegtreeOfEducation.diploma,
               },
               {
                 text: 'فوق دیپلم',
-                value: 2,
+                value: EDegtreeOfEducation.associate,
               },
               {
                 text: 'لیسانس',
-                value: 3,
+                value: EDegtreeOfEducation.bachelor,
               },
               {
                 text: 'ارشد',
-                value: 4,
+                value: EDegtreeOfEducation.master,
               },
               {
                 text: 'دکترا',
-                value: 4,
+                value: EDegtreeOfEducation.doctorate,
               },
             ]}
           />
@@ -78,7 +105,7 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
         <div className="filter-therapist__actions">
           <div className="filter-therapist__action">
             <Button
-              onClick={handleClose}
+              onClick={onSubmit}
               className="w-full"
               variant="main"
               size="sm"
@@ -88,7 +115,7 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
           </div>
           <div className="filter-therapist__action">
             <Button
-              onClick={handleClose}
+              onClick={handleClose.bind(null, true)}
               className="w-full"
               variant="error"
               size="sm"

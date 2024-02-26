@@ -1,4 +1,6 @@
+import { ICategory } from '@/types/category.type';
+
 export interface ITherapistCategorySliderProps {
-  category: any;
-  handleOpenDialog: () => void;
+  category: ICategory;
+  handleOpenDialog: (category: ICategory) => void;
 }

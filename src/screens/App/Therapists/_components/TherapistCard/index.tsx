@@ -2,25 +2,40 @@
 
 import './index.css';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { ITherapistCardProps } from './index.type';
 import classNames from 'classnames';
+import Image from '@/ui/kits/Image';
+import { IconUser, IconUserBolt } from '@tabler/icons-react';
+import { colorThemes } from '@/constants/color-theme.constant';
+
+const NotFoundImage = () => {
+  return (
+    <div className="absolute top-0 left-0 h-full w-full bg-main/10 rounded flex justify-center items-center">
+      <IconUserBolt size="35px" color={colorThemes.main} />
+    </div>
+  );
+};
 
 const TherapistCard: FC<ITherapistCardProps> = ({
   isTitleBold = true,
   size = 'sm',
+  therapist,
 }) => {
   return (
     <li className="therapist-card">
-      <Link href="/therapists/1" className="therapist-card__link">
+      <Link
+        href={`/therapists/${therapist.id}`}
+        className="therapist-card__link"
+      >
         <div className="therapist-card__avatar">
           <Image
-            src="https://file.drsaina.com/image/Profile/90c7c083-53d4-4ece-bf3c-9a035d57de48/160.jpg"
+            src={`http://localhost:4000${therapist.image}`}
             alt="category-therapist"
             fill
             className="therapist-card__img"
+            notFoundLoader={<NotFoundImage />}
           />
         </div>
         <h1
@@ -29,7 +44,7 @@ const TherapistCard: FC<ITherapistCardProps> = ({
             'therapist-card__title--normal': size === 'md',
           })}
         >
-          حسین لادمخی نژاد
+          {therapist.firstName} {therapist.lastName}
         </h1>
       </Link>
     </li>

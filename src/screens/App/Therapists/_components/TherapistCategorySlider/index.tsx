@@ -21,20 +21,35 @@ const TherapistCategorySlider: FC<ITherapistCategorySliderProps> = ({
     <div className="therapist-category-slider">
       <div className="card">
         <h1 className="card__title">{category.faName}</h1>
-        <div onClick={handleOpenDialog} className="card__icon">
+        <div
+          onClick={handleOpenDialog.bind(null, category)}
+          className="card__icon"
+        >
           <IconCaretLeftFilled size="20px" />
         </div>
       </div>
-      <ReactSlick
-        slide="ul"
-        infinite={false}
-        slidesToShow={3}
-        slidesToScroll={3}
-      >
-        {Array.from({ length: 10 }).map((_, i) => (
-          <TherapistCard size="md" key={i} isTitleBold={false} />
-        ))}
-      </ReactSlick>
+      {category.therapists.length > 0 ? (
+        <ReactSlick
+          slide="ul"
+          infinite={false}
+          slidesToShow={3}
+          slidesToScroll={1}
+          autoplay
+        >
+          {category.therapists.map((therapist) => (
+            <TherapistCard
+              therapist={therapist}
+              size="md"
+              isTitleBold={false}
+              key={therapist.id}
+            />
+          ))}
+        </ReactSlick>
+      ) : (
+        <div>
+          <p className="text-sm">پزشکی یافت نشد</p>
+        </div>
+      )}
     </div>
   );
 };
