@@ -16,7 +16,7 @@ const CategoriesList: FC<IHomeCategoriesProps> = ({ categories }) => {
           content="بیش از 2500 تخصص در زمینه پزشکی موجود میباشد"
         />
         <ul>
-          {categories.content.map((category: any) => (
+          {categories.map((category) => (
             <CategoryCard category={category} key={category.id} />
           ))}
         </ul>

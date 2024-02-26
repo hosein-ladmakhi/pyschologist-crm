@@ -5,19 +5,22 @@ import './index.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import { ITherapistCardProps } from './index.type';
 
-const TherapistCard: FC = () => {
+const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
   return (
     <div className="best-therapist">
       <div className="best-therapist__avatar">
         <Image
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQic9HKxc7De7FhFt6OLu3JGC-MRb_UpsuSdw&usqp=CAU"
+          src={`http://localhost:4000${therapist.image}`}
           fill
           alt="avatar"
           className="best-therapist__image"
         />
       </div>
-      <h1 className="best-therapist__title">حسین لادمخی تژاد</h1>
+      <h1 className="best-therapist__title">
+        {therapist.firstName} {therapist.lastName}
+      </h1>
       <p className="best-therapist__bio">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
         از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
@@ -40,7 +43,10 @@ const TherapistCard: FC = () => {
             </span>
           ))}
       </p>
-      <Link href="/" className="best-therapist__link">
+      <Link
+        href={`/therapists/${therapist.id}`}
+        className="best-therapist__link"
+      >
         جزئیات
       </Link>
     </div>

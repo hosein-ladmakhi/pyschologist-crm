@@ -15,10 +15,10 @@ const CategoryDetailDialog: FC<ICategoryDetailDialogProps> = ({
   return (
     <div className="category-detail">
       <div className="category-detail__content">
-        <CategoryCard category={category} onOpenCategoryDetail={() => {}} />
+        <CategoryCard category={category} handleOpenCategory={() => {}} />
         <ul className="category-detail__list">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <TherapistCard key={i} />
+          {category.therapists.map((therapist) => (
+            <TherapistCard therapist={therapist} key={therapist.id} />
           ))}
         </ul>
         <div className="category-detail__actions">

@@ -1,18 +1,25 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { FC, Suspense, useState } from 'react';
 import dynamic from 'next/dynamic';
 import TherapistSchedule from './_components/TherapistSchedule';
 import TherapistInfo from './_components/TherapistInfo';
+import { ITherapistDetailScreenProps } from './index.type';
 
 const ReserveDialog = dynamic(() => import('./_components/ReserveDialog'));
 
-const TherapistDetailScreen = () => {
+const TherapistDetailScreen: FC<ITherapistDetailScreenProps> = ({
+  therapist,
+  schedules,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="container">
-      <TherapistInfo handleOpenReserve={() => setIsOpen(true)} />
-      <TherapistSchedule />
+      <TherapistInfo
+        therapist={therapist}
+        handleOpenReserve={() => setIsOpen(true)}
+      />
+      <TherapistSchedule therapist={therapist} schedules={schedules} />
       {isOpen && (
         <Suspense fallback={<></>}>
           <ReserveDialog handleClose={() => setIsOpen(false)} />

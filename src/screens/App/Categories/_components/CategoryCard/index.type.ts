@@ -1,4 +1,6 @@
+import { ICategory } from '@/types/category.type';
+
 export interface ICaregoryCardProps {
-  category: any;
-  onOpenCategoryDetail: () => void;
+  category: ICategory;
+  handleOpenCategory: (category: ICategory) => void;
 }

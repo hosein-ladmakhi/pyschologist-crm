@@ -20,7 +20,9 @@ const CategoryCard: FC<ICategoryCardProps> = ({ category }) => {
         </div>
         <div>
           <h1 className="category-card__title">{category.faName}</h1>
-          <p className="category-card__desc">تعداد پزشکان متخصص : 252 نفر</p>
+          <p className="category-card__desc">
+            تعداد پزشکان متخصص : {category.therapists.length} نفر
+          </p>
         </div>
       </Link>
     </li>

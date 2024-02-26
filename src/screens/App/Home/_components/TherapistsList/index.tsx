@@ -5,8 +5,9 @@ import './index.css';
 import { FC } from 'react';
 import HomeHeader from '../HomeHeader';
 import TherapistCard from '../TherapistCard';
+import { ITherapistsListProps } from './index.type';
 
-const TherapistsList: FC = () => {
+const TherapistsList: FC<ITherapistsListProps> = ({ therapists }) => {
   return (
     <div className="best-therapists">
       <HomeHeader
@@ -14,8 +15,8 @@ const TherapistsList: FC = () => {
         title="گفتگو و مشاوره با بهترین مختصصین"
       />
       <div className="best-therapists__list">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <TherapistCard key={i} />
+        {therapists.map((therapist) => (
+          <TherapistCard key={therapist.id} therapist={therapist} />
         ))}
       </div>
     </div>

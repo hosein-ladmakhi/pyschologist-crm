@@ -48,7 +48,7 @@ const TherapistsScreen: FC<ITherapistsScreenProps> = ({ categories }) => {
 
   return (
     <div className="container">
-      {categories.map((category: any) => (
+      {categories.map((category) => (
         <TherapistCategorySlider
           key={category.id}
           category={category}

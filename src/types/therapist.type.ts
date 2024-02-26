@@ -25,4 +25,5 @@ export interface ITherapist extends IBaseModel, IBaseUser {
   image: string;
   workingFields: ICategory[];
   schedules: ITherapistSchedules[];
+  patientOrders?: any[];
 }

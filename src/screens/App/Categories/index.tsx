@@ -4,31 +4,38 @@ import { FC, Suspense, useState } from 'react';
 import { ICategoriesScreenProps } from './index.type';
 import CategoryCard from './_components/CategoryCard';
 import dynamic from 'next/dynamic';
+import { ICategory } from '@/types/category.type';
 
 const CategoryDetailDialog = dynamic(
   () => import('./_components/CategoryDetailDialog'),
 );
 
 const CategoriesScreen: FC<ICategoriesScreenProps> = ({ categories }) => {
-  const [categoryDetail, setCategoryDetail] = useState<boolean>(false);
+  const [selectedCategory, setSelectedCategory] = useState<ICategory>();
 
-  const onCategoryDetailChange = () => setCategoryDetail((prev) => !prev);
+  const handleOpenCategory = (category: ICategory) => {
+    setSelectedCategory(category);
+  };
+
+  const handleCloseCategory = () => {
+    setSelectedCategory(undefined);
+  };
 
   return (
     <div className="container">
-      {categories.map((category: any) => (
+      {categories.map((category) => (
         <CategoryCard
           key={category.id}
           category={category}
-          onOpenCategoryDetail={onCategoryDetailChange}
+          handleOpenCategory={handleOpenCategory}
         />
       ))}
 
-      {categoryDetail && (
+      {selectedCategory && (
         <Suspense fallback={<></>}>
           <CategoryDetailDialog
-            category={categories[0]}
-            onClose={onCategoryDetailChange}
+            category={selectedCategory}
+            onClose={handleCloseCategory}
           />
         </Suspense>
       )}

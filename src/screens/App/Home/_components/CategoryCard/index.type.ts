@@ -1,3 +1,5 @@
+import { ICategory } from '@/types/category.type';
+
 export interface ICategoryCardProps {
-  category: { faName: string; enName: string; icon: string; id: number };
+  category: ICategory;
 }

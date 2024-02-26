@@ -8,11 +8,11 @@ import { ICaregoryCardProps } from './index.type';
 
 const CategoryCard: FC<ICaregoryCardProps> = ({
   category,
-  onOpenCategoryDetail,
+  handleOpenCategory,
 }) => {
   return (
     <div
-      onClick={onOpenCategoryDetail}
+      onClick={handleOpenCategory.bind(null, category)}
       key={category.id}
       className="category-card"
     >

@@ -17,3 +17,8 @@ export interface ITherapistSchedules extends IBaseModel {
   type: ETherapistScheduleType;
   room: number;
 }
+
+export interface ITherapistSchedulesPerDay {
+  day: number;
+  items: ITherapistSchedules[];
+}
