@@ -1,5 +1,7 @@
 'use client';
 
+import './index.css';
+
 import Select from '@/ui/kits/Select';
 import {
   categories,
@@ -14,35 +16,35 @@ import { IReserveDialogProps } from './index.type';
 
 const ReserveDialog: FC<IReserveDialogProps> = ({ handleClose }) => {
   return (
-    <div className="fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end">
-      <div className="w-full h-5/6 bg-white p-5 pb-0 flex flex-col justify-start items-start overflow-auto">
-        <form className="w-full" action="">
+    <div className="reserve-dialog">
+      <div className="reserve-dialog__card">
+        <form className="reserve-dialog__form" action="">
           <Select
             emptyPlaceholder="روز رزرو را انتخاب کنید"
             label="روز های هفته"
             options={dayOptions}
-            additionalClasses="mb-4"
+            additionalClasses="reserve-dialog__form-item"
           />
           <Select
-            additionalClasses="mb-4"
+            additionalClasses="reserve-dialog__form-item"
             emptyPlaceholder="شیوه برگزاری جلسات را انتخاب کنید"
             label="شیوه برگزاری"
             options={typeOptions}
           />
           <Select
-            additionalClasses="mb-4"
+            additionalClasses="reserve-dialog__form-item"
             emptyPlaceholder="ساعت رزرو خود را انتخاب کنید"
             label="ساعت های موجود"
             options={timeOptions}
           />
           <Select
-            additionalClasses="mb-4"
+            additionalClasses="reserve-dialog__form-item"
             emptyPlaceholder="تاریخ برگزاری رزرو را انتخاب کنید"
             label="تاریخ های موجود"
             options={dateOptions}
           />
           <Select
-            additionalClasses="mb-4"
+            additionalClasses="reserve-dialog__form-item"
             emptyPlaceholder="به چه دلیل به این جلسه نیاز دارید"
             label="دلیل دریافت نوبت"
             options={[...categories.content, ...categories.content].map(
@@ -52,18 +54,19 @@ const ReserveDialog: FC<IReserveDialogProps> = ({ handleClose }) => {
               }),
             )}
           />
-          <Button variant="main" className="w-full !hidden">
-            درخواست رزرو
-          </Button>
         </form>
-        <div className="grid grid-cols-12 gap-3 w-full">
-          <div className="col-span-6">
-            <Button variant="main" className="w-full">
+        <div className="reserve-dialog__actions">
+          <div className="reserve-dialog__action">
+            <Button variant="main" className="reserve-dialog__btn">
               درخواست رزرو
             </Button>
           </div>
-          <div className="col-span-6">
-            <Button onClick={handleClose} variant="error" className="w-full">
+          <div className="reserve-dialog__action">
+            <Button
+              onClick={handleClose}
+              variant="error"
+              className="reserve-dialog__btn"
+            >
               لغو درخواست
             </Button>
           </div>

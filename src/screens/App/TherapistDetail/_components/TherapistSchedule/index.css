@@ -1,0 +1,31 @@
+.therapist-schedule {
+    @apply mt-5;
+
+    &__title {
+        @apply text-base font-bold;
+    }
+
+    &__content {
+        @apply mt-2;
+    }
+
+    &__tabs {
+        @apply flex flex-nowrap w-full overflow-auto whitespace-nowrap gap-4 pb-5;
+    }
+
+    &__tab-bar {
+        @apply text-sm first:bg-main first:text-white px-4 py-1 rounded;
+    }
+
+    &__tab-item {
+        @apply grid grid-cols-12 gap-4 mt-5;
+    }
+
+    &__item {
+        @apply col-span-6 text-center border border-neutral/10 p-4 rounded;
+    }
+
+    &__text {
+        @apply text-xs;
+    }
+}

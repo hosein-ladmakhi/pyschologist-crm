@@ -1,0 +1,28 @@
+.reserve-dialog {
+    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end;
+
+    &__card {
+        @apply w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto;
+    }
+
+    &__form {
+        @apply w-full;
+
+        &-item {
+            @apply mb-4;
+        }
+    }
+
+
+    &__actions {
+        @apply grid grid-cols-12 gap-3 w-full;
+    }
+
+    &__action {
+        @apply col-span-6;
+    }
+
+    &__btn {
+        @apply w-full;
+    }
+}

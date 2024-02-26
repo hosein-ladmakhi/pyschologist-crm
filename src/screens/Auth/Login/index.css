@@ -1,0 +1,39 @@
+.login {
+    @apply h-screen mx-auto flex justify-center items-start flex-col relative overflow-hidden;
+
+    &__picture {
+        @apply bg-main h-64 w-64 rounded-full absolute -top-32 -left-28;
+    }
+
+    &__picture-bottom {
+        @apply bg-main h-40 w-full rounded-full absolute -bottom-32 -right-28;
+    }
+
+    &__card {
+        @apply w-10/12 mx-auto;
+    }
+
+    &__title {
+        @apply text-4xl font-bold bg-gradient-to-r from-main via-main to-success text-transparent bg-clip-text;
+    }
+
+    &__subtitle {
+        @apply text-2xl mt-4 text-main;
+    }
+
+    &__form {
+        @apply mt-10;
+
+        &-item {
+            @apply my-4;
+        }
+
+        &-btn {
+            @apply w-full mt-10;
+        }
+    }
+
+    &__link {
+        @apply text-base my-10 block text-main underline;
+    }
+}
