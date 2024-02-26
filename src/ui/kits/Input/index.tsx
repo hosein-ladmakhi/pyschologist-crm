@@ -10,10 +10,10 @@ const Input: FC<TInputProps> = ({
   label,
   placeholder,
   helperText,
-  additionalClass = '',
   disabled,
   control,
   name,
+  className = '',
   ...attr
 }) => {
   return (
@@ -22,7 +22,7 @@ const Input: FC<TInputProps> = ({
       control={control}
       render={({ field, fieldState }) => {
         const error = fieldState.error?.message;
-        const inputGroupClass = classNames('input-group', additionalClass, {
+        const inputGroupClass = classNames('input-group', className, {
           error: !!error,
           disabled: !!disabled,
         });

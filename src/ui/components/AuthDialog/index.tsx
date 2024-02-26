@@ -8,7 +8,7 @@ import { IconX } from '@tabler/icons-react';
 import { IAuthDialogProps } from './index.type';
 import { useRouter } from 'next/navigation';
 import { AUTH_MODAL_ANIMATION } from './index.animation';
-import AuthContent from './components/AuthContent';
+import AuthCard from './_components/AuthCard';
 
 const AuthDialog: FC<IAuthDialogProps> = ({ onClose }) => {
   const route = useRouter();
@@ -28,12 +28,12 @@ const AuthDialog: FC<IAuthDialogProps> = ({ onClose }) => {
             <IconX />
           </div>
         </div>
-        <AuthContent
+        <AuthCard
           type="patient"
           redirectLogin={redirectToAuthLogin.bind(null, 'patient')}
           redirectSignup={redirectToAuthSignup.bind(null, 'patient')}
         />
-        <AuthContent
+        <AuthCard
           type="therapist"
           redirectLogin={redirectToAuthLogin.bind(null, 'therapist')}
           redirectSignup={redirectToAuthSignup.bind(null, 'therapist')}

@@ -1,11 +1,11 @@
 .header {
     @apply container flex justify-between items-center;
 
-    .title {
+    &__title {
         @apply font-bold text-lg;
     }
 
-    .icon {
+    &__icon {
         @apply h-10 w-10 flex justify-end items-center;
     }
 }

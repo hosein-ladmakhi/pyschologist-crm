@@ -9,12 +9,32 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { loginValidation } from './login-form.validation';
 import { TLoginFormValidation } from './index.type';
+import { useParams } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const LoginScreen = () => {
+  const params = useParams() as { type: string };
   const { control, handleSubmit } = useForm<TLoginFormValidation>({
     resolver: zodResolver(loginValidation),
   });
-  const onSubmit = handleSubmit(() => {});
+  const onSubmit = handleSubmit((data) => {
+    fetch(`http://localhost:4000/auth/login/${params.type}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(123, res);
+        toast.success('ورود شما با موفقیت انجام گردید');
+      })
+      .catch(() => {
+        console.log('Login error');
+        toast.error('ورود شما انجام نشد دوباره تلاش کنید');
+      });
+  });
 
   return (
     <div className="login">
@@ -26,18 +46,20 @@ const LoginScreen = () => {
         <form onSubmit={onSubmit} className="login__form">
           <Input
             control={control}
-            helperText="آدرس ایمیلی که در سایت ثبت شده است"
-            label="آدرس ایمیل"
-            name="email"
-            additionalClass="login__form-item"
+            helperText="شماره تماسی که در سایت ثبت شده است"
+            label="شماره تماس"
+            name="phone"
+            className="login__form-item"
+            tabIndex={1}
           />
           <Input
-            additionalClass="login__form-item"
+            className="login__form-item"
             control={control}
             helperText="گذرواژه کلید ورود شما به سایت میباشد"
             label="گذرواژه"
             name="password"
             type="password"
+            tabIndex={2}
           />
           <Button type="submit" variant="main" className="login__form-btn">
             ورود به حساب کاربری

@@ -1,24 +1,23 @@
-.auth-content {
+.auth-card {
     @apply flex justify-between items-center w-full gap-2 my-5;
 
-
-    .img {
-        @apply h-44 w-16 relative;
+    &__content {
+        @apply flex-1 w-full;
     }
 
-    .content {
-        @apply flex-1;
-    }
-
-    .title {
+    &__title {
         @apply font-bold text-sm;
     }
 
-    .text {
+    &__text {
         @apply text-xs mt-2 leading-5;
     }
 
-    .action-group {
+    &__img {
+        @apply h-44 w-16 relative;
+    }
+
+    &__actions {
         @apply flex justify-start items-center gap-3 mt-4;
     }
 }

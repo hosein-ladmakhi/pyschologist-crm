@@ -5,10 +5,10 @@ import './index.css';
 import Button from '@/ui/kits/Button';
 import Image from 'next/image';
 import { FC } from 'react';
-import { IAuthContentProps } from './index.type';
+import { IAuthCardProps } from './index.type';
 import { AUTH_CONTENT_TEXT } from './index.constant';
 
-const AuthContent: FC<IAuthContentProps> = ({
+const AuthCard: FC<IAuthCardProps> = ({
   redirectLogin,
   redirectSignup,
   type,
@@ -16,11 +16,11 @@ const AuthContent: FC<IAuthContentProps> = ({
   const content = AUTH_CONTENT_TEXT[type];
 
   return (
-    <div className="auth-content">
-      <div className="content">
-        <h1 className="title">{content.title}</h1>
-        <p className="text">{content.paragraph}</p>
-        <div className="action-group">
+    <div className="auth-card">
+      <div className="auth-card__content">
+        <h1 className="auth-card__title">{content.title}</h1>
+        <p className="auth-card__text">{content.paragraph}</p>
+        <div className="auth-card__actions">
           <Button onClick={redirectLogin} variant="main" isOutline size="xs">
             ورود به حساب
           </Button>
@@ -29,11 +29,11 @@ const AuthContent: FC<IAuthContentProps> = ({
           </Button>
         </div>
       </div>
-      <div className="img">
+      <div className="auth-card__img">
         <Image alt={content.imgAlt} fill src={content.img} />
       </div>
     </div>
   );
 };
 
-export default AuthContent;
+export default AuthCard;

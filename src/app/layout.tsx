@@ -2,14 +2,17 @@ import './global.css';
 
 import { FC, PropsWithChildren } from 'react';
 import { iranYekanFont } from '@/constants/font.constant';
-import { Next13ProgressBar } from 'next13-progressbar';
 import RouteLoadingProvider from '@/providers/RouteLoadingProvider';
+import 'react-toastify/dist/ReactToastify.css';
+import ToastifyProvider from '@/providers/ToastifyProvider';
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>
-        <RouteLoadingProvider>{children}</RouteLoadingProvider>
+        <RouteLoadingProvider>
+          <ToastifyProvider>{children}</ToastifyProvider>
+        </RouteLoadingProvider>
       </body>
     </html>
   );

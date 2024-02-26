@@ -6,6 +6,16 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { ITherapistCardProps } from './index.type';
 import Image from '@/ui/kits/Image';
+import { IconUserBolt } from '@tabler/icons-react';
+import { colorThemes } from '@/constants/color-theme.constant';
+
+const NotFoundImage = () => {
+  return (
+    <div className="flex justify-center items-center w-full bg-main/10 absolute top-0 left-0 h-full rounded">
+      <IconUserBolt size="35px" color={colorThemes.main} />
+    </div>
+  );
+};
 
 const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
   return (
@@ -20,6 +30,7 @@ const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
             alt="therapist image"
             fill
             className="therapist-card__img"
+            notFoundLoader={<NotFoundImage />}
           />
         </div>
         <div className="therapist-card__body">

@@ -9,13 +9,33 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { signupValidation } from './signup-form.validation';
 import { TSignupFormValidation } from './index.type';
+import { useParams } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const SignupScreen = () => {
   const { control, handleSubmit } = useForm<TSignupFormValidation>({
     resolver: zodResolver(signupValidation),
   });
+  const params = useParams() as { type: string };
 
-  const onSubmit = handleSubmit(() => {});
+  const onSubmit = handleSubmit((data) => {
+    fetch(`http://localhost:4000/auth/signup/${params.type}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(123, res);
+        toast.success('ثبت نام شما با موفقیت انجام گردید');
+      })
+      .catch(() => {
+        console.log('Signup error');
+        toast.error('ثبت نام شما انجام نشد دوباره تلاش کنید');
+      });
+  });
 
   return (
     <div className="signup">
@@ -26,20 +46,27 @@ const SignupScreen = () => {
         <form onSubmit={onSubmit} className="signup__form">
           <Input
             control={control}
-            helperText="نام و نام خانوادگی ثبت شده در سایت"
-            label="نام و نام خانوادگی"
-            name="fullName"
-            additionalClass="signup__form-item"
+            helperText="نام ثبت شده در سایت"
+            label="نام"
+            name="firstName"
+            className="signup__form-item"
           />
           <Input
             control={control}
-            helperText="آدرس ایمیلی که در سایت ثبت شده است"
-            label="آدرس ایمیل"
-            name="email"
-            additionalClass="signup__form-item"
+            helperText="نام خانوادگی ثبت شده در سایت"
+            label="نام خانوادگی"
+            name="lastName"
+            className="signup__form-item"
           />
           <Input
-            additionalClass="signup__form-item"
+            control={control}
+            helperText="شماره تماسی که میتوانید وارد حساب بشوید"
+            label="شماره تماس"
+            name="phone"
+            className="signup__form-item"
+          />
+          <Input
+            className="signup__form-item"
             control={control}
             label="گذرواژه"
             name="password"

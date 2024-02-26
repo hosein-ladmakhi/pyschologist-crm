@@ -19,14 +19,14 @@
     }
 
     &__form {
-        @apply mt-10;
+        @apply mt-5;
 
         &-item {
-            @apply my-4;
+            @apply my-2;
         }
 
         &-btn {
-            @apply w-full mt-10;
+            @apply w-full mt-5;
         }
     }
 

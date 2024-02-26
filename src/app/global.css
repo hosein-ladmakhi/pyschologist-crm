@@ -12,3 +12,16 @@
 *:focus {
     outline: none;
 }
+
+
+.Toastify__toast {
+    @apply !w-[300px] !mx-auto;
+}
+
+.Toastify__toast--success {
+    @apply !bg-main !text-white !rounded !mt-5 !mr-5 !shadow;
+}
+
+.Toastify__toast--success .Toastify--animate-icon svg {
+    @apply !fill-white
+}
