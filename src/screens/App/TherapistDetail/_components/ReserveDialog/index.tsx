@@ -14,11 +14,8 @@ import Button from '@/ui/kits/Button';
 import { FC } from 'react';
 import { IReserveDialogProps } from './index.type';
 import { useForm } from 'react-hook-form';
-import { useSession } from 'next-auth/react';
 
 const ReserveDialog: FC<IReserveDialogProps> = ({ handleClose }) => {
-  const x = useSession();
-  console.log(123344, x);
   const { control } = useForm();
   return (
     <div className="reserve-dialog">
