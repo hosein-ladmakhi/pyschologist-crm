@@ -9,6 +9,8 @@ import { IReserveDialogProps } from './index.type';
 import { useForm } from 'react-hook-form';
 import { ITherapistSchedulesPerDay } from '@/types/therapist-schedule.type';
 import moment from 'jalali-moment';
+import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const days = [
   'شنبه',
@@ -26,7 +28,8 @@ const ReserveDialog: FC<IReserveDialogProps> = ({
   therapistId,
   categories,
 }) => {
-  const { control, watch } = useForm();
+  const loggedInUser = useSession();
+  const { control, watch, handleSubmit } = useForm();
   const [dates, setDates] = useState<string[]>([]);
 
   const dayOptions = [
@@ -63,10 +66,44 @@ const ReserveDialog: FC<IReserveDialogProps> = ({
     }
   }, [watch('time'), therapistId, watch('day')]);
 
+  const onSubmit = handleSubmit((data) => {
+    const selectedSchedule = selectedDaySchedule?.items?.find(
+      (element) =>
+        `${element.startHour}_${element.endHour}` === watch('time') &&
+        element.type === watch('type'),
+    );
+    const [startHour, endHour] = data.time.split('_');
+    fetch('http://localhost:4000/orders', {
+      method: 'POST',
+      body: JSON.stringify({
+        ...data,
+        room: selectedSchedule?.room,
+        location: selectedSchedule?.location?.id,
+        startHour,
+        endHour,
+        therapist: therapistId,
+        patient: (loggedInUser.data?.user as any)?.id,
+        categories: [data.categories],
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${(loggedInUser?.data as any)?.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success('رزرو با موفقیت ثبت گردید');
+        handleClose();
+      })
+      .catch((err) => {
+        toast.error('ثبت رزرو با شکست مواجعه شد');
+      });
+  });
+
   return (
     <div className="reserve-dialog">
       <div className="reserve-dialog__card">
-        <form className="reserve-dialog__form" action="">
+        <form className="reserve-dialog__form">
           <Select
             name="day"
             control={control}
@@ -118,7 +155,11 @@ const ReserveDialog: FC<IReserveDialogProps> = ({
         </form>
         <div className="reserve-dialog__actions">
           <div className="reserve-dialog__action">
-            <Button variant="main" className="reserve-dialog__btn">
+            <Button
+              onClick={onSubmit}
+              variant="main"
+              className="reserve-dialog__btn"
+            >
               درخواست رزرو
             </Button>
           </div>

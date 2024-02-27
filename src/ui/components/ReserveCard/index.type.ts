@@ -1,4 +1,7 @@
+import { IOrder } from '@/types/order.type';
+
 export interface IReserveCardProps {
-  onOpenLocationDialog: () => void;
+  handleOpenLocation: (reserve: IOrder) => void;
   showStatus?: boolean;
+  reserve: IOrder;
 }

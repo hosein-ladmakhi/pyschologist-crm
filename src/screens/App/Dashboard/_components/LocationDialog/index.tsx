@@ -8,7 +8,12 @@ import { ILocationDialogProps } from './index.type';
 import { motion } from 'framer-motion';
 import { RESERVE_LOCATION_DIALOG_ANIMATION } from './index.animation';
 
-const LocationDialog: FC<ILocationDialogProps> = ({ onClose }) => {
+const LocationDialog: FC<ILocationDialogProps> = ({
+  onClose,
+  address,
+  city,
+  room,
+}) => {
   return (
     <motion.div
       {...RESERVE_LOCATION_DIALOG_ANIMATION}
@@ -17,18 +22,15 @@ const LocationDialog: FC<ILocationDialogProps> = ({ onClose }) => {
       <div className="reserve-location__content">
         <div className="reserve-location__item">
           <h1 className="reserve-location__title">شهر</h1>
-          <p className="reserve-location__desc">تهران</p>
+          <p className="reserve-location__desc">{city}</p>
         </div>
         <div className="reserve-location__item">
           <h1 className="reserve-location__title">آدرس دقیق</h1>
-          <p className="reserve-location__desc">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در
-          </p>
+          <p className="reserve-location__desc">{address}</p>
         </div>
         <div className="reserve-location__item">
           <h1 className="reserve-location__title">اتاق</h1>
-          <p className="reserve-location__desc">شماره 4</p>
+          <p className="reserve-location__desc">شماره {room}</p>
         </div>
         <Button
           variant="error"

@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import { FC, Suspense, useState } from 'react';
 import { IReservationsListProps } from './index.type';
 import dynamic from 'next/dynamic';
+import { IOrder } from '@/types/order.type';
 
 const ReserveLocationDialog = dynamic(() => import('../LocationDialog'));
 
@@ -15,11 +16,17 @@ const ReservationsList: FC<IReservationsListProps> = ({
   title,
   showStatus,
 }) => {
-  const [locationDetailDialog, setLocationDetailDialog] =
-    useState<boolean>(false);
+  const [selectedReserve, setSelectedReserve] = useState<IOrder>();
+  const [openLocationDetail, setOpenLocationDetail] = useState<boolean>(false);
 
-  const onLocationDetailDialogChange = () => {
-    setLocationDetailDialog((prev) => !prev);
+  const handleOpenLocationDetail = (reserve: IOrder) => {
+    setSelectedReserve(reserve);
+    setOpenLocationDetail(true);
+  };
+
+  const handleCloseLocationDetail = () => {
+    setOpenLocationDetail(false);
+    setSelectedReserve(undefined);
   };
 
   return (
@@ -30,19 +37,26 @@ const ReservationsList: FC<IReservationsListProps> = ({
           <p className="reservations-list__empty">رزرو موجود نیست</p>
         )}
         <ul className="reservations-list__list">
-          {data.map(() => (
+          {data.map((reserve) => (
             <ReserveCard
               showStatus={showStatus}
-              onOpenLocationDialog={onLocationDetailDialogChange}
+              handleOpenLocation={handleOpenLocationDetail}
+              reserve={reserve}
+              key={reserve.id}
             />
           ))}
         </ul>
       </div>
 
       <AnimatePresence>
-        {locationDetailDialog && (
+        {openLocationDetail && selectedReserve && (
           <Suspense fallback={<></>}>
-            <ReserveLocationDialog onClose={onLocationDetailDialogChange} />
+            <ReserveLocationDialog
+              address={selectedReserve.address}
+              city={selectedReserve.city}
+              room={selectedReserve.room}
+              onClose={handleCloseLocationDetail}
+            />
           </Suspense>
         )}
       </AnimatePresence>

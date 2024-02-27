@@ -28,11 +28,9 @@ const SignupScreen = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(123, res);
         toast.success('ثبت نام شما با موفقیت انجام گردید');
       })
       .catch(() => {
-        console.log('Signup error');
         toast.error('ثبت نام شما انجام نشد دوباره تلاش کنید');
       });
   });

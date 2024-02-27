@@ -9,9 +9,19 @@ import Button from '@/ui/kits/Button';
 import { useForm } from 'react-hook-form';
 import { IEditProfileDialogProps } from './index.type';
 import { EDIT_PROFILE_DIALOG_ANIMATION } from './index.animation';
+import { useSession } from 'next-auth/react';
+import { IPatient } from '@/types/patient.model';
 
 const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
-  const { control } = useForm();
+  const session = useSession();
+  const user = session?.data?.user as IPatient;
+  const { control } = useForm({
+    defaultValues: {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      phone: user?.phone,
+    },
+  });
 
   return (
     <motion.div {...EDIT_PROFILE_DIALOG_ANIMATION} className="edit-profile">
