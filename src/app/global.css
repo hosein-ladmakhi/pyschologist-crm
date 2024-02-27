@@ -15,13 +15,21 @@
 
 
 .Toastify__toast {
-    @apply !w-[300px] !mx-auto;
+    @apply !w-[300px] !mx-auto !rounded !mt-5 !mr-5 !shadow;
 }
 
 .Toastify__toast--success {
-    @apply !bg-main !text-white !rounded !mt-5 !mr-5 !shadow;
+    @apply !bg-main !text-white;
 }
 
-.Toastify__toast--success .Toastify--animate-icon svg {
+.Toastify__toast--error {
+    @apply !bg-error !text-white;
+}
+
+.Toastify__close-button {
+    @apply !text-white;
+}
+
+.Toastify--animate-icon svg {
     @apply !fill-white
 }

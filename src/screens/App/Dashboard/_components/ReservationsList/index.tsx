@@ -26,6 +26,9 @@ const ReservationsList: FC<IReservationsListProps> = ({
     <>
       <div className="reservations-list">
         <h1 className="reservations-list__title">{title}</h1>
+        {data.length === 0 && (
+          <p className="reservations-list__empty">رزرو موجود نیست</p>
+        )}
         <ul className="reservations-list__list">
           {data.map(() => (
             <ReserveCard

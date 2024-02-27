@@ -8,4 +8,8 @@
     &__list {
         @apply mt-5;
     }
+
+    &__empty {
+        @apply text-center text-sm bg-main/10 py-5 mt-4 rounded font-bold;
+    }
 }

@@ -1,5 +1,7 @@
+import { IOrder } from '@/types/order.type';
+
 export interface IReservationsListProps {
-  data: any[];
+  data: IOrder[];
   title: string;
   showStatus?: boolean;
 }

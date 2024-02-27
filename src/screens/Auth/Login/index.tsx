@@ -9,38 +9,29 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { loginValidation } from './login-form.validation';
 import { TLoginFormValidation } from './index.type';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 
 const LoginScreen = () => {
   const params = useParams() as { type: string };
+  const router = useRouter();
   const { control, handleSubmit } = useForm<TLoginFormValidation>({
     resolver: zodResolver(loginValidation),
   });
   const onSubmit = handleSubmit(async (data) => {
-    // fetch(`http://localhost:4000/auth/login/${params.type}`, {
-    //   method: 'POST',
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(123, res);
-    //     toast.success('ورود شما با موفقیت انجام گردید');
-    //   })
-    //   .catch(() => {
-    //     console.log('Login error');
-    //     toast.error('ورود شما انجام نشد دوباره تلاش کنید');
-    //   });
-
-    await signIn('credentials', {
+    const res = await signIn('credentials', {
       ...data,
       type: params.type,
-      callbackUrl: '/',
+      redirect: false,
     });
+
+    if (res?.ok) {
+      toast.success('ورود شما با موفقیت انجام شد');
+      router.push('/');
+    } else {
+      toast.error('ورود شما با شکست مواجعه شد');
+    }
   });
 
   return (

@@ -22,7 +22,12 @@ const TherapistDetailScreen: FC<ITherapistDetailScreenProps> = ({
       <TherapistSchedule therapist={therapist} schedules={schedules} />
       {isOpen && (
         <Suspense fallback={<></>}>
-          <ReserveDialog handleClose={() => setIsOpen(false)} />
+          <ReserveDialog
+            therapistId={therapist.id}
+            schedules={schedules}
+            handleClose={() => setIsOpen(false)}
+            categories={therapist.workingFields}
+          />
         </Suspense>
       )}
     </div>

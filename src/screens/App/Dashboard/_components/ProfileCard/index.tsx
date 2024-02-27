@@ -7,11 +7,15 @@ import { FC, Suspense, useState } from 'react';
 import { IEditProfileCardProps } from './index.type';
 import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
+import { IPatient } from '@/types/patient.model';
 
 const EditProfileDialog = dynamic(() => import('../EditProfileDialog'));
 
 const ProfileCard: FC<IEditProfileCardProps> = ({}) => {
   const [editProfileDialog, setEditProfileDialog] = useState<boolean>(false);
+  const session = useSession();
+  const user = session?.data?.user as IPatient;
   const onEditProfileDialogChange = () => {
     setEditProfileDialog((prev) => !prev);
   };
@@ -21,8 +25,10 @@ const ProfileCard: FC<IEditProfileCardProps> = ({}) => {
       <div className="profile-card">
         <div className="profile-card__content">
           <div>
-            <h1 className="profile-card__username">حسین لادمخی نژاد</h1>
-            <p className="profile-card__phone">09925087579</p>
+            <h1 className="profile-card__username">
+              {user?.firstName} {user?.lastName}
+            </h1>
+            <p className="profile-card__phone">{user?.phone}</p>
           </div>
           <Button
             onClick={onEditProfileDialogChange}
