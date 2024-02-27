@@ -7,11 +7,13 @@ import { Icon24Hours } from '@tabler/icons-react';
 import Image from 'next/image';
 import { FC } from 'react';
 import { ITherapistInfoProps } from './index.type';
+import { useSession } from 'next-auth/react';
 
 const TherapistInfo: FC<ITherapistInfoProps> = ({
   handleOpenReserve,
   therapist,
 }) => {
+  const session = useSession();
   return (
     <div className="therapist-info">
       <div className="therapist-info__main">
@@ -31,6 +33,7 @@ const TherapistInfo: FC<ITherapistInfoProps> = ({
           variant="main"
           size="sm"
           className="therapist-info__btn"
+          disabled={session.status !== 'authenticated'}
         >
           <Icon24Hours stroke={2} />
           رزرو جدید

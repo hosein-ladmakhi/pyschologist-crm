@@ -3,7 +3,6 @@ import './index.css';
 import Button from '@/ui/kits/Button';
 import { FC } from 'react';
 import { IReserveCardProps } from './index.type';
-
 const ReserveCard: FC<IReserveCardProps> = ({
   onOpenLocationDialog,
   showStatus,

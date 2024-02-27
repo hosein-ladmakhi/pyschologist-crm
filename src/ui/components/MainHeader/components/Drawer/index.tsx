@@ -9,24 +9,39 @@ import Link from 'next/link';
 import Button from '@/ui/kits/Button';
 import { FC } from 'react';
 import { IMainHeaderDrawerProps } from './index.type';
+import { signOut, useSession } from 'next-auth/react';
 
 const MainHeaderDrawer: FC<IMainHeaderDrawerProps> = ({
   onClose,
   onOpenAuthDialog,
 }) => {
+  const session = useSession();
   return (
     <div className="drawer-content">
       <motion.nav {...MAIN_HEADER_DRAWER_ANIMATION} className="content">
         <h1 className="title">سایت روانشناسی</h1>
         <ul>
-          {MAIN_HEADER_MENU.map((item) => (
+          {MAIN_HEADER_MENU.filter((item) =>
+            item.when === 'auth' ? session.status === 'authenticated' : true,
+          ).map((item) => (
             <li className="item" key={item.href}>
               <Link href={item.href}>{item.text}</Link>
             </li>
           ))}
-          <li className="item" onClick={onOpenAuthDialog}>
-            احراز هویت
-          </li>
+          {session.status === 'authenticated' ? (
+            <li
+              onClick={() =>
+                signOut({ redirect: true, callbackUrl: '/auth/patient/login' })
+              }
+              className="item"
+            >
+              خروج از حساب کاربری
+            </li>
+          ) : (
+            <li className="item" onClick={onOpenAuthDialog}>
+              احراز هویت
+            </li>
+          )}
         </ul>
         <Button
           onClick={onClose}
