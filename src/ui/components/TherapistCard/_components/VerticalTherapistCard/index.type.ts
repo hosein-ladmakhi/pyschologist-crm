@@ -1,5 +1,5 @@
 import { ITherapist } from '@/types/therapist.type';
 
-export interface ITherapistCardProps {
+export interface IVerticalTherapistCardProps {
   therapist: ITherapist;
 }

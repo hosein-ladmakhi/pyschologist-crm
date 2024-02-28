@@ -2,7 +2,7 @@
     @apply p-4 border my-5 rounded border-neutral/10;
 
     &__title {
-        @apply text-sm leading-6 mb-2 font-bold;
+        @apply text-sm leading-6 font-bold;
     }
 
     &__content {
@@ -14,6 +14,22 @@
     }
 
     &__btn {
-        @apply flex justify-end items-center mt-3;
+        @apply flex justify-end items-center mt-3 gap-4 flex-wrap;
+    }
+
+    &__header {
+        @apply flex justify-between items-center mb-2 ;
+    }
+
+    &__actions {
+        @apply flex justify-center items-center;
+    }
+
+    &__action {
+        @apply h-6 w-6 flex justify-center items-center rounded-full relative;
+
+        &--delete {
+            @apply text-error;
+        }
     }
 }

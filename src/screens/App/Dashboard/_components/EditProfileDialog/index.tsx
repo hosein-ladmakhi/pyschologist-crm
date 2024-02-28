@@ -9,25 +9,55 @@ import Button from '@/ui/kits/Button';
 import { useForm } from 'react-hook-form';
 import { IEditProfileDialogProps } from './index.type';
 import { EDIT_PROFILE_DIALOG_ANIMATION } from './index.animation';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { IPatient } from '@/types/patient.model';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
   const session = useSession();
+  const router = useRouter();
   const user = session?.data?.user as IPatient;
-  const { control } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
       phone: user?.phone,
+      currentPassword: '',
+      newPassword: '',
     },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    fetch('http://localhost:4000/patient/profile', {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: {
+        Authorization: `Bearer ${(session.data as any)?.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => (res.status === 200 ? res.json() : Promise.reject(res)))
+      .then((response) => {
+        console.log(response);
+        toast.success('اطلاعات کاربری شما با موفقیت ثبت گردید');
+        session.update(response);
+        onClose();
+        if (data.newPassword) {
+          signOut({ redirect: false });
+          router.replace('/auth/patient/login');
+        }
+      })
+      .catch(async () => {
+        toast.error('ویرایش حساب کاربری با شکست مواجعه شد');
+      });
   });
 
   return (
     <motion.div {...EDIT_PROFILE_DIALOG_ANIMATION} className="edit-profile">
       <div className="edit-profile__content">
         <h1 className="edit-profile__title">ویرایش پروفایل کاربر</h1>
-        <form className="profile-form" action="">
+        <form className="profile-form" onSubmit={onSubmit}>
           <div className="profile-form__content">
             <div className="profile-form__item">
               <Input
@@ -57,8 +87,9 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
               <Input
                 control={control}
                 label="گذرواژه جدید"
-                name="password"
+                name="newPassword"
                 helperText="گذرواژه کلید ورود شما به سایت میباشد"
+                type="password"
               />
             </div>
             <div className="profile-form__item">
@@ -67,10 +98,11 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
                 label="گذرواژه فعلی"
                 name="currentPassword"
                 helperText="درصورتی که تمایل به تغییر گذرواژه دارید پر شود"
+                type="password"
               />
             </div>
             <div className="profile-form__action">
-              <Button variant="main" className="w-full" size="sm">
+              <Button type="submit" variant="main" className="w-full" size="sm">
                 اعمال تغییرات
               </Button>
             </div>

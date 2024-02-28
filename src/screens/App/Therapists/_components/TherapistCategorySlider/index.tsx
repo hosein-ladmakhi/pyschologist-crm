@@ -10,8 +10,7 @@ import { IconCaretLeftFilled } from '@tabler/icons-react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReactSlick from 'react-slick';
-
-import TherapistCard from '../TherapistCard';
+import TherapistCard from '@/ui/components/TherapistCard';
 
 const TherapistCategorySlider: FC<ITherapistCategorySliderProps> = ({
   category,
@@ -39,9 +38,8 @@ const TherapistCategorySlider: FC<ITherapistCategorySliderProps> = ({
           {category.therapists.map((therapist) => (
             <TherapistCard
               therapist={therapist}
-              size="md"
-              isTitleBold={false}
               key={therapist.id}
+              variant="minial"
             />
           ))}
         </ReactSlick>

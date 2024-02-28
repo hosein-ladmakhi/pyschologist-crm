@@ -1,13 +1,11 @@
-'use client';
-
 import './index.css';
 
-import Link from 'next/link';
-import { FC } from 'react';
-import { ITherapistCardProps } from './index.type';
+import { colorThemes } from '@/constants/color-theme.constant';
 import Image from '@/ui/kits/Image';
 import { IconUserBolt } from '@tabler/icons-react';
-import { colorThemes } from '@/constants/color-theme.constant';
+import Link from 'next/link';
+import { FC } from 'react';
+import { IHorizontalTherapistCardProps } from './index.type';
 
 const NotFoundImage = () => {
   return (
@@ -17,28 +15,30 @@ const NotFoundImage = () => {
   );
 };
 
-const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
+const HorizontalTherapistCard: FC<IHorizontalTherapistCardProps> = ({
+  therapist,
+}) => {
   return (
-    <li className="therapist-card">
+    <li className="horizontal-therapist">
       <Link
-        className="therapist-card__content"
+        className="horizontal-therapist__content"
         href={`/therapists/${therapist.id}`}
       >
-        <div className="therapist-card__avatar">
+        <div className="horizontal-therapist__avatar">
           <Image
             src={`http://localhost:4000${therapist.image}`}
             alt="therapist image"
             fill
-            className="therapist-card__img"
+            className="horizontal-therapist__img"
             notFoundLoader={<NotFoundImage />}
           />
         </div>
-        <div className="therapist-card__body">
-          <h1 className="therapist-card__title">
+        <div className="horizontal-therapist__body">
+          <h1 className="horizontal-therapist__title">
             {therapist.firstName} {therapist.lastName}
           </h1>
-          <p className="therapist-card__desc">{therapist.bio}</p>
-          <p className="therapist-card__subdesc">
+          <p className="horizontal-therapist__desc">{therapist.bio}</p>
+          <p className="horizontal-therapist__subdesc">
             تعداد مشاوره های موفق : {therapist.patientOrders?.length || 0} جلسه
           </p>
         </div>
@@ -47,4 +47,4 @@ const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
   );
 };
 
-export default TherapistCard;
+export default HorizontalTherapistCard;

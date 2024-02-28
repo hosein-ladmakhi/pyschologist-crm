@@ -1,27 +1,27 @@
-'use client';
-
 import './index.css';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import { FC } from 'react';
-import { ITherapistCardProps } from './index.type';
+import { IVerticalTherapistCardProps } from './index.type';
+import Link from 'next/link';
+import Image from '@/ui/kits/Image';
 
-const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
+const VerticalTherapistCard: FC<IVerticalTherapistCardProps> = ({
+  therapist,
+}) => {
   return (
-    <div className="best-therapist">
-      <div className="best-therapist__avatar">
+    <div className="vertical-therapist">
+      <div className="vertical-therapist__avatar">
         <Image
           src={`http://localhost:4000${therapist.image}`}
           fill
           alt="avatar"
-          className="best-therapist__image"
+          className="vertical-therapist__image"
         />
       </div>
-      <h1 className="best-therapist__title">
+      <h1 className="vertical-therapist__title">
         {therapist.firstName} {therapist.lastName}
       </h1>
-      <p className="best-therapist__bio">
+      <p className="vertical-therapist__bio">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
         از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
         سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
@@ -33,19 +33,19 @@ const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
         رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
         پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
       </p>
-      <p className="best-therapist__categories">
+      <p className="vertical-therapist__categories">
         <b>تخصص ها : </b>
         {['درمانگر', 'روانشناس', 'افسردگی', 'رواشناس فردی']
           .splice(0, 3)
           .map((text) => (
-            <span className="best-therapist__item" key={text}>
+            <span className="vertical-therapist__item" key={text}>
               {text}
             </span>
           ))}
       </p>
       <Link
         href={`/therapists/${therapist.id}`}
-        className="best-therapist__link"
+        className="vertical-therapist__link"
       >
         جزئیات
       </Link>
@@ -53,4 +53,4 @@ const TherapistCard: FC<ITherapistCardProps> = ({ therapist }) => {
   );
 };
 
-export default TherapistCard;
+export default VerticalTherapistCard;

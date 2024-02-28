@@ -1,9 +1,11 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { FC, Suspense, useState } from 'react';
 import Header from './_components/Header';
 import TicketCard from './_components/TicketCard';
 import dynamic from 'next/dynamic';
+import { ITicketsScreenProps } from './index.type';
+import { ITicket } from '@/types/ticket.type';
 
 const TicketDetailDialog = dynamic(
   () => import('./_components/TicketDetailDialog'),
@@ -13,36 +15,44 @@ const CreateTicketDialog = dynamic(
   () => import('./_components/CreateTicketDialog'),
 );
 
-const TICKETS_DATA = [
-  'سلام چجوری میتونم در آزمون های روانشناسی شرکت بکنم ؟',
-  'نحوه دریافت مدرک روانشناسی در پزشک من',
-  'دلیل اینکه نمراتم اینقدر پایین شده چه چیزی میباشد',
-  'میشه اکانت من رو باز کنید خواهش میکنم من توش کلی دیتا داشتم',
-  'میتونم قسطی هم پرداخت کنم اطلاعات مختلف رو',
-];
-
-const TicketsScreen = () => {
+const TicketsScreen: FC<ITicketsScreenProps> = ({ tickets }) => {
   const [ticketDetailDialog, setTicketDetailDialog] = useState<boolean>(false);
   const [createTicketDialog, setCreateTicketDialog] = useState<boolean>(false);
 
+  const [selectedTicket, setSelectedTicket] = useState<ITicket>();
+
   const handleOpenCreateTicket = () => setCreateTicketDialog(true);
+
   const handleCloseCreateTicket = () => setCreateTicketDialog(false);
 
-  const handleOpenDetailTicket = () => setTicketDetailDialog(true);
-  const handleCloseDetailTicket = () => setTicketDetailDialog(false);
+  const handleOpenTicket = (ticket: ITicket) => {
+    setSelectedTicket(ticket);
+    setTicketDetailDialog(true);
+  };
+
+  const handleCloseTicket = () => {
+    setSelectedTicket(undefined);
+    setTicketDetailDialog(false);
+  };
 
   return (
     <div className="container">
       <Header handleOpenDialog={handleOpenCreateTicket} />
       <ul className="mt-10">
-        {TICKETS_DATA.map((e) => (
+        {tickets.map((ticket) => (
           <TicketCard
-            handleOpenDetail={handleOpenDetailTicket}
-            ticket={e}
-            key={e}
+            handleOpenDetail={handleOpenTicket}
+            ticket={ticket}
+            key={ticket.id}
           />
         ))}
       </ul>
+
+      {tickets.length === 0 && (
+        <div className="bg-main/10 p-4 rounded">
+          <p className="text-sm text-main">تیکتی ساخته نشده است</p>
+        </div>
+      )}
 
       {createTicketDialog && (
         <Suspense fallback={<></>}>
@@ -50,11 +60,12 @@ const TicketsScreen = () => {
         </Suspense>
       )}
 
-      {ticketDetailDialog && (
+      {ticketDetailDialog && selectedTicket && (
         <Suspense fallback={<></>}>
           <TicketDetailDialog
-            handleCloseDetail={handleCloseDetailTicket}
-            handleOpenDetail={handleOpenDetailTicket}
+            ticket={selectedTicket}
+            handleCloseDetail={handleCloseTicket}
+            handleOpenDetail={handleOpenTicket}
           />
         </Suspense>
       )}

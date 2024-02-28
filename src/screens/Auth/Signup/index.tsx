@@ -75,7 +75,7 @@ const SignupScreen = () => {
             ساخت حساب
           </Button>
         </form>
-        <Link className="signup__link" href="/auth/therapist/login">
+        <Link className="signup__link" href={`/auth/${params.type}/login`}>
           ورود به حساب کاربری
         </Link>
       </div>

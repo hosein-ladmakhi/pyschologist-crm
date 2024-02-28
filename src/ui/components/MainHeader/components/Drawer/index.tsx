@@ -17,14 +17,14 @@ const MainHeaderDrawer: FC<IMainHeaderDrawerProps> = ({
 }) => {
   const session = useSession();
   return (
-    <div className="drawer-content">
-      <motion.nav {...MAIN_HEADER_DRAWER_ANIMATION} className="content">
-        <h1 className="title">سایت روانشناسی</h1>
+    <div className="drawer">
+      <motion.nav {...MAIN_HEADER_DRAWER_ANIMATION} className="drawer__content">
+        <h1 className="drawer__title">سایت روانشناسی</h1>
         <ul>
           {MAIN_HEADER_MENU.filter((item) =>
             item.when === 'auth' ? session.status === 'authenticated' : true,
           ).map((item) => (
-            <li className="item" key={item.href}>
+            <li className="drawer__item" key={item.href}>
               <Link href={item.href}>{item.text}</Link>
             </li>
           ))}
@@ -33,22 +33,17 @@ const MainHeaderDrawer: FC<IMainHeaderDrawerProps> = ({
               onClick={() =>
                 signOut({ redirect: true, callbackUrl: '/auth/patient/login' })
               }
-              className="item"
+              className="drawer__item"
             >
               خروج از حساب کاربری
             </li>
           ) : (
-            <li className="item" onClick={onOpenAuthDialog}>
+            <li className="drawer__item" onClick={onOpenAuthDialog}>
               احراز هویت
             </li>
           )}
         </ul>
-        <Button
-          onClick={onClose}
-          variant="error"
-          className="w-full !mt-auto"
-          size="sm"
-        >
+        <Button onClick={onClose} variant="error" className="drawer__btn">
           بستن منو
         </Button>
       </motion.nav>

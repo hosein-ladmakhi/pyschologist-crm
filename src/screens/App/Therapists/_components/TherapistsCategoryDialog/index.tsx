@@ -5,8 +5,8 @@ import './index.css';
 import { FC, useMemo } from 'react';
 import { ITherapistsCategoryDialogProps } from './index.type';
 import Button from '@/ui/kits/Button';
-import TherapistCard from '../TherapistCard';
 import { useSearchParams } from 'next/navigation';
+import TherapistCard from '@/ui/components/TherapistCard';
 
 const TherapistsCategoryDialog: FC<ITherapistsCategoryDialogProps> = ({
   category,
@@ -39,7 +39,11 @@ const TherapistsCategoryDialog: FC<ITherapistsCategoryDialogProps> = ({
         <div className="therapists-card__content">
           <ul className="therapists-card__list">
             {transformedTherapist.map((therapist) => (
-              <TherapistCard key={therapist.id} therapist={therapist} />
+              <TherapistCard
+                therapist={therapist}
+                key={therapist.id}
+                variant="minial"
+              />
             ))}
           </ul>
         </div>

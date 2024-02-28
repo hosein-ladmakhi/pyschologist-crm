@@ -1,4 +1,6 @@
+import { ITicket } from '@/types/ticket.type';
+
 export interface ITicketCardProps {
-  ticket: any;
-  handleOpenDetail: () => void;
+  ticket: ITicket;
+  handleOpenDetail: (ticket: ITicket) => void;
 }

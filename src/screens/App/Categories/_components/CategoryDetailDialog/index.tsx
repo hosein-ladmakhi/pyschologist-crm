@@ -5,8 +5,8 @@ import './index.css';
 import Button from '@/ui/kits/Button';
 import { FC } from 'react';
 import { ICategoryDetailDialogProps } from './index.type';
-import TherapistCard from '../TherapistCard';
 import CategoryCard from '../CategoryCard';
+import TherapistCard from '@/ui/components/TherapistCard';
 
 const CategoryDetailDialog: FC<ICategoryDetailDialogProps> = ({
   category,
@@ -18,7 +18,11 @@ const CategoryDetailDialog: FC<ICategoryDetailDialogProps> = ({
         <CategoryCard category={category} handleOpenCategory={() => {}} />
         <ul className="category-detail__list">
           {category.therapists.map((therapist) => (
-            <TherapistCard therapist={therapist} key={therapist.id} />
+            <TherapistCard
+              therapist={therapist}
+              key={therapist.id}
+              variant="horizonal"
+            />
           ))}
         </ul>
         <div className="category-detail__actions">

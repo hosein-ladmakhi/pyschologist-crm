@@ -4,8 +4,8 @@ import './index.css';
 
 import { FC } from 'react';
 import HomeHeader from '../HomeHeader';
-import TherapistCard from '../TherapistCard';
 import { ITherapistsListProps } from './index.type';
+import TherapistCard from '@/ui/components/TherapistCard';
 
 const TherapistsList: FC<ITherapistsListProps> = ({ therapists }) => {
   return (
@@ -16,7 +16,11 @@ const TherapistsList: FC<ITherapistsListProps> = ({ therapists }) => {
       />
       <div className="best-therapists__list">
         {therapists.map((therapist) => (
-          <TherapistCard key={therapist.id} therapist={therapist} />
+          <TherapistCard
+            therapist={therapist}
+            variant="vertical"
+            key={therapist.id}
+          />
         ))}
       </div>
     </div>

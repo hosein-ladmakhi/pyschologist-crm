@@ -1,4 +1,4 @@
-.therapist-card {
+.minimal-therapist {
     @apply col-span-4 list-none;
 
     &__link {

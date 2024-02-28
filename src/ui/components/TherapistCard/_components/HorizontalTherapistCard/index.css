@@ -1,4 +1,4 @@
-.therapist-card {
+.horizontal-therapist {
     @apply my-4;
 
     &__content {
@@ -18,7 +18,7 @@
     }
 
     &__title {
-        @apply text-sm font-bold;
+        @apply text-sm font-bold !text-right;
     }
 
     &__desc {

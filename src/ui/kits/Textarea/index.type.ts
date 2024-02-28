@@ -4,7 +4,8 @@ interface IBaseTextarea {
   rows?: number;
   label: string;
   helper: string;
-  error?: string;
+  control: any;
+  name: string;
 }
 
 export type TTextareaProps = IBaseTextarea &
