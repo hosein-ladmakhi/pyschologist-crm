@@ -9,20 +9,32 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { signupValidation } from "./signup-form.validation";
 import { TSignupFormValidation } from "./index.type";
-import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { signupMutationApi } from "@/services/auth";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const SignupScreen = () => {
+	const router = useRouter();
 	const { control, handleSubmit } = useForm<TSignupFormValidation>({
 		resolver: zodResolver(signupValidation),
 	});
-	const params = useParams() as { type: string };
 
 	const onSubmit = handleSubmit((data) => {
 		signupMutationApi(data)
+			.then(() => {
+				return signIn("credentials", {
+					...data,
+					redirect: false,
+				});
+			})
 			.then((res) => {
-				toast.success("ثبت نام شما با موفقیت انجام گردید");
+				if (res?.ok) {
+					toast.success("ثبت نام شما با موفقیت انجام گردید");
+					router.push("/");
+				} else {
+					toast.error("ثبت نام شما با شکست مواجعه شد");
+				}
 			})
 			.catch(() => {
 				toast.error("ثبت نام شما انجام نشد دوباره تلاش کنید");
@@ -69,7 +81,7 @@ const SignupScreen = () => {
 						ساخت حساب
 					</Button>
 				</form>
-				<Link className="signup__link" href={`/auth/${params.type}/login`}>
+				<Link className="signup__link" href="/auth/login">
 					ورود به حساب کاربری
 				</Link>
 			</div>
