@@ -1,3 +1,15 @@
-interface IBaseTabs {}
+import { PropsWithChildren } from "react";
 
-export type TTabsProps = IBaseTabs;
+type TTabNavRender = {
+	activeTab: number;
+	handleChangeActive: (activeTab: number) => void;
+	tabIndex: number;
+	item: string;
+};
+
+interface IBaseTabs {
+	tabNavs: string[];
+	tabNavRender: (props: TTabNavRender) => void;
+}
+
+export type TTabsProps = IBaseTabs & PropsWithChildren;

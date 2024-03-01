@@ -1,12 +1,32 @@
 "use client";
 
-import { FC } from "react";
+import React, { FC, useState } from "react";
+import { TTabsProps } from "./index.type";
 
-const Tabs: FC = () => {
+const Tabs: FC<TTabsProps> = ({ tabNavs, tabNavRender, children }) => {
+	const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+
+	const handleChangeActiveTab = (index: number) => setActiveTabIndex(index);
+
 	return (
-		<ul>
-			<li>Tabs</li>
-		</ul>
+		<>
+			{React.Children.toArray(
+				tabNavs.map((item, itemIndex) => (
+					<>
+						{tabNavRender({
+							activeTab: activeTabIndex,
+							handleChangeActive: handleChangeActiveTab,
+							tabIndex: itemIndex,
+							item,
+						})}
+					</>
+				))
+			)}
+
+			{React.Children.map(children, (child, childIndex) =>
+				childIndex === activeTabIndex ? child : null
+			)}
+		</>
 	);
 };
 
