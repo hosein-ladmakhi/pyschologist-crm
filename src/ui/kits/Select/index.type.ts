@@ -1,8 +1,10 @@
+import { TSelectOption } from '@/types/general.type';
+
 interface IBaseSelect {
   label: string;
   control: any;
   name: string;
-  options: { text: string; value: any }[];
+  options: TSelectOption[];
   emptyPlaceholder: string;
   additionalClasses?: string;
 }

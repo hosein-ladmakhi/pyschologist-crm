@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import MinimalTherapistCard from './_components/MinimalTherapistCard';
 import VerticalTherapistCard from './_components/VerticalTherapistCard';

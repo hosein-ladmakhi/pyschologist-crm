@@ -1,0 +1,7 @@
+.categories-list-loading {
+    @apply mt-5;
+
+    &__item {
+        @apply flex justify-start items-center gap-2 w-full mt-1;
+    }
+}

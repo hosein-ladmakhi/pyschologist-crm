@@ -1,7 +1,0 @@
-.best-therapists {
-    @apply container;
-
-    &__list {
-        @apply grid grid-cols-12 gap-6 mt-10;
-    }
-}

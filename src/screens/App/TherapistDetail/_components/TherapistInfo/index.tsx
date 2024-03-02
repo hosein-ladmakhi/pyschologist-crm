@@ -7,13 +7,17 @@ import { Icon24Hours } from '@tabler/icons-react';
 import Image from 'next/image';
 import { FC } from 'react';
 import { ITherapistInfoProps } from './index.type';
-import { useSession } from 'next-auth/react';
+import {
+  transformDegreeOfEducation,
+  transformGender,
+} from '@/utils/enum-transformer';
+import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
 
 const TherapistInfo: FC<ITherapistInfoProps> = ({
   handleOpenReserve,
   therapist,
 }) => {
-  const session = useSession();
+  const isAuthCurrentUser = useIsAuthenticated();
   return (
     <div className="therapist-info">
       <div className="therapist-info__main">
@@ -33,7 +37,7 @@ const TherapistInfo: FC<ITherapistInfoProps> = ({
           variant="main"
           size="sm"
           className="therapist-info__btn"
-          disabled={session.status !== 'authenticated'}
+          disabled={!isAuthCurrentUser}
         >
           <Icon24Hours stroke={2} />
           رزرو جدید
@@ -42,12 +46,14 @@ const TherapistInfo: FC<ITherapistInfoProps> = ({
       <div className="therapist-info__info">
         <h1 className="therapist-info__subtitle">مدرک تحصیلی این پزشک</h1>
         <span className="therapist-info__text">
-          {therapist.degreeOfEducation}
+          {transformDegreeOfEducation(therapist.degreeOfEducation)}
         </span>
       </div>
       <div className="therapist-info__info">
         <h1 className="therapist-info__subtitle">جنسیت این پزشک</h1>
-        <span className="therapist-info__text">{therapist.gender}</span>
+        <span className="therapist-info__text">
+          {transformGender(therapist.gender)}
+        </span>
       </div>
       <div className="therapist-info__info">
         <h1 className="therapist-info__subtitle">توضیحات این پزشک</h1>

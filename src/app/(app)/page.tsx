@@ -1,14 +1,39 @@
-import HomeScreen from "@/screens/App/Home";
-import { fetchTherapistsOfCategoriesApi } from "@/services/categories";
-import { fetchTherapistsApi } from "@/services/therapists";
+import './page.css';
 
-const HomePage = async () => {
-	const categories = await fetchTherapistsOfCategoriesApi();
-	const therapists = await fetchTherapistsApi();
+import { Suspense } from 'react';
+import CategoriesList from './_components/CategoriesList';
+import Landing from './_components/Landing';
+import TherapistsList from './_components/TherapistsList';
+import HomeHeader from './_components/HomeHeader';
+import CategoriesListLoading from './_components/CategoriesListLoading';
+import TherapistsListLoading from './_components/TherapistsListLoading';
 
-	return (
-		<HomeScreen categories={categories} therapists={therapists?.content} />
-	);
+export const dynamic = 'force-dynamic';
+
+const HomePage = () => {
+  return (
+    <>
+      <Landing />
+      <div className="best-therapists">
+        <HomeHeader
+          content="بیش از 2500 پزشک آماده پاسخگویی به شما هستند"
+          title="گفتگو و مشاوره با بهترین مختصصین"
+        />
+        <Suspense fallback={<TherapistsListLoading />}>
+          <TherapistsList />
+        </Suspense>
+      </div>
+      <div className="categories-list">
+        <HomeHeader
+          title="تخصص های موحود در پزشک من"
+          content="بیش از 2500 تخصص در زمینه پزشکی موجود میباشد"
+        />
+        <Suspense fallback={<CategoriesListLoading />}>
+          <CategoriesList />
+        </Suspense>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;

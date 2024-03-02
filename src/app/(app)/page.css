@@ -1,0 +1,7 @@
+.categories-list {
+    @apply container;
+}
+
+.best-therapists {
+    @apply container;
+}

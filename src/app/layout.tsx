@@ -1,9 +1,10 @@
 import './global.css';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { FC, PropsWithChildren } from 'react';
 import { iranYekanFont } from '@/constants/font.constant';
 import RouteLoadingProvider from '@/providers/RouteLoadingProvider';
-import 'react-toastify/dist/ReactToastify.css';
 import ToastifyProvider from '@/providers/ToastifyProvider';
 import SessionProvider from '@/providers/SessionProvider';
 import { getServerSession } from 'next-auth';

@@ -80,6 +80,10 @@ const Select: FC<TSelectProps> = ({
                 {option.text}
               </li>
             ))}
+
+            {options.length === 0 && (
+              <li className="dropdown-item">آیتمی موجود نیست</li>
+            )}
           </ul>
         </div>
       )}

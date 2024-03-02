@@ -1,12 +1,12 @@
-import DashboardScreen from "@/screens/App/Dashboard";
-import { fetchOwnReservationOrdersApi } from "@/services/orders";
-import { FC } from "react";
+import DashboardScreen from '@/screens/App/Dashboard';
+import { fetchOwnReservationOrdersApi } from '@/services/orders';
+import { FC } from 'react';
 
-export const dynamic = "force-update";
+export const dynamic = 'force-dynamic';
 
 const DashboardPage: FC = async () => {
-	const orders = await fetchOwnReservationOrdersApi();
-	return <DashboardScreen reserves={orders} />;
+  const orders = await fetchOwnReservationOrdersApi();
+  return <DashboardScreen reserves={orders} />;
 };
 
 export default DashboardPage;

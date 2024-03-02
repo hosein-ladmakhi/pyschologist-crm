@@ -1,0 +1,16 @@
+.therapist-schedule-item {
+    @apply grid grid-cols-12 gap-4 mt-5;
+
+    &__item {
+        @apply col-span-6 text-center border border-neutral/10 p-4 rounded;
+    }
+
+
+    &__text {
+        @apply text-xs;
+    }
+
+    &__empty {
+        @apply text-sm font-bold;
+    }
+}
