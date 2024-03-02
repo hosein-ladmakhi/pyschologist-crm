@@ -12,7 +12,7 @@ const VerticalTherapistCard: FC<IVerticalTherapistCardProps> = ({
     <div className="vertical-therapist">
       <div className="vertical-therapist__avatar">
         <Image
-          src={`http://localhost:4000${therapist.image}`}
+          src={`https://pyschologist-api.liara.run${therapist.image}`}
           fill
           alt="avatar"
           className="vertical-therapist__image"

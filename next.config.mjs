@@ -11,7 +11,7 @@ const nextConfig = {
                 protocol: 'https'
             },
             {
-                hostname: "file.drsaina.com",
+                hostname: "pyschologist-api.liara.run",
                 protocol: "https"
             },
             {

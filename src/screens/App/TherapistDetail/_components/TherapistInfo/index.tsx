@@ -23,7 +23,7 @@ const TherapistInfo: FC<ITherapistInfoProps> = ({
       <div className="therapist-info__main">
         <div className="therapist-info__avatar">
           <Image
-            src={`http://localhost:4000${therapist.image}`}
+            src={`https://pyschologist-api.liara.run${therapist.image}`}
             alt="therapist"
             fill
             className="therapist-info__img"

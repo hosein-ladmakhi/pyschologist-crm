@@ -26,7 +26,7 @@ const MinimalTherapistCard: FC<IMinimalTherapistCardProps> = ({
       >
         <div className="minimal-therapist__avatar">
           <Image
-            src={`http://localhost:4000${therapist.image}`}
+            src={`https://pyschologist-api.liara.run${therapist.image}`}
             alt="category-therapist"
             fill
             className="minimal-therapist__img"

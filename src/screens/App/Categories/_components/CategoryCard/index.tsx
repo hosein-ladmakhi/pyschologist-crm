@@ -21,7 +21,7 @@ const CategoryCard: FC<ICaregoryCardProps> = ({
           <Image
             fill
             alt={`icon-${category.enName}`}
-            src={`http://localhost:4000/upload/${category.icon}`}
+            src={`https://pyschologist-api.liara.run/upload/${category.icon}`}
           />
         </div>
         <h1 className="category-card__title">{category.faName}</h1>

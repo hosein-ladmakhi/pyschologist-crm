@@ -9,7 +9,7 @@ const CategoriesList: FC<IHomeCategoriesProps> = async () => {
   const categories = await fetchTherapistsOfCategoriesApi();
   return (
     <ul>
-      {categories.map((category) => (
+      {categories?.map((category) => (
         <CategoryCard category={category} key={category.id} />
       ))}
     </ul>
