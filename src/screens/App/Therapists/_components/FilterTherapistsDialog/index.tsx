@@ -46,14 +46,14 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
             control={control}
             helperText=""
             label="نام"
-            additionalClass="my-3"
+            className="my-3"
           />
           <Input
             name="lastName"
             control={control}
             helperText=""
             label="نام خانوادگی"
-            additionalClass="my-3"
+            className="my-3"
           />
           <Select
             control={control}
