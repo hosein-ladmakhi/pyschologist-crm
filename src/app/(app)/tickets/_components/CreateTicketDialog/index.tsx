@@ -15,13 +15,15 @@ import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createTicketFormValidation } from './create-ticket-form.validation';
 import { createTicketMutationApi } from '@/services/tickets';
+import { useTicketContext } from '../../_context/ticket-context';
 
-const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({
-  handleCloseDialog,
-}) => {
+const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
   const { control, handleSubmit } = useForm<TCreateTicketFormValidation>({
     resolver: zodResolver(createTicketFormValidation),
   });
+
+  const { createTicketDialog, handleCloseCreate } = useTicketContext();
+
   const filepickerRef = useRef<HTMLInputElement>(null);
 
   const handleOpenFile = () => filepickerRef?.current?.click();
@@ -38,12 +40,14 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({
       .then((data) => {
         console.log(data);
         toast.success('تیکت با موفقیت ثبت گردید');
-        handleCloseDialog();
+        handleCloseCreate();
       })
       .catch((error) => {
         console.log('error', error);
       });
   });
+
+  if (!createTicketDialog) return <></>;
 
   return (
     <div className="create-ticket">
@@ -88,7 +92,7 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({
             </div>
             <div className="create-ticket__action">
               <Button
-                onClick={handleCloseDialog}
+                onClick={handleCloseCreate}
                 size="sm"
                 variant="error"
                 className="w-full"

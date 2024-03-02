@@ -1,7 +1,6 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 export const useQueryState = () => {
   const searchParams = useSearchParams();

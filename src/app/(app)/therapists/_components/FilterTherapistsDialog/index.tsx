@@ -15,10 +15,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { filterFormValidation } from './filter-form.validation';
 import { EDegtreeOfEducation, EGender } from '@/types/therapist.type';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { useTherapistsContext } from '../../_context/therapists-context';
 
-const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
-  handleClose,
-}) => {
+const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
+  const { handleCloseFilter, isOpenFilter } = useTherapistsContext();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -27,13 +27,15 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
     resolver: zodResolver(filterFormValidation),
   });
 
+  if (!isOpenFilter) return <></>;
+
   const onSubmit = handleSubmit((data) => {
     const url = new URLSearchParams(searchParams);
     Object.keys(data)
       .filter((key) => (data as any)[key])
       .map((key) => url.set(key, (data as any)[key]));
     router.push(pathname + '?' + url);
-    handleClose();
+    handleCloseFilter();
   });
 
   return (
@@ -115,7 +117,7 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = ({
           </div>
           <div className="filter-therapist__action">
             <Button
-              onClick={handleClose.bind(null, true)}
+              onClick={handleCloseFilter}
               className="w-full"
               variant="error"
               size="sm"

@@ -1,0 +1,11 @@
+.tickets-list {
+    @apply mt-10;
+}
+
+.tickets-empty {
+    @apply bg-main/10 p-4 rounded;
+
+    &__text {
+        @apply text-sm text-main;
+    }
+}

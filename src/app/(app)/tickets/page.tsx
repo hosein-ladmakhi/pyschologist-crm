@@ -1,9 +1,17 @@
-import TicketsScreen from '@/screens/App/Tickets';
-import { fetchOwnTicketsApi } from '@/services/tickets';
+import CreateTicketDialog from './_components/CreateTicketDialog';
+import Header from './_components/Header';
+import TicketDetailDialog from './_components/TicketDetailDialog';
+import TicketLists from './_components/TicketLists';
 
 const TicketsPage = async () => {
-  const tickets = await fetchOwnTicketsApi();
-  return <TicketsScreen tickets={tickets?.content} />;
+  return (
+    <div className="container">
+      <Header />
+      <TicketLists />
+      <CreateTicketDialog />
+      <TicketDetailDialog />
+    </div>
+  );
 };
 
 export default TicketsPage;

@@ -33,7 +33,6 @@ const api = async <ResponseType>(
     try {
       const session = (await getSession()) as any;
       headers.set('Authorization', `Bearer ${session?.accessToken}`);
-      console.log(123, session);
     } catch (error) {}
   }
 

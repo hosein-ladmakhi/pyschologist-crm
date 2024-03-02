@@ -11,17 +11,18 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReactSlick from 'react-slick';
 import TherapistCard from '@/ui/components/TherapistCard';
+import { useTherapistsContext } from '../../_context/therapists-context';
 
 const TherapistCategorySlider: FC<ITherapistCategorySliderProps> = ({
   category,
-  handleOpenDialog,
 }) => {
+  const { handleOpenDetail } = useTherapistsContext();
   return (
     <div className="therapist-category-slider">
       <div className="card">
         <h1 className="card__title">{category.faName}</h1>
         <div
-          onClick={handleOpenDialog.bind(null, category)}
+          onClick={handleOpenDetail.bind(null, category)}
           className="card__icon"
         >
           <IconCaretLeftFilled size="20px" />
