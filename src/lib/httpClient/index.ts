@@ -1,7 +1,8 @@
 import { TApiMethod, TApiOptions } from './index.type';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
-import { getSession } from 'next-auth/react';
+import { getSession, signOut } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -35,15 +36,28 @@ const api = async <ResponseType>(
       headers.set('Authorization', `Bearer ${session?.accessToken}`);
     } catch (error) {}
   }
-
-  return fetch(baseURL.concat(url), {
-    ...options,
-    method,
-    headers,
-    cache: options.cache || 'no-store',
-  })
-    .then((res) => res.json())
-    .catch((err) => Promise.reject<any>(err));
+  try {
+    const response = await fetch(baseURL.concat(url), {
+      ...options,
+      method,
+      headers,
+    });
+    const responseJSON = await response.json();
+    if (response.status === 401) {
+      if (headers.get('Authorization')) {
+        signOut({ redirect: true, callbackUrl: '/auth/login' });
+      } else {
+        typeof window === typeof undefined
+          ? redirect('/auth/login')
+          : (window.location.href = '/auth/login');
+      }
+      throw new Error();
+    }
+    return responseJSON;
+  } catch (error) {
+    console.log('ERROR', error);
+    return error;
+  }
 };
 
 const httpGet = async <ResponseType>(

@@ -1,5 +1,3 @@
-'use client';
-
 import './index.css';
 
 import { FC } from 'react';

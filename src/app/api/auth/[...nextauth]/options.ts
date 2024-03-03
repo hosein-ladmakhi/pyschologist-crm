@@ -28,6 +28,7 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  pages: { signIn: '/auth/login' },
   callbacks: {
     jwt: ({ user, token, session }: any) => {
       if (session) token.user = { ...session };
@@ -40,6 +41,9 @@ export const authOptions: AuthOptions = {
         session.accessToken = token.accessToken;
       }
       return session;
+    },
+    redirect(params) {
+      return `${params.baseUrl}/auth/login`;
     },
   },
 };

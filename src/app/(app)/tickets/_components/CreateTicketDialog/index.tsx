@@ -5,7 +5,7 @@ import './index.css';
 import Button from '@/ui/kits/Button';
 import Input from '@/ui/kits/Input';
 import Textarea from '@/ui/kits/Textarea';
-import { FC, useRef } from 'react';
+import { FC, useRef, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   ICreateTicketDialogProps,
@@ -14,13 +14,17 @@ import {
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createTicketFormValidation } from './create-ticket-form.validation';
-import { createTicketMutationApi } from '@/services/tickets';
 import { useTicketContext } from '../../_context/ticket-context';
+import { createTicketAction } from '../../actions';
+import Loading from '@/ui/kits/Loading';
 
 const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
-  const { control, handleSubmit } = useForm<TCreateTicketFormValidation>({
-    resolver: zodResolver(createTicketFormValidation),
-  });
+  const [loading, handleTransition] = useTransition();
+  const { control, handleSubmit, reset } = useForm<TCreateTicketFormValidation>(
+    {
+      resolver: zodResolver(createTicketFormValidation),
+    },
+  );
 
   const { createTicketDialog, handleCloseCreate } = useTicketContext();
 
@@ -29,22 +33,30 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
   const handleOpenFile = () => filepickerRef?.current?.click();
 
   const onSubmit = handleSubmit((data) => {
-    console.log('create ticket', data);
-    const formdata = new FormData();
-    formdata.append('title', data.title);
-    formdata.append('content', data.content);
-    Array.from(filepickerRef?.current?.files!).map((file) =>
-      formdata.append('attachments', file),
-    );
-    createTicketMutationApi(formdata)
-      .then((data) => {
-        console.log(data);
-        toast.success('تیکت با موفقیت ثبت گردید');
-        handleCloseCreate();
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
+    handleTransition(() => {
+      const formdata = new FormData();
+      formdata.append('title', data.title);
+      formdata.append('content', data.content);
+      Array.from(filepickerRef?.current?.files!).map((file: any) =>
+        formdata.append('attachments', file),
+      );
+      createTicketAction(formdata)
+        .then((isSuccess) => {
+          if (isSuccess) {
+            toast.success('تیکت با موفقیت ثبت گردید');
+          } else {
+            toast.error('ساخت تیکت شکست خورد');
+          }
+        })
+        .catch(() => {
+          toast.error('ساخت تیکت شکست خورد');
+        })
+        .finally(() => {
+          handleCloseCreate();
+          reset();
+          filepickerRef.current!.files = null;
+        });
+    });
   });
 
   if (!createTicketDialog) return <></>;
@@ -53,6 +65,11 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
     <div className="create-ticket">
       <div className="create-ticket__card">
         <h1 className="create-ticket__title">ثبت رزرو جدید</h1>
+        {loading && (
+          <div className="create-ticket__loading">
+            <Loading type="spinner" size="xxxxl" variant="main" />
+          </div>
+        )}
         <form onSubmit={onSubmit} className="create-ticket__form">
           <Input
             control={control}

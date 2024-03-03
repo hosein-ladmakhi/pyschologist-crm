@@ -1,5 +1,9 @@
 .ticket-card {
-    @apply p-4 border my-5 rounded border-neutral/10;
+    @apply p-4 border my-5 rounded border-neutral/10 relative;
+
+    &__loading {
+        @apply absolute top-0 left-0 h-full w-full bg-gray/30 flex backdrop-blur-sm z-10 justify-center items-center rounded;
+    }
 
     &__title {
         @apply text-sm leading-6 font-bold;

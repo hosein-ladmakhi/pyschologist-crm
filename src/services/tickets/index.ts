@@ -4,7 +4,9 @@ import { ITicket, TPaginatedTickets } from '@/types/ticket.type';
 // HTTP GET
 
 export const fetchOwnTicketsApi = () =>
-  httpGet<TPaginatedTickets>('/tickets/own');
+  httpGet<TPaginatedTickets>('/tickets/own', {
+    next: { tags: ['tickets'] },
+  });
 
 export const downloadTicketAttachmentsApi = (id: number) =>
   httpGet<Buffer>(`/tickets/download/attachment/${id}`);

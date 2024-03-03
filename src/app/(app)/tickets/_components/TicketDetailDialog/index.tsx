@@ -3,13 +3,16 @@
 import './index.css';
 
 import Button from '@/ui/kits/Button';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ITicketDetailDialogProps } from './index.type';
 import TicketCard from '../TicketCard';
 import { downloadTicketAttachmentsApi } from '@/services/tickets';
 import { useTicketContext } from '../../_context/ticket-context';
+import { toast } from 'react-toastify';
+import Loading from '@/ui/kits/Loading';
 
 const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const {
     selectedTicket: ticket,
     viewTicketDialog,
@@ -18,8 +21,10 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
   if (!viewTicketDialog || !ticket) return <></>;
 
   const handleDownloadAttchments = () => {
+    setLoading(true);
     downloadTicketAttachmentsApi(ticket.id)
       .then((data) => {
+        console.log(data);
         const buffer = Buffer.from(data);
         const blob = new Blob([buffer]);
         const url = window.URL.createObjectURL(blob);
@@ -31,15 +36,25 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();
+        toast.success('فایل پیوست با موفقیت دانلود شد');
       })
       .catch((err) => {
         console.log('error heppen', err);
+        toast.error('دانلود فایل پیوست با شکست مواجعه شد');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
     <div className="ticket-detail">
       <div className="ticket-detail__card">
+        {loading && (
+          <div className="ticket-detail__loading">
+            <Loading type="spinner" size="xxxxl" variant="main" />
+          </div>
+        )}
         <h1 className="ticket-detail__title">{ticket.title}</h1>
         <div className="ticket-detail__content">
           <p className="ticket-detail__text">{ticket.content}</p>
