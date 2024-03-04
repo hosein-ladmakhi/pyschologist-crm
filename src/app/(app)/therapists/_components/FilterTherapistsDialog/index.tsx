@@ -117,7 +117,7 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
           </div>
           <div className="filter-therapist__action">
             <Button
-              onClick={handleCloseFilter}
+              onClick={handleCloseFilter.bind(null, false)}
               className="w-full"
               variant="error"
               size="sm"

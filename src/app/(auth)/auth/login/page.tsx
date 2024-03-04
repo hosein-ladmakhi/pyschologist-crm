@@ -12,24 +12,35 @@ import { TLoginFormValidation } from './page.type';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
-  const { control, handleSubmit } = useForm<TLoginFormValidation>({
+  const [loading, setLoading] = useState<boolean>(false);
+  const { control, handleSubmit, reset } = useForm<TLoginFormValidation>({
     resolver: zodResolver(loginValidation),
   });
-  const onSubmit = handleSubmit(async (data) => {
-    const res = await signIn('credentials', {
+  const onSubmit = handleSubmit((data) => {
+    setLoading(true);
+    signIn('credentials', {
       ...data,
       redirect: false,
-    });
-
-    if (res?.ok) {
-      toast.success('ورود شما با موفقیت انجام شد');
-      router.push('/');
-    } else {
-      toast.error('ورود شما با شکست مواجعه شد');
-    }
+    })
+      .then((res) => {
+        if (res?.ok) {
+          toast.success('ورود شما با موفقیت انجام شد');
+          router.push('/');
+          reset();
+        } else {
+          toast.error('ورود شما با شکست مواجعه شد');
+        }
+      })
+      .catch(() => {
+        toast.error('ورود شما با شکست مواجعه شد');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   });
 
   return (
@@ -57,7 +68,12 @@ const LoginPage = () => {
             type="password"
             tabIndex={2}
           />
-          <Button type="submit" variant="main" className="login__form-btn">
+          <Button
+            loading={loading}
+            type="submit"
+            variant="main"
+            className="login__form-btn"
+          >
             ورود به حساب کاربری
           </Button>
         </form>

@@ -7,7 +7,10 @@ import { motion } from 'framer-motion';
 import Input from '@/ui/kits/Input';
 import Button from '@/ui/kits/Button';
 import { useForm } from 'react-hook-form';
-import { IEditProfileDialogProps } from './index.type';
+import {
+  IEditProfileDialogProps,
+  TEditProfileFormValidation,
+} from './index.type';
 import { EDIT_PROFILE_DIALOG_ANIMATION } from './index.animation';
 import { signOut } from 'next-auth/react';
 import { toast } from 'react-toastify';
@@ -15,12 +18,14 @@ import { useRouter } from 'next/navigation';
 import { updateOwnProfileMutationApi } from '@/services/patient';
 import { useLoggedInUser } from '@/hooks/useLoggedInUser';
 import { useAuthSession } from '@/hooks/useAuthSession';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { editProfileFormValidation } from './edit-profile.validation';
 
 const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
   const session = useAuthSession();
   const user = useLoggedInUser();
   const router = useRouter();
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<TEditProfileFormValidation>({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
@@ -28,6 +33,7 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
       currentPassword: '',
       newPassword: '',
     },
+    resolver: zodResolver(editProfileFormValidation),
   });
 
   const onSubmit = handleSubmit((data) => {

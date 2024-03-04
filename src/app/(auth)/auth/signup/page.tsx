@@ -13,14 +13,17 @@ import { toast } from 'react-toastify';
 import { signupMutationApi } from '@/services/auth';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const SignupPage = () => {
   const router = useRouter();
-  const { control, handleSubmit } = useForm<TSignupFormValidation>({
+  const [loading, setLoading] = useState<boolean>(false);
+  const { control, handleSubmit, reset } = useForm<TSignupFormValidation>({
     resolver: zodResolver(signupValidation),
   });
 
   const onSubmit = handleSubmit((data) => {
+    setLoading(true);
     signupMutationApi(data)
       .then(() => {
         return signIn('credentials', {
@@ -32,12 +35,16 @@ const SignupPage = () => {
         if (res?.ok) {
           toast.success('ثبت نام شما با موفقیت انجام گردید');
           router.push('/');
+          reset();
         } else {
           toast.error('ثبت نام شما با شکست مواجعه شد');
         }
       })
       .catch(() => {
         toast.error('ثبت نام شما انجام نشد دوباره تلاش کنید');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   });
 
@@ -77,7 +84,12 @@ const SignupPage = () => {
             type="password"
             helperText="گذرواژه کلید ورود شما به سایت میباشد"
           />
-          <Button type="submit" variant="main" className="signup__form-btn">
+          <Button
+            loading={loading}
+            type="submit"
+            variant="main"
+            className="signup__form-btn"
+          >
             ساخت حساب
           </Button>
         </form>
