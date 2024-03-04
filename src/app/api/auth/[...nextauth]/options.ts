@@ -1,21 +1,21 @@
-import { ILoginRequestBody } from '@/types/auth.type';
-import { loginMutationApi } from '@/services/auth';
-import { AuthOptions } from 'next-auth';
-import NextAuthCredentials from 'next-auth/providers/credentials';
+import { ILoginRequestBody } from "@/types/auth.type";
+import { loginMutationApi } from "@/services/auth";
+import { AuthOptions } from "next-auth";
+import NextAuthCredentials from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: 'jwt',
-    maxAge: 3600,
+    strategy: "jwt",
+    maxAge: 86400,
   },
   providers: [
     NextAuthCredentials({
-      type: 'credentials',
+      type: "credentials",
       credentials: {
-        phone: { type: 'string' },
-        password: { type: 'string' },
-        type: { type: 'string' },
+        phone: { type: "string" },
+        password: { type: "string" },
+        type: { type: "string" },
       },
       async authorize(data?: ILoginRequestBody) {
         const response = await loginMutationApi(data as ILoginRequestBody);
@@ -29,7 +29,7 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  pages: { signIn: '/auth/login' },
+  pages: { signIn: "/auth/login" },
   callbacks: {
     jwt: ({ user, token, session }: any) => {
       if (session) token.user = { ...session };
