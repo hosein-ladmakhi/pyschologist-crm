@@ -2,7 +2,7 @@
 
 import "./index.css";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import Input from "@/ui/kits/Input";
 import Button from "@/ui/kits/Button";
 import { useForm } from "react-hook-form";
@@ -19,6 +19,7 @@ import Dialog from "@/ui/kits/Dialog";
 
 const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
   const session = useAuthSession();
+  const [loading, setLoading] = useState<boolean>(false);
   const user = useLoggedInUser();
   const router = useRouter();
   const { control, handleSubmit } = useForm<TEditProfileFormValidation>({
@@ -33,6 +34,7 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
   });
 
   const onSubmit = handleSubmit((data) => {
+    setLoading(true);
     updateOwnProfileMutationApi(data)
       .then((response) => {
         toast.success("اطلاعات کاربری شما با موفقیت ثبت گردید");
@@ -46,11 +48,14 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
       .catch((error) => {
         console.log(error);
         toast.error("ویرایش حساب کاربری با شکست مواجعه شد");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   });
   // {...EDIT_PROFILE_DIALOG_ANIMATION}
   return (
-    <Dialog isOpen cardClass="max-h-full lg:max-h-none h-fit">
+    <Dialog loading={loading} isOpen cardClass="max-h-full lg:max-h-none h-fit">
       <div className="edit-profile">
         <h1 className="edit-profile__title">ویرایش پروفایل کاربر</h1>
         <form className="profile-form" onSubmit={onSubmit}>
