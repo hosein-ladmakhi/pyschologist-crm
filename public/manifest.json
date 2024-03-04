@@ -1,9 +1,9 @@
 {
-  "name": "Pyschologist Application",
-  "short_name": "DrApp",
-  "description": "You Can Manage Your Therapist Session With Pyschologist App",
+  "name": "اپلیکیشن تراپیست من",
+  "short_name": "تراپیست من",
+  "description": "با اپلیکیشن تراپیست من میتوانید تمامی جلسات مورد نظر خود را با پزشکان متخصص انتخاب کنید و مدیریت کنید",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
   "orientation": "portrait",
