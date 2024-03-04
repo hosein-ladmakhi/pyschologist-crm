@@ -1,14 +1,6 @@
 .reserve-dialog {
-    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end;
-
-    &__card {
-        @apply w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto relative;
-    }
-
-    &__loading {
-        @apply absolute top-0 left-0 h-full w-full bg-neutral/70 z-50 backdrop-blur-sm flex justify-center items-center;
-    }
-
+    @apply w-full;
+    
     &__form {
         @apply w-full;
 

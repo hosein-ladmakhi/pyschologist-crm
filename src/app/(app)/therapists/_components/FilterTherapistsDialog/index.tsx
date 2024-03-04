@@ -1,21 +1,19 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import Button from '@/ui/kits/Button';
-import Input from '@/ui/kits/Input';
-import Select from '@/ui/kits/Select';
-import { FC } from 'react';
-import { useForm } from 'react-hook-form';
-import {
-  IFilterTherapistsDialogProps,
-  TFilterFormValidation,
-} from './index.type';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { filterFormValidation } from './filter-form.validation';
-import { EDegtreeOfEducation, EGender } from '@/types/therapist.type';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useTherapistsContext } from '../../_context/therapists-context';
+import Button from "@/ui/kits/Button";
+import Input from "@/ui/kits/Input";
+import Select from "@/ui/kits/Select";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { IFilterTherapistsDialogProps, TFilterFormValidation } from "./index.type";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { filterFormValidation } from "./filter-form.validation";
+import { EDegtreeOfEducation, EGender } from "@/types/therapist.type";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useTherapistsContext } from "../../_context/therapists-context";
+import Dialog from "@/ui/kits/Dialog";
 
 const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
   const { handleCloseFilter, isOpenFilter } = useTherapistsContext();
@@ -34,22 +32,16 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
     Object.keys(data)
       .filter((key) => (data as any)[key])
       .map((key) => url.set(key, (data as any)[key]));
-    router.push(pathname + '?' + url);
+    router.push(pathname + "?" + url);
     handleCloseFilter();
   });
 
   return (
-    <div className="filter-therapist">
-      <div className="filter-therapist__card">
+    <Dialog isOpen={isOpenFilter}>
+      <div className="filter-therapist">
         <h1 className="filter-therapist__title">فیلتر پزشکان</h1>
         <form className="filter-therapist__form">
-          <Input
-            name="firstName"
-            control={control}
-            helperText=""
-            label="نام"
-            className="my-3"
-          />
+          <Input name="firstName" control={control} helperText="" label="نام" className="my-3" />
           <Input
             name="lastName"
             control={control}
@@ -65,11 +57,11 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
             additionalClasses="my-3"
             options={[
               {
-                text: 'پزشک آقا',
+                text: "پزشک آقا",
                 value: EGender.male,
               },
               {
-                text: 'پزشک خانم',
+                text: "پزشک خانم",
                 value: EGender.female,
               },
             ]}
@@ -82,23 +74,23 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
             additionalClasses="my-3"
             options={[
               {
-                text: 'دیپلم',
+                text: "دیپلم",
                 value: EDegtreeOfEducation.diploma,
               },
               {
-                text: 'فوق دیپلم',
+                text: "فوق دیپلم",
                 value: EDegtreeOfEducation.associate,
               },
               {
-                text: 'لیسانس',
+                text: "لیسانس",
                 value: EDegtreeOfEducation.bachelor,
               },
               {
-                text: 'ارشد',
+                text: "ارشد",
                 value: EDegtreeOfEducation.master,
               },
               {
-                text: 'دکترا',
+                text: "دکترا",
                 value: EDegtreeOfEducation.doctorate,
               },
             ]}
@@ -106,12 +98,7 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
         </form>
         <div className="filter-therapist__actions">
           <div className="filter-therapist__action">
-            <Button
-              onClick={onSubmit}
-              className="w-full"
-              variant="main"
-              size="sm"
-            >
+            <Button onClick={onSubmit} className="w-full" variant="main" size="sm">
               اعمال فیلتر
             </Button>
           </div>
@@ -127,7 +114,7 @@ const FilterTherapistsDialog: FC<IFilterTherapistsDialogProps> = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 };
 

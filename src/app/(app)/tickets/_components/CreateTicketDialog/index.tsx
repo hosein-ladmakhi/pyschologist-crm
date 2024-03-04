@@ -1,30 +1,26 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import Button from '@/ui/kits/Button';
-import Input from '@/ui/kits/Input';
-import Textarea from '@/ui/kits/Textarea';
-import { FC, useRef, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import {
-  ICreateTicketDialogProps,
-  TCreateTicketFormValidation,
-} from './index.type';
-import { toast } from 'react-toastify';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { createTicketFormValidation } from './create-ticket-form.validation';
-import { useTicketContext } from '../../_context/ticket-context';
-import { createTicketAction } from '../../actions';
-import Loading from '@/ui/kits/Loading';
+import Button from "@/ui/kits/Button";
+import Input from "@/ui/kits/Input";
+import Textarea from "@/ui/kits/Textarea";
+import { FC, useRef, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { ICreateTicketDialogProps, TCreateTicketFormValidation } from "./index.type";
+import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createTicketFormValidation } from "./create-ticket-form.validation";
+import { useTicketContext } from "../../_context/ticket-context";
+import { createTicketAction } from "../../actions";
+import Loading from "@/ui/kits/Loading";
+import Dialog from "@/ui/kits/Dialog";
 
 const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
   const [loading, handleTransition] = useTransition();
-  const { control, handleSubmit, reset } = useForm<TCreateTicketFormValidation>(
-    {
-      resolver: zodResolver(createTicketFormValidation),
-    },
-  );
+  const { control, handleSubmit, reset } = useForm<TCreateTicketFormValidation>({
+    resolver: zodResolver(createTicketFormValidation),
+  });
 
   const { createTicketDialog, handleCloseCreate } = useTicketContext();
 
@@ -35,21 +31,21 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
   const onSubmit = handleSubmit((data) => {
     handleTransition(() => {
       const formdata = new FormData();
-      formdata.append('title', data.title);
-      formdata.append('content', data.content);
+      formdata.append("title", data.title);
+      formdata.append("content", data.content);
       Array.from(filepickerRef?.current?.files!).map((file: any) =>
-        formdata.append('attachments', file),
+        formdata.append("attachments", file)
       );
       createTicketAction(formdata)
         .then((isSuccess) => {
           if (isSuccess) {
-            toast.success('تیکت با موفقیت ثبت گردید');
+            toast.success("تیکت با موفقیت ثبت گردید");
           } else {
-            toast.error('ساخت تیکت شکست خورد');
+            toast.error("ساخت تیکت شکست خورد");
           }
         })
         .catch(() => {
-          toast.error('ساخت تیکت شکست خورد');
+          toast.error("ساخت تیکت شکست خورد");
         })
         .finally(() => {
           handleCloseCreate();
@@ -62,14 +58,9 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
   if (!createTicketDialog) return <></>;
 
   return (
-    <div className="create-ticket">
-      <div className="create-ticket__card">
+    <Dialog loading={loading} isOpen={createTicketDialog} cardClass="!overflow-auto pb-0">
+      <div className="create-ticket">
         <h1 className="create-ticket__title">ثبت رزرو جدید</h1>
-        {loading && (
-          <div className="create-ticket__loading">
-            <Loading type="spinner" size="xxxxl" variant="main" />
-          </div>
-        )}
         <form onSubmit={onSubmit} className="create-ticket__form">
           <Input
             control={control}
@@ -94,13 +85,7 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
           >
             افزودن فایل
           </Button>
-          <input
-            accept="application/pdf"
-            ref={filepickerRef}
-            type="file"
-            hidden
-            multiple
-          />
+          <input accept="application/pdf" ref={filepickerRef} type="file" hidden multiple />
           <div className="create-ticket__actions">
             <div className="create-ticket__action">
               <Button type="submit" size="sm" variant="main" className="w-full">
@@ -108,19 +93,14 @@ const CreateTicketDialog: FC<ICreateTicketDialogProps> = ({}) => {
               </Button>
             </div>
             <div className="create-ticket__action">
-              <Button
-                onClick={handleCloseCreate}
-                size="sm"
-                variant="error"
-                className="w-full"
-              >
+              <Button onClick={handleCloseCreate} size="sm" variant="error" className="w-full">
                 بازگشت
               </Button>
             </div>
           </div>
         </form>
       </div>
-    </div>
+    </Dialog>
   );
 };
 

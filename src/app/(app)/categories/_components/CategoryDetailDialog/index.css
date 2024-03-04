@@ -1,10 +1,6 @@
 .category-detail {
-    @apply fixed bottom-0 left-0 w-full h-full bg-neutral/40 flex justify-center items-end;
+    @apply w-full h-full flex flex-col justify-start items-center;
 
-    &__content {
-        @apply bg-white w-full h-5/6 p-5 pb-0 flex flex-col justify-start items-center;
-    }
-    
     &__list {
         @apply flex-1 overflow-auto w-full;
     }

@@ -21,6 +21,7 @@ import Loading from "@/ui/kits/Loading";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { saveReserveFormValidation } from "./save-reserve.validation";
 import { DAYS } from "@/constants/days.constant";
+import Dialog from "@/ui/kits/Dialog";
 
 const ReserveDialog: FC<IReserveDialogProps> = ({ schedules, therapistId, categories }) => {
   const { handleCloseReserveDialog, openReserveDialog } = useTherapistDetailContext();
@@ -121,13 +122,8 @@ const ReserveDialog: FC<IReserveDialogProps> = ({ schedules, therapistId, catego
   if (!openReserveDialog) return <></>;
 
   return (
-    <div className="reserve-dialog">
-      <div className="reserve-dialog__card">
-        {loading && (
-          <div className="reserve-dialog__loading">
-            <Loading type="spinner" size="xxxxl" variant="main" />
-          </div>
-        )}
+    <Dialog loading={loading} isOpen={openReserveDialog}>
+      <div className="reserve-dialog">
         <form className="reserve-dialog__form">
           <Select
             name="day"
@@ -187,7 +183,7 @@ const ReserveDialog: FC<IReserveDialogProps> = ({ schedules, therapistId, catego
           </div>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 };
 

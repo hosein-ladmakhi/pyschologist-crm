@@ -1,23 +1,19 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import Button from '@/ui/kits/Button';
-import { FC, useState } from 'react';
-import { ITicketDetailDialogProps } from './index.type';
-import TicketCard from '../TicketCard';
-import { downloadTicketAttachmentsApi } from '@/services/tickets';
-import { useTicketContext } from '../../_context/ticket-context';
-import { toast } from 'react-toastify';
-import Loading from '@/ui/kits/Loading';
+import Button from "@/ui/kits/Button";
+import { FC, useState } from "react";
+import { ITicketDetailDialogProps } from "./index.type";
+import TicketCard from "../TicketCard";
+import { downloadTicketAttachmentsApi } from "@/services/tickets";
+import { useTicketContext } from "../../_context/ticket-context";
+import { toast } from "react-toastify";
+import Dialog from "@/ui/kits/Dialog";
 
 const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const {
-    selectedTicket: ticket,
-    viewTicketDialog,
-    handleCloseViewTicket,
-  } = useTicketContext();
+  const { selectedTicket: ticket, viewTicketDialog, handleCloseViewTicket } = useTicketContext();
   if (!viewTicketDialog || !ticket) return <></>;
 
   const handleDownloadAttchments = () => {
@@ -27,19 +23,19 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
         const buffer = Buffer.from(data);
         const blob = new Blob([buffer]);
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         document.body.appendChild(a);
-        a.style.display = 'none';
+        a.style.display = "none";
         a.href = url;
-        a.download = 'download.zip';
+        a.download = "download.zip";
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();
-        toast.success('فایل پیوست با موفقیت دانلود شد');
+        toast.success("فایل پیوست با موفقیت دانلود شد");
       })
       .catch((err) => {
-        console.log('error heppen', err);
-        toast.error('دانلود فایل پیوست با شکست مواجعه شد');
+        console.log("error heppen", err);
+        toast.error("دانلود فایل پیوست با شکست مواجعه شد");
       })
       .finally(() => {
         setLoading(false);
@@ -47,13 +43,12 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
   };
 
   return (
-    <div className="ticket-detail">
-      <div className="ticket-detail__card">
-        {loading && (
-          <div className="ticket-detail__loading">
-            <Loading type="spinner" size="xxxxl" variant="main" />
-          </div>
-        )}
+    <Dialog
+      loading={loading}
+      isOpen={!!(viewTicketDialog && ticket)}
+      cardClass="h-5/6 !overflow-auto"
+    >
+      <div className="ticket-detail">
         <h1 className="ticket-detail__title">{ticket.title}</h1>
         <div className="ticket-detail__content">
           <p className="ticket-detail__text">{ticket.content}</p>
@@ -65,9 +60,7 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
           )}
           {ticket.childrens.length > 0 && (
             <div className="related-ticket">
-              <h1 className="related-ticket__title">
-                پیام های ایجاد شده در این تیکت
-              </h1>
+              <h1 className="related-ticket__title">پیام های ایجاد شده در این تیکت</h1>
               <ul className="related-ticket__list">
                 {ticket.childrens.map((ticket) => (
                   <TicketCard ticket={ticket} key={ticket.id} />
@@ -90,12 +83,7 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
               </Button>
             </div>
             <div className="col-span-6">
-              <Button
-                onClick={handleCloseViewTicket}
-                variant="error"
-                size="sm"
-                className="w-full"
-              >
+              <Button onClick={handleCloseViewTicket} variant="error" size="sm" className="w-full">
                 بستن جزئیات
               </Button>
             </div>
@@ -103,19 +91,14 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
         ) : (
           <div className="ticket-detail__action">
             <div className="col-span-12">
-              <Button
-                onClick={handleCloseViewTicket}
-                variant="error"
-                size="sm"
-                className="w-full"
-              >
+              <Button onClick={handleCloseViewTicket} variant="error" size="sm" className="w-full">
                 بستن جزئیات
               </Button>
             </div>
           </div>
         )}
       </div>
-    </div>
+    </Dialog>
   );
 };
 

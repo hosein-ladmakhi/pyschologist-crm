@@ -1,10 +1,4 @@
 .auth-dialog {
-    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end z-50;
-
-    .paper {
-        @apply w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto;
-    }
-
     .header {
         @apply flex justify-between items-center w-full;
 

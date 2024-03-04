@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import Button from '@/ui/kits/Button';
-import { FC, Suspense, useState } from 'react';
-import { IEditProfileCardProps } from './index.type';
-import { AnimatePresence } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import { useLoggedInUser } from '@/hooks/useLoggedInUser';
+import Button from "@/ui/kits/Button";
+import { FC, Suspense, useState } from "react";
+import { IEditProfileCardProps } from "./index.type";
+import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useLoggedInUser } from "@/hooks/useLoggedInUser";
 
-const EditProfileDialog = dynamic(() => import('../EditProfileDialog'));
+const EditProfileDialog = dynamic(() => import("../EditProfileDialog"));
 
 const ProfileCard: FC<IEditProfileCardProps> = ({}) => {
   const [editProfileDialog, setEditProfileDialog] = useState<boolean>(false);
@@ -33,12 +33,7 @@ const ProfileCard: FC<IEditProfileCardProps> = ({}) => {
             </h1>
             <p className="profile-card__phone">{user?.phone}</p>
           </div>
-          <Button
-            onClick={handleOpenEditProfile}
-            variant="main"
-            isOutline
-            size="xs"
-          >
+          <Button onClick={handleOpenEditProfile} variant="main" isOutline size="xs">
             ویرایش حساب
           </Button>
         </div>

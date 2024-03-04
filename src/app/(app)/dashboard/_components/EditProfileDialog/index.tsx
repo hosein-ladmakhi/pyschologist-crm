@@ -1,25 +1,21 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import Input from '@/ui/kits/Input';
-import Button from '@/ui/kits/Button';
-import { useForm } from 'react-hook-form';
-import {
-  IEditProfileDialogProps,
-  TEditProfileFormValidation,
-} from './index.type';
-import { EDIT_PROFILE_DIALOG_ANIMATION } from './index.animation';
-import { signOut } from 'next-auth/react';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
-import { updateOwnProfileMutationApi } from '@/services/patient';
-import { useLoggedInUser } from '@/hooks/useLoggedInUser';
-import { useAuthSession } from '@/hooks/useAuthSession';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { editProfileFormValidation } from './edit-profile.validation';
+import { FC } from "react";
+import Input from "@/ui/kits/Input";
+import Button from "@/ui/kits/Button";
+import { useForm } from "react-hook-form";
+import { IEditProfileDialogProps, TEditProfileFormValidation } from "./index.type";
+import { signOut } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { updateOwnProfileMutationApi } from "@/services/patient";
+import { useLoggedInUser } from "@/hooks/useLoggedInUser";
+import { useAuthSession } from "@/hooks/useAuthSession";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { editProfileFormValidation } from "./edit-profile.validation";
+import Dialog from "@/ui/kits/Dialog";
 
 const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
   const session = useAuthSession();
@@ -30,8 +26,8 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
       firstName: user?.firstName,
       lastName: user?.lastName,
       phone: user?.phone,
-      currentPassword: '',
-      newPassword: '',
+      currentPassword: "",
+      newPassword: "",
     },
     resolver: zodResolver(editProfileFormValidation),
   });
@@ -39,23 +35,23 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
   const onSubmit = handleSubmit((data) => {
     updateOwnProfileMutationApi(data)
       .then((response) => {
-        toast.success('اطلاعات کاربری شما با موفقیت ثبت گردید');
+        toast.success("اطلاعات کاربری شما با موفقیت ثبت گردید");
         session.update(response);
         onClose();
         if (data.newPassword) {
           signOut({ redirect: false });
-          router.replace('/auth/patient/login');
+          router.replace("/auth/patient/login");
         }
       })
       .catch((error) => {
         console.log(error);
-        toast.error('ویرایش حساب کاربری با شکست مواجعه شد');
+        toast.error("ویرایش حساب کاربری با شکست مواجعه شد");
       });
   });
-
+  // {...EDIT_PROFILE_DIALOG_ANIMATION}
   return (
-    <motion.div {...EDIT_PROFILE_DIALOG_ANIMATION} className="edit-profile">
-      <div className="edit-profile__content">
+    <Dialog isOpen cardClass="max-h-full lg:max-h-none h-fit">
+      <div className="edit-profile">
         <h1 className="edit-profile__title">ویرایش پروفایل کاربر</h1>
         <form className="profile-form" onSubmit={onSubmit}>
           <div className="profile-form__content">
@@ -122,7 +118,7 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
           </div>
         </form>
       </div>
-    </motion.div>
+    </Dialog>
   );
 };
 
