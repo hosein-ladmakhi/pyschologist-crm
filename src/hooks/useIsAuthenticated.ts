@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useAuthSession } from './useAuthSession';
+import { useAuthSession } from "./useAuthSession";
 
 export const useIsAuthenticated = () => {
   const session = useAuthSession();
-  return session.status !== 'unauthenticated';
+  return session.status === "authenticated";
 };
