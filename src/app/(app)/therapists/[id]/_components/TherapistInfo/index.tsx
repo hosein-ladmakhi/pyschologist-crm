@@ -12,11 +12,10 @@ import {
   transformGender,
 } from '@/utils/enum-transformer';
 import { useIsAuthenticated } from '@/hooks/useIsAuthenticated';
+import { useTherapistDetailContext } from '../../_context/therapist-detail-context';
 
-const TherapistInfo: FC<ITherapistInfoProps> = ({
-  handleOpenReserve,
-  therapist,
-}) => {
+const TherapistInfo: FC<ITherapistInfoProps> = ({ therapist }) => {
+  const { handleOpenReserveDialog } = useTherapistDetailContext();
   const isAuthCurrentUser = useIsAuthenticated();
   return (
     <div className="therapist-info">
@@ -33,7 +32,7 @@ const TherapistInfo: FC<ITherapistInfoProps> = ({
           {therapist.firstName} {therapist.lastName}
         </h1>
         <Button
-          onClick={handleOpenReserve}
+          onClick={handleOpenReserveDialog}
           variant="main"
           size="sm"
           className="therapist-info__btn"

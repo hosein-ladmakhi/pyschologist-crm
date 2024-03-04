@@ -1,10 +1,17 @@
-import CategoriesScreen from "@/screens/App/Categories";
-import { fetchTherapistsOfCategoriesApi } from "@/services/categories";
-import { FC } from "react";
+import { FC, Suspense } from 'react';
+import CategoryLists from './_components/CategoryLists';
+import CategoryDetailDialog from './_components/CategoryDetailDialog';
+import CategoryListsLoading from './_components/CategoryListsLoading';
 
 const CategoriesPage: FC = async () => {
-	const categories = await fetchTherapistsOfCategoriesApi();
-	return <CategoriesScreen categories={categories} />;
+  return (
+    <div className="container">
+      <Suspense fallback={<CategoryListsLoading />}>
+        <CategoryLists />
+      </Suspense>
+      <CategoryDetailDialog />
+    </div>
+  );
 };
 
 export default CategoriesPage;

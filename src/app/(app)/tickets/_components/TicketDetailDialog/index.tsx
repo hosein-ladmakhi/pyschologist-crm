@@ -24,7 +24,6 @@ const TicketDetailDialog: FC<ITicketDetailDialogProps> = ({}) => {
     setLoading(true);
     downloadTicketAttachmentsApi(ticket.id)
       .then((data) => {
-        console.log(data);
         const buffer = Buffer.from(data);
         const blob = new Blob([buffer]);
         const url = window.URL.createObjectURL(blob);

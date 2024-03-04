@@ -5,14 +5,13 @@ import './index.css';
 import Image from 'next/image';
 import { FC } from 'react';
 import { ICaregoryCardProps } from './index.type';
+import { useCategoriesContext } from '../../_context/categories-context';
 
-const CategoryCard: FC<ICaregoryCardProps> = ({
-  category,
-  handleOpenCategory,
-}) => {
+const CategoryCard: FC<ICaregoryCardProps> = ({ category }) => {
+  const { handleOpenCategoryDetail } = useCategoriesContext();
   return (
     <div
-      onClick={handleOpenCategory.bind(null, category)}
+      onClick={handleOpenCategoryDetail.bind(null, category)}
       key={category.id}
       className="category-card"
     >

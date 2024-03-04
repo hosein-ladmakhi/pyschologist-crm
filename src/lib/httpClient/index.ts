@@ -3,6 +3,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import { getSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import { handleUnauthApi } from './handle-api-error';
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -44,13 +45,7 @@ const api = async <ResponseType>(
     });
     const responseJSON = await response.json();
     if (response.status === 401) {
-      if (headers.get('Authorization')) {
-        signOut({ redirect: true, callbackUrl: '/auth/login' });
-      } else {
-        typeof window === typeof undefined
-          ? redirect('/auth/login')
-          : (window.location.href = '/auth/login');
-      }
+      handleUnauthApi();
       throw new Error();
     }
     return responseJSON;

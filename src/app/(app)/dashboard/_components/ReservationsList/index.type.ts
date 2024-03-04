@@ -4,4 +4,5 @@ export interface IReservationsListProps {
   data: IOrder[];
   title: string;
   showStatus?: boolean;
+  type: 'active' | 'disabled';
 }

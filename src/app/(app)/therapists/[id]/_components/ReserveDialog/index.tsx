@@ -4,7 +4,7 @@ import './index.css';
 
 import Select from '@/ui/kits/Select';
 import Button from '@/ui/kits/Button';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useTransition } from 'react';
 import { IReserveDialogProps } from './index.type';
 import { useForm } from 'react-hook-form';
 import { ITherapistSchedulesPerDay } from '@/types/therapist-schedule.type';
@@ -17,6 +17,10 @@ import {
 import { transformScheduleType } from '@/utils/enum-transformer';
 import { removeDuplicateOptions } from '@/utils/remove-duplicate-options';
 import { useLoggedInUser } from '@/hooks/useLoggedInUser';
+import { useTherapistDetailContext } from '../../_context/therapist-detail-context';
+import { reserveOrderAction } from '../../actions';
+import { ISaveOwnOrderRequestBody } from '@/types/order.type';
+import Loading from '@/ui/kits/Loading';
 
 const days = [
   'شنبه',
@@ -29,13 +33,15 @@ const days = [
 ];
 
 const ReserveDialog: FC<IReserveDialogProps> = ({
-  handleClose,
   schedules,
   therapistId,
   categories,
 }) => {
+  const { handleCloseReserveDialog, openReserveDialog } =
+    useTherapistDetailContext();
+  const [loading, handleTransition] = useTransition();
   const loggedInUser = useLoggedInUser();
-  const { control, watch, handleSubmit } = useForm();
+  const { control, watch, handleSubmit, reset } = useForm();
   const [dates, setDates] = useState<string[]>([]);
 
   const dayOptions = removeDuplicateOptions(
@@ -76,35 +82,45 @@ const ReserveDialog: FC<IReserveDialogProps> = ({
   }, [watch('time'), therapistId, watch('day')]);
 
   const onSubmit = handleSubmit((data) => {
-    const selectedSchedule = selectedDaySchedule?.items?.find(
-      (element) =>
-        `${element.startHour}_${element.endHour}` === watch('time') &&
-        element.type === watch('type'),
-    );
-    const [startHour, endHour] = data.time.split('_');
-    const requestBody = {
-      ...data,
-      room: selectedSchedule?.room,
-      location: selectedSchedule?.location?.id,
-      startHour,
-      endHour,
-      therapist: therapistId,
-      patient: loggedInUser?.id,
-      categories: [data.categories],
-    };
-    saveOwnReservationOrderMutationApi(requestBody as any)
-      .then((data) => {
-        toast.success('رزرو با موفقیت ثبت گردید');
-        handleClose();
-      })
-      .catch((err) => {
-        toast.error('ثبت رزرو با شکست مواجعه شد');
-      });
+    handleTransition(() => {
+      const selectedSchedule = selectedDaySchedule?.items?.find(
+        (element) =>
+          `${element.startHour}_${element.endHour}` === watch('time') &&
+          element.type === watch('type'),
+      );
+      const [startHour, endHour] = data.time.split('_');
+      const requestBody = {
+        ...data,
+        room: selectedSchedule?.room,
+        location: selectedSchedule?.location?.id,
+        startHour,
+        endHour,
+        therapist: therapistId,
+        patient: loggedInUser?.id,
+        categories: [data.categories],
+      };
+      reserveOrderAction(requestBody as ISaveOwnOrderRequestBody)
+        .then((data) => {
+          toast.success('رزرو با موفقیت ثبت گردید');
+          handleCloseReserveDialog();
+          reset();
+        })
+        .catch((err) => {
+          toast.error('ثبت رزرو با شکست مواجعه شد');
+        });
+    });
   });
+
+  if (!openReserveDialog) return <></>;
 
   return (
     <div className="reserve-dialog">
       <div className="reserve-dialog__card">
+        {loading && (
+          <div className="reserve-dialog__loading">
+            <Loading type="spinner" size="xxxxl" variant="main" />
+          </div>
+        )}
         <form className="reserve-dialog__form">
           <Select
             name="day"
@@ -167,7 +183,7 @@ const ReserveDialog: FC<IReserveDialogProps> = ({
           </div>
           <div className="reserve-dialog__action">
             <Button
-              onClick={handleClose}
+              onClick={handleCloseReserveDialog}
               variant="error"
               className="reserve-dialog__btn"
             >
