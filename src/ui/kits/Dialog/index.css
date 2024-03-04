@@ -1,8 +1,8 @@
 .dialog {
-    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 flex justify-center items-end backdrop-blur-sm z-50;
+    @apply fixed top-0 left-0 h-full w-full bg-neutral/50 backdrop-blur-sm z-50;
 
     &__card {
-        @apply w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto relative;
+        @apply fixed bottom-0 left-0 w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto;
     }
 
     &__loading {
