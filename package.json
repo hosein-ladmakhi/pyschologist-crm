@@ -25,6 +25,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "react-loading-skeleton": "^3.4.0",
+    "react-pwa-installer-prompt": "^1.0.8",
     "react-slick": "^0.30.2",
     "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.4",
