@@ -20,11 +20,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
   const session = await getServerSession();
   const isMobilePlatform = userAgent({ headers: headers() }).device.type === "mobile";
-  const currentURL = headers().get("next-url");
   const desktopPageURL = "/main-operation";
-  if (isMobilePlatform && !currentURL?.startsWith(desktopPageURL) && currentURL) {
-    redirect(desktopPageURL);
-  }
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>
