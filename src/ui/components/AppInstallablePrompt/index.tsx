@@ -25,7 +25,7 @@ const AppInstallablePrompt: FC = () => {
   return (
     <PWAInstallerPrompt
       render={({ onClick }) => (
-        <div className="bg-main/10 w-full p-5">
+        <div className="absolute top-0 left-0 bg-main/10 w-full p-5 w-full">
           <div className="flex justify-start items-center gap-2 mb-4">
             <div className="h-14 w-14 relative">
               <Image
