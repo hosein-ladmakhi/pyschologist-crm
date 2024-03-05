@@ -5,19 +5,22 @@ import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import PWAInstallerPrompt from "react-pwa-installer-prompt";
 
-const installationPromptStatus = window.localStorage.getItem("installation");
-
 const AppInstallablePrompt: FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(
-    installationPromptStatus ? installationPromptStatus === "true" : true
-  );
+  const [isOpen, setIsOpen] = useState<boolean>();
+
+  useEffect(() => {
+    const installationPromptStatus =
+      typeof window === typeof undefined ? open : window.localStorage.getItem("installation");
+    console.log("installationPromptStatus", installationPromptStatus);
+    setIsOpen(installationPromptStatus ? installationPromptStatus === "true" : true);
+  }, []);
 
   const handleClose = () => {
     setIsOpen(false);
     window.localStorage.setItem("installation", "false");
   };
 
-  if (!isOpen) return <></>;
+  if (isOpen === false) return <></>;
 
   return (
     <PWAInstallerPrompt
