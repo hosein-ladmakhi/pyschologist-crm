@@ -17,6 +17,8 @@ const AppInstallablePrompt: FC = () => {
     window.localStorage.setItem("installation", "false");
   };
 
+  if (!isOpen) return <></>;
+
   return (
     <PWAInstallerPrompt
       render={({ onClick }) => (
