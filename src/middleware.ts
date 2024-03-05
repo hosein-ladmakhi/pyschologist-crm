@@ -15,9 +15,10 @@ const withPlatform = (handler) => {
       isMobilePlatform &&
       currentURL !== desktopPageURL &&
       !currentURL.startsWith("/_next") &&
-      !currentURL.startsWith("/api")
+      !currentURL.startsWith("/api") &&
+      currentURL !== "/manifest.json"
     ) {
-      console.log(454, currentURL);
+      console.log(454, currentURL, userAgent({ headers: headers() }).device);
       return NextResponse.rewrite(new URL(desktopPageURL, request.url), {
         status: 303,
       });
