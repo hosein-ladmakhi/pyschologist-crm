@@ -11,8 +11,16 @@ const withPlatform = (handler) => {
     const isMobilePlatform = userAgent({ headers: headers() }).device.type === "mobile";
     const desktopPageURL = "/main-operation";
     const currentURL = request.nextUrl.pathname;
-    if (isMobilePlatform && currentURL !== desktopPageURL) {
-      return NextResponse.redirect(request.nextUrl.origin + desktopPageURL);
+    if (
+      isMobilePlatform &&
+      currentURL !== desktopPageURL &&
+      !currentURL.startsWith("/_next") &&
+      !currentURL.startsWith("/api")
+    ) {
+      console.log(454, currentURL);
+      return NextResponse.rewrite(new URL(desktopPageURL, request.url), {
+        status: 303,
+      });
     }
     return handler(request);
   };
