@@ -16,8 +16,8 @@ const withPlatform = (handler) => {
     if (
       isMobilePlatform &&
       currentURL !== desktopPageURL &&
-      routes.find((element) => element.startsWith(currentURL) && currentURL !== "/") &&
-      currentURL === "/"
+      (routes.find((element) => element.startsWith(currentURL) && currentURL !== "/") ||
+        currentURL === "/")
     ) {
       return NextResponse.rewrite(new URL(desktopPageURL, request.url), {
         status: 303,
