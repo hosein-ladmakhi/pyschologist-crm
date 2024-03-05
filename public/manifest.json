@@ -3,7 +3,7 @@
   "short_name": "تراپیست من",
   "description": "با اپلیکیشن تراپیست من میتوانید تمامی جلسات مورد نظر خود را با پزشکان متخصص انتخاب کنید و مدیریت کنید",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
   "orientation": "portrait",
