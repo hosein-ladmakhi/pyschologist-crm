@@ -2,10 +2,21 @@
 
 import Button from "@/ui/kits/Button";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import PWAInstallerPrompt from "react-pwa-installer-prompt";
 
+const installationPromptStatus = window.localStorage.getItem("installation");
+
 const AppInstallablePrompt: FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(
+    installationPromptStatus ? installationPromptStatus === "true" : true
+  );
+
+  const handleClose = () => {
+    setIsOpen(false);
+    window.localStorage.setItem("installation", "false");
+  };
+
   return (
     <PWAInstallerPrompt
       render={({ onClick }) => (
@@ -25,10 +36,17 @@ const AppInstallablePrompt: FC = () => {
             </div>
           </div>
           <div className="w-full flex justify-end items-center gap-3">
-            <Button isOutline size="xs" variant="main">
+            <Button onClick={handleClose} isOutline size="xs" variant="main">
               بستن
             </Button>
-            <Button onClick={onClick} size="xs" variant="main">
+            <Button
+              onClick={() => {
+                onClick();
+                handleClose();
+              }}
+              size="xs"
+              variant="main"
+            >
               دانلود
             </Button>
           </div>
