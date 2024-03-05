@@ -13,19 +13,13 @@ const withPlatform = (handler) => {
     const isMobilePlatform = userAgent({ headers: headers() }).device.type === "mobile";
     const desktopPageURL = "/main-operation";
     const currentURL = request.nextUrl.pathname;
+    console.log(":::::", userAgent({ headers: headers() }));
     if (
       isMobilePlatform &&
       currentURL !== desktopPageURL &&
       (routes.find((element) => element.startsWith(currentURL) && currentURL !== "/") ||
         currentURL === "/")
     ) {
-      console.log(
-        123,
-        isMobilePlatform,
-        currentURL !== desktopPageURL,
-        routes.find((element) => element.startsWith(currentURL) && currentURL !== "/"),
-        currentURL === "/"
-      );
       return NextResponse.rewrite(new URL(desktopPageURL, request.url), {
         status: 303,
       });
