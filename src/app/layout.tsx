@@ -9,6 +9,8 @@ import ToastifyProvider from "@/providers/ToastifyProvider";
 import SessionProvider from "@/providers/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Metadata } from "next";
+import { userAgent } from "next/server";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -19,6 +21,7 @@ const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>
+        <pre>{JSON.stringify(userAgent({ headers: headers() }), null, 10)}</pre>
         <RouteLoadingProvider>
           <ToastifyProvider>
             <SessionProvider session={session}>{children}</SessionProvider>
