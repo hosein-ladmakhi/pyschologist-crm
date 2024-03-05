@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import Button from '@/ui/kits/Button';
-import { FC, useTransition } from 'react';
-import { ITicketCardProps } from './index.type';
-import { ETicketStatus } from '@/types/ticket.type';
-import moment from 'jalali-moment';
-import { IconTrash } from '@tabler/icons-react';
-import { toast } from 'react-toastify';
-import { useTicketContext } from '../../_context/ticket-context';
-import { deleteTicketAction } from '../../actions';
-import Loading from '@/ui/kits/Loading';
+import Button from "@/ui/kits/Button";
+import { FC, useTransition } from "react";
+import { ITicketCardProps } from "./index.type";
+import { ETicketStatus } from "@/types/ticket.type";
+import moment from "jalali-moment";
+import { IconTrash } from "@tabler/icons-react";
+import { toast } from "react-toastify";
+import { useTicketContext } from "../../_context/ticket-context";
+import { deleteTicketAction } from "../../actions";
+import Loading from "@/ui/kits/Loading";
 
 const TicketCard: FC<ITicketCardProps> = ({ ticket }) => {
   const { handleViewTicket } = useTicketContext();
@@ -22,14 +22,14 @@ const TicketCard: FC<ITicketCardProps> = ({ ticket }) => {
       deleteTicketAction(ticket.id)
         .then((res) => {
           if (res) {
-            toast.success('تیکت با موفقیت حذف گردید');
-            console.log('deleted ...');
+            toast.success("تیکت با موفقیت حذف گردید");
+            console.log("deleted ...");
           } else {
-            toast.error('حذف تیکت با شکست مواجعه شد');
+            toast.error("حذف تیکت با شکست مواجعه شد");
           }
         })
         .catch(() => {
-          toast.error('حذف تیکت با شکست مواجعه شد');
+          toast.error("حذف تیکت با شکست مواجعه شد");
         });
     });
   };
@@ -53,23 +53,19 @@ const TicketCard: FC<ITicketCardProps> = ({ ticket }) => {
       </div>
       <div className="ticket-card__content">
         <span className="ticket-card__badge">
-          {moment(ticket.createdAt).utc(true).locale('fa').fromNow()}
+          {moment(ticket.createdAt).utc(true).locale("fa").fromNow()}
         </span>
         <span className="ticket-card__badge">
           {ticket.status === ETicketStatus.Open
-            ? 'تیکت در وضعیت باز میباشد'
-            : 'تیکت در وضعیت بسته میباشد'}
+            ? "تیکت در وضعیت باز میباشد"
+            : "تیکت در وضعیت بسته میباشد"}
         </span>
         <span className="ticket-card__badge">
-          {ticket.answerAt ? 'تیکت پاسخ داده شده' : 'تیکت پاسخ داده نشده'}
+          {ticket.answerAt ? "تیکت پاسخ داده شده" : "تیکت پاسخ داده نشده"}
         </span>
       </div>
       <div className="ticket-card__btn">
-        <Button
-          onClick={handleViewTicket.bind(null, ticket)}
-          variant="main"
-          size="xs"
-        >
+        <Button onClick={handleViewTicket.bind(null, ticket)} variant="main" size="xs">
           نمایش جزئیات تیکت
         </Button>
       </div>

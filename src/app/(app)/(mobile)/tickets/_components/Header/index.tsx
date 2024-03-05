@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import Button from '@/ui/kits/Button';
-import { FC } from 'react';
-import { IHeaderProps } from './index.type';
-import { useTicketContext } from '../../_context/ticket-context';
+import Button from "@/ui/kits/Button";
+import { FC } from "react";
+import { IHeaderProps } from "./index.type";
+import { useTicketContext } from "../../_context/ticket-context";
 
 const Header: FC<IHeaderProps> = () => {
   const { handleOpenCreate } = useTicketContext();

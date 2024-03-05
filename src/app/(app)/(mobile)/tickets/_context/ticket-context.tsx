@@ -1,11 +1,5 @@
-import { ITicket } from '@/types/ticket.type';
-import {
-  FC,
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { ITicket } from "@/types/ticket.type";
+import { FC, PropsWithChildren, createContext, useContext, useState } from "react";
 
 interface ITicketContext {
   selectedTicket?: ITicket;

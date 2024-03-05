@@ -11,6 +11,7 @@ import { getServerSession } from "next-auth";
 import { Metadata } from "next";
 import { userAgent } from "next/server";
 import { headers } from "next/headers";
+import { redirect, usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -19,10 +20,14 @@ export const metadata: Metadata = {
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
   const session = await getServerSession();
   const isMobilePlatform = userAgent({ headers: headers() }).device.type === "mobile";
+  const currentURL = headers().get("next-url");
+  const desktopPageURL = "/main-operation";
+  if (isMobilePlatform && !currentURL?.startsWith(desktopPageURL) && currentURL) {
+    redirect(desktopPageURL);
+  }
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>
-        {isMobilePlatform && <p>این دستگاه با موبایل وارد شده است</p>}
         <RouteLoadingProvider>
           <ToastifyProvider>
             <SessionProvider session={session}>{children}</SessionProvider>

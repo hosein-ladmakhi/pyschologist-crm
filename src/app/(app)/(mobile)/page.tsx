@@ -1,14 +1,14 @@
-import './page.css';
+import "./page.css";
 
-import { Suspense } from 'react';
-import CategoriesList from './_components/CategoriesList';
-import Landing from './_components/Landing';
-import TherapistsList from './_components/TherapistsList';
-import HomeHeader from './_components/HomeHeader';
-import CategoriesListLoading from './_components/CategoriesListLoading';
-import TherapistsListLoading from './_components/TherapistsListLoading';
+import { Suspense } from "react";
+import CategoriesList from "../_components/CategoriesList";
+import Landing from "../_components/Landing";
+import TherapistsList from "../_components/TherapistsList";
+import HomeHeader from "../_components/HomeHeader";
+import CategoriesListLoading from "../_components/CategoriesListLoading";
+import TherapistsListLoading from "../_components/TherapistsListLoading";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const HomePage = () => {
   return (
