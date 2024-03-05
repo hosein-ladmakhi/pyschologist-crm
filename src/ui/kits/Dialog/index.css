@@ -2,7 +2,7 @@
     @apply fixed top-0 left-0 h-full w-full bg-neutral/50 backdrop-blur-sm z-50;
 
     &__card {
-        @apply fixed bottom-0 left-0 w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto h-[700px];
+        @apply fixed bottom-0 left-0 w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto;
     }
 
     &__loading {
