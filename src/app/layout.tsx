@@ -18,10 +18,11 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
   const session = await getServerSession();
+  const isMobilePlatform = userAgent({ headers: headers() }).device.type === "mobile";
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>
-        <pre>{JSON.stringify(userAgent({ headers: headers() }), null, 10)}</pre>
+        {isMobilePlatform && <p>این دستگاه با موبایل وارد شده است</p>}
         <RouteLoadingProvider>
           <ToastifyProvider>
             <SessionProvider session={session}>{children}</SessionProvider>
