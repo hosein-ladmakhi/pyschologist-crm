@@ -13,7 +13,13 @@ const withPlatform = (handler) => {
     const isMobilePlatform = userAgent({ headers: headers() }).device.type === "mobile";
     const desktopPageURL = "/main-operation";
     const currentURL = request.nextUrl.pathname;
-    console.log(":::::", userAgent({ headers: headers() }));
+    console.log(
+      ":::::",
+      userAgent({ headers: headers() })?.ua?.match(
+        /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
+      )
+    );
+
     if (
       isMobilePlatform &&
       currentURL !== desktopPageURL &&
