@@ -4,6 +4,8 @@ import { withAuth } from "next-auth/middleware";
 
 const protectedRoute = ["/dashboard", "/tickets"];
 
+const routes = ["/dashboard", "/tickets", "/categories", "/therapists"];
+
 const protectedMiddleware = withAuth({});
 
 const withPlatform = (handler) => {
@@ -14,11 +16,9 @@ const withPlatform = (handler) => {
     if (
       isMobilePlatform &&
       currentURL !== desktopPageURL &&
-      !currentURL.startsWith("/_next") &&
-      !currentURL.startsWith("/api") &&
-      currentURL !== "/manifest.json"
+      routes.find((element) => element.startsWith(currentURL) && currentURL !== "/") &&
+      currentURL === "/"
     ) {
-      console.log(454, currentURL, userAgent({ headers: headers() }).device);
       return NextResponse.rewrite(new URL(desktopPageURL, request.url), {
         status: 303,
       });
