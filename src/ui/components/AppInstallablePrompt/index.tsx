@@ -1,5 +1,7 @@
 "use client";
 
+import Button from "@/ui/kits/Button";
+import Image from "next/image";
 import { FC } from "react";
 import PWAInstallerPrompt from "react-pwa-installer-prompt";
 
@@ -7,9 +9,30 @@ const AppInstallablePrompt: FC = () => {
   return (
     <PWAInstallerPrompt
       render={({ onClick }) => (
-        <button type="button" onClick={onClick}>
-          // make sure you pass onClick Install
-        </button>
+        <div className="bg-main/10 w-full p-5">
+          <div className="flex justify-start items-center gap-2 mb-4">
+            <div className="h-14 w-14 relative">
+              <Image
+                src="/icons/android/android-launchericon-512-512.png"
+                alt="android-icon"
+                fill
+                className="object-cover object-center"
+              />
+            </div>
+            <div className="flex-1">
+              <h1 className="text-xs font-bold">اپلیکیشن روانشناسی من</h1>
+              <p className="text-xs mt-1">دسترسی سریع تر و راحت تر به متخصصان و پزشکان</p>
+            </div>
+          </div>
+          <div className="w-full flex justify-end items-center gap-3">
+            <Button isOutline size="xs" variant="main">
+              بستن
+            </Button>
+            <Button onClick={onClick} size="xs" variant="main">
+              دانلود
+            </Button>
+          </div>
+        </div>
       )}
       callback={(data) => console.log(data)}
     />
