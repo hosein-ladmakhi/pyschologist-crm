@@ -15,9 +15,8 @@ const withPlatform = (handler) => {
     );
     const desktopPageURL = "/main-operation";
     const currentURL = request.nextUrl.pathname;
-
     if (
-      isMobilePlatform &&
+      !isMobilePlatform &&
       currentURL !== desktopPageURL &&
       (routes.find((element) => element.startsWith(currentURL) && currentURL !== "/") ||
         currentURL === "/")
