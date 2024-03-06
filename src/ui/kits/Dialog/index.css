@@ -3,6 +3,8 @@
 
     &__card {
         @apply fixed bottom-0 left-0 w-full bg-white p-5 flex flex-col justify-start items-start overflow-auto;
+        /* MOBILE */
+        @apply lg:left-1/2 lg:top-1/2 lg:!-translate-x-1/2 lg:!-translate-y-1/2 lg:max-w-screen-2xl lg:rounded lg:overflow-y-auto;
     }
 
     &__loading {

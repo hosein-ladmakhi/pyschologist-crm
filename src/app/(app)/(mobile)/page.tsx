@@ -2,7 +2,7 @@ import "./page.css";
 
 import { Suspense } from "react";
 import CategoriesList from "../_components/CategoriesList";
-import Landing from "../_components/Landing";
+import Landing from "../../../ui/components/Landing";
 import TherapistsList from "../_components/TherapistsList";
 import HomeHeader from "../_components/HomeHeader";
 import CategoriesListLoading from "../_components/CategoriesListLoading";

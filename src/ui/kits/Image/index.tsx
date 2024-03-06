@@ -1,6 +1,8 @@
-import { FC, useState } from 'react';
-import NextImage from 'next/image';
-import { IImageProps } from './index.type';
+"use client";
+
+import { FC, useState } from "react";
+import NextImage from "next/image";
+import { IImageProps } from "./index.type";
 
 const Image: FC<IImageProps> = ({ notFoundLoader, ...imgProps }) => {
   const [error, setError] = useState<boolean>(false);

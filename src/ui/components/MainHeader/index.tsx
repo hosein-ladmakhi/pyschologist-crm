@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import './index.css';
+import "./index.css";
 
-import { IconMenu } from '@tabler/icons-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { FC, Suspense, useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import dynamic from 'next/dynamic';
+import { IconMenu } from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FC, Suspense, useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 
-const AuthDialog = dynamic(() => import('../AuthDialog'));
-const MainHeaderDrawer = dynamic(() => import('./components/Drawer'));
+const AuthDialog = dynamic(() => import("../AuthDialog"));
+const MainHeaderDrawer = dynamic(() => import("./components/Drawer"));
 
 const MainHeader: FC = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);

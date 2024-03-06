@@ -1,10 +1,17 @@
+import Landing from "@/ui/components/Landing";
 import { FC } from "react";
+import Header from "./_components/Header";
+import TherapistsView from "./_components/TherapistsView";
+import CategoriesView from "./_components/CategoriesView";
 
-const MainOperationPage: FC = () => {
+const MainOperationPage: FC = async () => {
   return (
-    <div>
-      <p>کاربر این سایت با دیوایس دسکتاپ امده است</p>
-    </div>
+    <>
+      <Header />
+      <Landing />
+      <TherapistsView />
+      <CategoriesView />
+    </>
   );
 };
 
