@@ -1,8 +1,8 @@
 import { fetchTherapistsApi } from "@/services/therapists";
-import Button from "@/ui/kits/Button";
 import Image from "@/ui/kits/Image";
 import { FC } from "react";
 import TherapistsViewHeader from "../TherapistsViewHeader";
+import TherapistItemButton from "../TherapistItemButton";
 
 const TherapistsView: FC = async () => {
   const therapists = await fetchTherapistsApi();
@@ -42,9 +42,7 @@ const TherapistsView: FC = async () => {
                     </div>
                   ))}
                 </div>
-                <Button size="sm" shape="block" className="mt-4" variant="main">
-                  جزئیات
-                </Button>
+                <TherapistItemButton therapist={therapist} />
               </div>
             </div>
           </div>

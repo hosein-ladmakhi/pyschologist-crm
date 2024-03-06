@@ -8,8 +8,8 @@ import Image from "@/ui/kits/Image";
 import { EGender, ITherapist } from "@/types/therapist.type";
 import { fetchTherapistsApi } from "@/services/therapists";
 import Loading from "@/ui/kits/Loading";
-import Button from "@/ui/kits/Button";
 import { colorThemes } from "@/constants/color-theme.constant";
+import TherapistItemButton from "../TherapistItemButton";
 
 const NotFoundTherapistImage = () => {
   return (
@@ -75,10 +75,10 @@ const AllTherapistsModal: FC<IAllTherapistsModalProps> = ({ therapists, count, h
         </div>
       </div>
 
-      <div className="w-full grid grid-cols-12 gap-5 mt-10">
+      <div className="w-full grid grid-cols-12 gap-7 mt-10">
         {data.map((therapist) => (
           <div className="col-span-4" key={therapist.id}>
-            <div className="flex justify-start items-center gap-3">
+            <div className="flex justify-start items-center gap-5">
               <div className="h-24 w-24 relative">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}${therapist.image}`}
@@ -89,16 +89,12 @@ const AllTherapistsModal: FC<IAllTherapistsModalProps> = ({ therapists, count, h
                 />
               </div>
               <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <h1 className="text-base font-bold">
-                    {therapist.gender === EGender.male ? "آقای  دکتر" : "خانوم دکتر"}{" "}
-                    {therapist.firstName} {therapist.lastName}
-                  </h1>
-                  <Button size="xs" variant="main" isOutline>
-                    جزئیات
-                  </Button>
-                </div>
+                <h1 className="text-base font-bold">
+                  {therapist.gender === EGender.male ? "آقای  دکتر" : "خانوم دکتر"}{" "}
+                  {therapist.firstName} {therapist.lastName}
+                </h1>
                 <p className="text-sm mt-1 line-clamp-2">{therapist.bio}</p>
+                <TherapistItemButton therapist={therapist} />
               </div>
             </div>
           </div>

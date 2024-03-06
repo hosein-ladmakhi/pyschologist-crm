@@ -41,7 +41,7 @@ const ReserveDialog: FC<IReserveDialogProps> = ({ schedules, therapistId, catego
       .filter((element) => element.items.length > 0)
       .map((element) => ({
         value: element.day,
-        text: DAYS[element.day],
+        text: DAYS[element.day - 1],
       }))
   );
 
