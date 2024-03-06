@@ -21,6 +21,7 @@ const withPlatform = (handler) => {
       (routes.find((element) => element.startsWith(currentURL) && currentURL !== "/") ||
         currentURL === "/")
     ) {
+      console.log("desktop url", currentURL);
       return NextResponse.rewrite(new URL(desktopPageURL, request.url), {
         status: 303,
       });
