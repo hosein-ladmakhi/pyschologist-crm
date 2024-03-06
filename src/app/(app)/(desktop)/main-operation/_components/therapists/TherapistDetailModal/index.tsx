@@ -2,7 +2,6 @@
 
 import Dialog from "@/ui/kits/Dialog";
 import { FC, useEffect, useState } from "react";
-import { useOperationContext } from "../../_context/operation-context";
 import Image from "@/ui/kits/Image";
 import { transformDegreeOfEducation, transformScheduleType } from "@/utils/enum-transformer";
 import { ITherapistSchedulesPerDay } from "@/types/therapist-schedule.type";
@@ -10,6 +9,7 @@ import { fetchTherapistSchedulesPerDayApi } from "@/services/therapists";
 import Loading from "@/ui/kits/Loading";
 import { DAYS } from "@/constants/days.constant";
 import { IconX } from "@tabler/icons-react";
+import { useOperationContext } from "../../../_context/operation-context";
 
 const NotFoundImage: FC = () => <p>NOt Found</p>;
 

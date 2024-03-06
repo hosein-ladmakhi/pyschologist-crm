@@ -3,7 +3,7 @@
 import Button from "@/ui/kits/Button";
 import { FC } from "react";
 import { ITherapistItemButtonProps } from "./index.type";
-import { useOperationContext } from "../../_context/operation-context";
+import { useOperationContext } from "../../../_context/operation-context";
 
 const TherapistItemButton: FC<ITherapistItemButtonProps> = ({ therapist }) => {
   const { handleSelectedTherapistDetailChange } = useOperationContext();

@@ -1,15 +1,11 @@
 "use client";
 
 import Dialog from "@/ui/kits/Dialog";
-import { IconUser, IconX } from "@tabler/icons-react";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { IAllTherapistsModalProps } from "./index.type";
-import Image from "@/ui/kits/Image";
-import { EGender, ITherapist } from "@/types/therapist.type";
+import { ITherapist } from "@/types/therapist.type";
 import { fetchTherapistsApi } from "@/services/therapists";
 import Loading from "@/ui/kits/Loading";
-import { colorThemes } from "@/constants/color-theme.constant";
-import TherapistItemButton from "../TherapistItemButton";
 import AllTherapistsList from "../AllTherapistsList";
 
 const AllTherapistsModal: FC<IAllTherapistsModalProps> = ({ therapists, count, handleClose }) => {
