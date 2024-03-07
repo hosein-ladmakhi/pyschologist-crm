@@ -41,11 +41,7 @@ const ReserveCard: FC<IReserveCardProps> = ({ showStatus, reserve, handleOpenLoc
       {showStatus && (
         <div className="reserve-card__content">
           <span className="reserve-card__title">وضعیت رزرو</span>
-          <span>
-            {transformReserveStatus(
-              reserve?.status === EOrderStatus.Cancel ? EOrderStatus.Cancel : EOrderStatus.Done
-            )}
-          </span>
+          <span>{transformReserveStatus(reserve?.status)}</span>
         </div>
       )}
       <div className="reserve-card__content">
