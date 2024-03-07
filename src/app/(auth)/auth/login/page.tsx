@@ -1,46 +1,23 @@
-'use client';
+"use client";
 
-import './page.css';
+import "./page.css";
 
-import Button from '@/ui/kits/Button';
-import Input from '@/ui/kits/Input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import { loginValidation } from './login-form.validation';
-import { TLoginFormValidation } from './page.type';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
+import Button from "@/ui/kits/Button";
+import Input from "@/ui/kits/Input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { TLoginFormValidation } from "./page.type";
+import { useLogin } from "@/hooks/useLogin";
+import { loginValidation } from "@/constants/login-form.validation";
 
 const LoginPage = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
+  const { handleLogin, loading } = useLogin();
   const { control, handleSubmit, reset } = useForm<TLoginFormValidation>({
     resolver: zodResolver(loginValidation),
   });
   const onSubmit = handleSubmit((data) => {
-    setLoading(true);
-    signIn('credentials', {
-      ...data,
-      redirect: false,
-    })
-      .then((res) => {
-        if (res?.ok) {
-          toast.success('ورود شما با موفقیت انجام شد');
-          router.push('/');
-          reset();
-        } else {
-          toast.error('ورود شما با شکست مواجعه شد');
-        }
-      })
-      .catch(() => {
-        toast.error('ورود شما با شکست مواجعه شد');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    handleLogin(data, reset, "/");
   });
 
   return (
@@ -68,12 +45,7 @@ const LoginPage = () => {
             type="password"
             tabIndex={2}
           />
-          <Button
-            loading={loading}
-            type="submit"
-            variant="main"
-            className="login__form-btn"
-          >
+          <Button loading={loading} type="submit" variant="main" className="login__form-btn">
             ورود به حساب کاربری
           </Button>
         </form>

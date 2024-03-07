@@ -1,9 +1,26 @@
+"use client";
+
+import { useLoggedInUser } from "@/hooks/useLoggedInUser";
 import Button from "@/ui/kits/Button";
 import { IconPaperBag, IconUserCode } from "@tabler/icons-react";
 import Image from "next/image";
 import { FC } from "react";
+import { useOperationContext } from "../../_context/operation-context";
+import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
 
 const Header: FC = () => {
+  // const isAuth = useIsAuthenticated();
+  const loggedInUser = useLoggedInUser();
+  const { handleOpenAuthDialog, handleOpenDashboardDialog } = useOperationContext();
+
+  const handleOpenDashboardDlg = () => {
+    if (!loggedInUser?.id) {
+      handleOpenAuthDialog();
+    } else {
+      handleOpenDashboardDialog();
+    }
+  };
+
   return (
     <div className="container py-5">
       <div className="flex justify-between items-center w-full">
@@ -20,7 +37,7 @@ const Header: FC = () => {
           </div>
         </div>
         <div className="flex justify-center items-center gap-3">
-          <Button variant="main" className="w-44 h-14">
+          <Button onClick={handleOpenDashboardDlg} variant="main" className="w-44 h-14">
             <IconUserCode size="27px" stroke={1} />
             ورود به پنل
           </Button>

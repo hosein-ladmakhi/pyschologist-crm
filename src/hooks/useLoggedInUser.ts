@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useAuthSession } from './useAuthSession';
+import { useAuthSession } from "./useAuthSession";
 
 export const useLoggedInUser = () => {
   const session = useAuthSession();

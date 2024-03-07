@@ -3,7 +3,7 @@
 import Dialog from "@/ui/kits/Dialog";
 import { FC } from "react";
 import { ICategoryDetailModalProps } from "./index.type";
-import AllTherapistsList from "../../therapists/AllTherapistsList";
+import AllTherapistsList from "../../Therapists/AllTherapistsList";
 
 const CategoryDetailModal: FC<ICategoryDetailModalProps> = ({ handleClose, therapists }) => {
   return (

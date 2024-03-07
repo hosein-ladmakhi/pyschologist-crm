@@ -14,7 +14,7 @@ import { updateOwnProfileMutationApi } from "@/services/patient";
 import { useLoggedInUser } from "@/hooks/useLoggedInUser";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { editProfileFormValidation } from "./edit-profile.validation";
+import { editProfileFormValidation } from "../../../../../../constants/edit-profile.validation";
 import Dialog from "@/ui/kits/Dialog";
 
 const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {

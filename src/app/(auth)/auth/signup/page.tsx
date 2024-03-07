@@ -1,51 +1,24 @@
-'use client';
+"use client";
 
-import './page.css';
+import "./page.css";
 
-import Button from '@/ui/kits/Button';
-import Input from '@/ui/kits/Input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import { signupValidation } from './signup-form.validation';
-import { TSignupFormValidation } from './page.type';
-import { toast } from 'react-toastify';
-import { signupMutationApi } from '@/services/auth';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import Button from "@/ui/kits/Button";
+import Input from "@/ui/kits/Input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { TSignupFormValidation } from "./page.type";
+import { useSignup } from "@/hooks/useSignup";
+import { signupValidation } from "@/constants/signup-form.validation";
 
 const SignupPage = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
+  const { handleSignup, loading } = useSignup();
   const { control, handleSubmit, reset } = useForm<TSignupFormValidation>({
     resolver: zodResolver(signupValidation),
   });
 
   const onSubmit = handleSubmit((data) => {
-    setLoading(true);
-    signupMutationApi(data)
-      .then(() => {
-        return signIn('credentials', {
-          ...data,
-          redirect: false,
-        });
-      })
-      .then((res) => {
-        if (res?.ok) {
-          toast.success('ثبت نام شما با موفقیت انجام گردید');
-          router.push('/');
-          reset();
-        } else {
-          toast.error('ثبت نام شما با شکست مواجعه شد');
-        }
-      })
-      .catch(() => {
-        toast.error('ثبت نام شما انجام نشد دوباره تلاش کنید');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    handleSignup(data, reset, "/");
   });
 
   return (
@@ -84,12 +57,7 @@ const SignupPage = () => {
             type="password"
             helperText="گذرواژه کلید ورود شما به سایت میباشد"
           />
-          <Button
-            loading={loading}
-            type="submit"
-            variant="main"
-            className="signup__form-btn"
-          >
+          <Button loading={loading} type="submit" variant="main" className="signup__form-btn">
             ساخت حساب
           </Button>
         </form>
