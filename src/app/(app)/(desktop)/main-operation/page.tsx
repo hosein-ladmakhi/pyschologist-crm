@@ -6,6 +6,7 @@ import CategoriesView from "./_components/Categories/CategoriesView";
 import TherapistDetailModal from "./_components/Therapists/TherapistDetailModal";
 import AuthDialog from "./_components/AuthDialog";
 import DashboardDialog from "./_components/Dashboard/_components/DashboardDialog";
+import ReservationDetailDialog from "./_components/Dashboard/_components/ReservationDetailDialog";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,7 @@ const MainOperationPage: FC = async () => {
       <TherapistDetailModal />
       <AuthDialog />
       <DashboardDialog />
+      <ReservationDetailDialog />
     </>
   );
 };

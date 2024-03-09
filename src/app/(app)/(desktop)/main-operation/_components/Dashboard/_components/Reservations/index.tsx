@@ -9,7 +9,7 @@ import Button from "@/ui/kits/Button";
 import moment from "jalali-moment";
 
 const Reservations: FC = () => {
-  const { handleCloseDashboardDialog } = useOperationContext();
+  const { handleCloseDashboardDialog, handleOpenSelectedReserveDetail } = useOperationContext();
   const [reservations, setReservations] = useState<IOrder[]>([]);
   const [activeTab, setActiveTab] = useState<"all" | "disabled" | "active">("all");
 
@@ -71,7 +71,11 @@ const Reservations: FC = () => {
       <ul className="grid grid-cols-12 gap-3">
         {transformedReservations.map((reserve) => (
           <div key={reserve.id} className="col-span-4">
-            <ReserveCard handleOpenLocation={() => {}} reserve={reserve} showStatus />
+            <ReserveCard
+              handleOpenLocation={handleOpenSelectedReserveDetail.bind(null, reserve)}
+              reserve={reserve}
+              showStatus
+            />
           </div>
         ))}
       </ul>
