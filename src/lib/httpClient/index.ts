@@ -42,6 +42,7 @@ const api = async <ResponseType>(
       ...options,
       method,
       headers,
+      cache: options.cache || "no-store",
     });
     const responseJSON = await response.json();
     if (response.status === 401) {

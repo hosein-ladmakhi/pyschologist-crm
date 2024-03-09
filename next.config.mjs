@@ -31,4 +31,4 @@ const nextConfig = {
     }
 };
 
-export default withPWA({ dest: 'public', register: true, skipWaiting: true })(nextConfig);
+export default withPWA({ dest: 'public', register: true, skipWaiting: true, cacheStartUrl: "/" })(nextConfig);
