@@ -7,15 +7,13 @@ import ReserveCard from "@/ui/components/ReserveCard";
 import { useOperationContext } from "../../../../_context/operation-context";
 import Button from "@/ui/kits/Button";
 import moment from "jalali-moment";
+import Select from "@/ui/kits/Select";
+import { useForm } from "react-hook-form";
 
 const Reservations: FC = () => {
   const { handleCloseDashboardDialog, handleOpenSelectedReserveDetail } = useOperationContext();
   const [reservations, setReservations] = useState<IOrder[]>([]);
-  const [activeTab, setActiveTab] = useState<"all" | "disabled" | "active">("all");
-
-  const handleChangeTab = (tab: "all" | "disabled" | "active") => {
-    setActiveTab(tab);
-  };
+  const { control, watch } = useForm({ defaultValues: { list: "all" } });
 
   useEffect(() => {
     fetchOwnReservationOrdersApi()
@@ -27,6 +25,7 @@ const Reservations: FC = () => {
       });
   }, []);
 
+  const activeTab = watch("list");
   const transformedReservations = useMemo(() => {
     switch (activeTab) {
       case "all":
@@ -48,28 +47,30 @@ const Reservations: FC = () => {
     <div>
       <div className="flex justify-between items-center w-full">
         <h1 className="text-lg font-bold mb-5">لیست رزرو های این کاربر</h1>
-        <div className="flex justify-center items-center gap-3">
-          <Button onClick={handleChangeTab.bind(null, "all")} size="sm" variant="main" isOutline>
-            نمایش تمامی رزرو ها
-          </Button>
-          <Button onClick={handleChangeTab.bind(null, "active")} size="sm" variant="main" isOutline>
-            نمایش رزرو های فعال
-          </Button>
-          <Button
-            onClick={handleChangeTab.bind(null, "disabled")}
-            size="sm"
-            variant="main"
-            isOutline
-          >
-            نمایش رزرو های گذشته
-          </Button>
-          <Button size="sm" variant="error" onClick={handleCloseDashboardDialog} isOutline>
-            بستن
-          </Button>
-        </div>
+        <Select
+          control={control}
+          emptyPlaceholder="نحوه نمایش لیست رزرو ها"
+          label=""
+          name="list"
+          additionalClasses="!w-[500px]"
+          options={[
+            {
+              text: "نمایش تمامی رزرو ها",
+              value: "all",
+            },
+            {
+              text: "نمایش رزرو های فعال",
+              value: "active",
+            },
+            {
+              text: "نمایش رزرو عای گذشته",
+              value: "disabled",
+            },
+          ]}
+        />
       </div>
       <ul className="grid grid-cols-12 gap-3">
-        {transformedReservations.map((reserve) => (
+        {transformedReservations?.map((reserve) => (
           <div key={reserve.id} className="col-span-4">
             <ReserveCard
               handleOpenLocation={handleOpenSelectedReserveDetail.bind(null, reserve)}

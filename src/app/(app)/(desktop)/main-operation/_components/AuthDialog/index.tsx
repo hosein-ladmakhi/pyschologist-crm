@@ -7,13 +7,7 @@ import AuthDialogSignupForm from "./_components/SignupForm";
 import { useOperationContext } from "../../_context/operation-context";
 
 const AuthDialog: FC = () => {
-  const { handleCloseAuthDialog, isAuthDialogOpen, handleOpenDashboardDialog } =
-    useOperationContext();
-
-  const handleClose = () => {
-    handleCloseAuthDialog();
-    handleOpenDashboardDialog();
-  };
+  const { handleCloseAuthDialog, isAuthDialogOpen } = useOperationContext();
 
   return (
     <Dialog isOpen={isAuthDialogOpen} cardClass="h-[660px]">
@@ -22,12 +16,12 @@ const AuthDialog: FC = () => {
           <div className="flex justify-center items-center flex-col">
             <h1 className="font-bold text-lg">ساخت حساب کاربری جدید</h1>
           </div>
-          <AuthDialogSignupForm handleClose={handleClose} />
+          <AuthDialogSignupForm handleClose={handleCloseAuthDialog} />
         </div>
         <div className="col-span-6">
           <div className="flex justify-center items-center flex-col">
             <h1 className="font-bold text-lg">ورود به حساب کاربری</h1>
-            <AuthDialogLoginForm handleClose={handleClose} />
+            <AuthDialogLoginForm handleClose={handleCloseAuthDialog} />
           </div>
         </div>
       </div>

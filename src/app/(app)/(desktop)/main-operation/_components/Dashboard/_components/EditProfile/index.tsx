@@ -13,6 +13,7 @@ import { updateOwnProfileMutationApi } from "@/services/patient";
 import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
 import { useOperationContext } from "../../../../_context/operation-context";
+import { IconX } from "@tabler/icons-react";
 
 const EditProfile: FC = () => {
   const currentUser = useLoggedInUser();
@@ -58,7 +59,12 @@ const EditProfile: FC = () => {
 
   return (
     <>
-      <h1 className="text-lg font-bold mb-5">ویرایش حساب کاربری</h1>
+      <div className="flex justify-between items-start">
+        <h1 className="text-lg font-bold mb-5">ویرایش حساب کاربری</h1>
+        <div className="cursor-pointer" onClick={handleCloseDashboardDialog}>
+          <IconX />
+        </div>
+      </div>
       <form onSubmit={onSubmit}>
         <Input
           control={control}

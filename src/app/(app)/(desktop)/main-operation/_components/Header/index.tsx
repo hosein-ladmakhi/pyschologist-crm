@@ -2,23 +2,26 @@
 
 import { useLoggedInUser } from "@/hooks/useLoggedInUser";
 import Button from "@/ui/kits/Button";
-import { IconPaperBag, IconUserCode } from "@tabler/icons-react";
 import Image from "next/image";
 import { FC } from "react";
 import { useOperationContext } from "../../_context/operation-context";
-import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
+import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 const Header: FC = () => {
-  // const isAuth = useIsAuthenticated();
   const loggedInUser = useLoggedInUser();
   const { handleOpenAuthDialog, handleOpenDashboardDialog } = useOperationContext();
 
   const handleOpenDashboardDlg = () => {
     if (!loggedInUser?.id) {
-      handleOpenAuthDialog();
+      toast.error("برای ورود به داشبورد ابتدا باید احراز هویت را انجام دهید");
     } else {
       handleOpenDashboardDialog();
     }
+  };
+
+  const handleExit = () => {
+    signOut({ redirect: false });
   };
 
   return (
@@ -37,10 +40,23 @@ const Header: FC = () => {
           </div>
         </div>
         <div className="flex justify-center items-center gap-3">
-          <Button isOutline onClick={handleOpenDashboardDlg} variant="main" className="w-44 h-14">
-            <IconUserCode size="27px" stroke={1} />
-            ورود به پنل
+          <Button isOutline onClick={handleOpenDashboardDlg} variant="main" className="w-32 h-12">
+            داشبورد
           </Button>
+          {loggedInUser?.id ? (
+            <Button isOutline onClick={handleExit} variant="error" className="w-36 h-12">
+              خروج از حساب
+            </Button>
+          ) : (
+            <Button
+              isOutline
+              onClick={handleOpenAuthDialog}
+              variant="success"
+              className="w-32 h-12"
+            >
+              احراز هویت
+            </Button>
+          )}
         </div>
       </div>
     </div>

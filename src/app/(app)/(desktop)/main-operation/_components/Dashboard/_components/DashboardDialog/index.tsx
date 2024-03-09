@@ -7,14 +7,9 @@ import EditProfile from "../EditProfile";
 import Reservations from "../Reservations";
 
 const DashboardDialog: FC = () => {
-  const { handleCloseDashboardDialog, isDashboardDialogOpen } = useOperationContext();
-  console.log(123, isDashboardDialogOpen);
+  const { isDashboardDialogOpen } = useOperationContext();
   return (
-    <Dialog
-      isOpen={isDashboardDialogOpen}
-      // isOpen
-      cardClass="h-4/6"
-    >
+    <Dialog isOpen={isDashboardDialogOpen} cardClass="h-5/6">
       <div className="grid grid-cols-12 gap-7 w-full">
         <div className="col-span-9">
           <Reservations />
