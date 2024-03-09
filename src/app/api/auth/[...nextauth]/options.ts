@@ -30,7 +30,8 @@ export const authOptions: AuthOptions = {
   ],
   pages: { signIn: "/auth/login" },
   callbacks: {
-    jwt: ({ user, token }: any) => {
+    jwt: ({ user, token, session }: any) => {
+      if (session) token.user = { ...session };
       if (user) return { ...(user || {}), ...(token || {}) };
       return { ...token };
     },

@@ -38,7 +38,7 @@ const EditProfileDialog: FC<IEditProfileDialogProps> = ({ onClose }) => {
     updateOwnProfileMutationApi(data)
       .then((response) => {
         toast.success("اطلاعات کاربری شما با موفقیت ثبت گردید");
-        session.update(response);
+        session.update({ ...response });
         onClose();
         if (data.newPassword) {
           signOut({ redirect: false });
