@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { INextAuthSession } from '@/types/general.type';
-import { useSession } from 'next-auth/react';
+import { INextAuthSession } from "@/types/general.type";
+import { useSession } from "next-auth/react";
 
 export const useAuthSession = (): INextAuthSession => {
   const session: any = useSession();

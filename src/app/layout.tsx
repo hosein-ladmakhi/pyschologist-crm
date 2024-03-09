@@ -9,13 +9,14 @@ import ToastifyProvider from "@/providers/ToastifyProvider";
 import SessionProvider from "@/providers/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Metadata } from "next";
+import { authOptions } from "./api/auth/[...nextauth]/options";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>

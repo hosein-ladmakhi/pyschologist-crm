@@ -30,14 +30,13 @@ export const authOptions: AuthOptions = {
   ],
   pages: { signIn: "/auth/login" },
   callbacks: {
-    jwt: ({ user, token, session }: any) => {
-      if (session) token.user = { ...session };
+    jwt: ({ user, token }: any) => {
       if (user) return { ...(user || {}), ...(token || {}) };
       return { ...token };
     },
     async session({ session, token }: any) {
       if (token?.user) {
-        session.user = token.user;
+        session.user = { ...token.user };
         session.accessToken = token.accessToken;
       }
       return session;
