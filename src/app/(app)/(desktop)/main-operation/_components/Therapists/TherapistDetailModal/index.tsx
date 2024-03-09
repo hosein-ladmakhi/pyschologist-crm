@@ -10,14 +10,21 @@ import Loading from "@/ui/kits/Loading";
 import { DAYS } from "@/constants/days.constant";
 import { IconX } from "@tabler/icons-react";
 import { useOperationContext } from "../../../_context/operation-context";
+import Button from "@/ui/kits/Button";
+import { useLoggedInUser } from "@/hooks/useLoggedInUser";
 
 const NotFoundImage: FC = () => <p>NOt Found</p>;
 
 const TherapistDetailModal: FC = () => {
-  const { selectedTherapistDetail, handleSelectedTherapistDetailChange } = useOperationContext();
+  const {
+    selectedTherapistDetail,
+    handleSelectedTherapistDetailChange,
+    handleOpenScheduleToReserve,
+  } = useOperationContext();
   const [schedules, setSchedules] = useState<ITherapistSchedulesPerDay[]>([]);
   const [schedulesLoading, setSchedulesLoading] = useState<boolean>(false);
   const handleClose = () => handleSelectedTherapistDetailChange(undefined);
+  const loggedInUser = useLoggedInUser();
 
   useEffect(() => {
     if (selectedTherapistDetail) {
@@ -54,6 +61,11 @@ const TherapistDetailModal: FC = () => {
               className="rounded"
             />
           </div>
+          {!loggedInUser?.id && (
+            <div className="w-full bg-error/10 text-error text-base font-bold my-5 p-4 rounded">
+              برای ثبت رزرو در این سایت شما ابتدا باید وارد اکانت خود شوید
+            </div>
+          )}
           <h1 className="font-bold text-lg mt-3 mb-1">نام پزشک</h1>
           <h3 className="text-base">
             {selectedTherapistDetail?.firstName} {selectedTherapistDetail?.lastName}
@@ -108,6 +120,21 @@ const TherapistDetailModal: FC = () => {
                       نوع برگزاری : {transformScheduleType(element.type)}
                     </h1>
                   </div>
+                  {loggedInUser?.id && (
+                    <div className="flex justify-end items-center w-full">
+                      <Button
+                        onClick={() => {
+                          handleOpenScheduleToReserve(element);
+                          handleClose();
+                        }}
+                        size="sm"
+                        variant="main"
+                        isOutline
+                      >
+                        ثبت رزرو با این پزشک
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

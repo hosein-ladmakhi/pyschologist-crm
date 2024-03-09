@@ -37,13 +37,9 @@ const Header: FC = () => {
           </div>
         </div>
         <div className="flex justify-center items-center gap-3">
-          <Button onClick={handleOpenDashboardDlg} variant="main" className="w-44 h-14">
+          <Button isOutline onClick={handleOpenDashboardDlg} variant="main" className="w-44 h-14">
             <IconUserCode size="27px" stroke={1} />
             ورود به پنل
-          </Button>
-          <Button isOutline variant="main" className="w-44 h-14">
-            <IconPaperBag size="27px" stroke={1} />
-            ثبت رزرو جدید
           </Button>
         </div>
       </div>

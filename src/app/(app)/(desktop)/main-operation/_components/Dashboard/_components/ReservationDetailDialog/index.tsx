@@ -26,7 +26,8 @@ const ReservationDetailDialog: FC<IReservationDetailDialogProps> = () => {
         <h1 className="text-base font-bold">تاریخ برگزاری رزرو</h1>
         <p className="text-base leading-7 text-neutral mt-1">
           {DAYS[reserve.day]} {transformScheduleType(reserve.type)} ساعت {reserve.startHour} تا{" "}
-          {reserve.endHour} در تاریخ {jalaliMoment(reserve.date).format("jYYYY-jM-jD")}
+          {reserve.endHour} در تاریخ{" "}
+          <span className="rtl">{jalaliMoment(reserve.date).format("jD-jM-jYYYY")}</span>
         </p>
       </div>
       <div className="mb-4">

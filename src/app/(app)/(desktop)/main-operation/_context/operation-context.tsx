@@ -1,6 +1,7 @@
 "use client";
 
 import { IOrder } from "@/types/order.type";
+import { ITherapistSchedules } from "@/types/therapist-schedule.type";
 import { ITherapist } from "@/types/therapist.type";
 import { FC, PropsWithChildren, createContext, useContext, useState } from "react";
 
@@ -10,6 +11,7 @@ interface IOperationContext {
   isDashboardDialogOpen?: boolean;
   isAuthDialogOpen?: boolean;
   selectedReserveDetail?: IOrder;
+  scheduleToReserve?: ITherapistSchedules;
 
   // FUNCTIONS
   handleSelectedTherapistDetailChange: (therapist?: ITherapist) => void;
@@ -19,6 +21,8 @@ interface IOperationContext {
   handleCloseDashboardDialog: () => void;
   handleOpenSelectedReserveDetail: (reserve: IOrder) => void;
   handleCloseSelectedReserveDetail: () => void;
+  handleOpenScheduleToReserve: (schedule: ITherapistSchedules) => void;
+  handleCloseScheduleToReserve: () => void;
 }
 
 const operationContext = createContext<IOperationContext>({
@@ -29,6 +33,8 @@ const operationContext = createContext<IOperationContext>({
   handleOpenDashboardDialog: () => {},
   handleCloseSelectedReserveDetail: () => {},
   handleOpenSelectedReserveDetail: (reserve: IOrder) => {},
+  handleCloseScheduleToReserve: () => {},
+  handleOpenScheduleToReserve: (schedule: ITherapistSchedules) => {},
 });
 
 export const useOperationContext = () => useContext(operationContext);
@@ -40,6 +46,15 @@ export const OperationContextProvider: FC<PropsWithChildren> = ({ children }) =>
   const [isAuthDialogOpen, setAuthDialogOpen] = useState<boolean>(false);
   const [isDashboardDialogOpen, setDashboardDialogOpen] = useState<boolean>(false);
   const [selectedReserveDetail, setSelectedReserveDetail] = useState<IOrder>();
+  const [scheduleToReserve, setScheduleToReserve] = useState<ITherapistSchedules>();
+
+  const handleOpenScheduleToReserve = (schedule: ITherapistSchedules) => {
+    setScheduleToReserve(schedule);
+  };
+
+  const handleCloseScheduleToReserve = () => {
+    setScheduleToReserve(undefined);
+  };
 
   const handleCloseSelectedReserveDetail = () => {
     setSelectedReserveDetail(undefined);
@@ -83,6 +98,9 @@ export const OperationContextProvider: FC<PropsWithChildren> = ({ children }) =>
         handleCloseSelectedReserveDetail,
         handleOpenSelectedReserveDetail,
         selectedReserveDetail,
+        handleCloseScheduleToReserve,
+        handleOpenScheduleToReserve,
+        scheduleToReserve,
       }}
     >
       {children}

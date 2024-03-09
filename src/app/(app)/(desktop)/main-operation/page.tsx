@@ -7,6 +7,7 @@ import TherapistDetailModal from "./_components/Therapists/TherapistDetailModal"
 import AuthDialog from "./_components/AuthDialog";
 import DashboardDialog from "./_components/Dashboard/_components/DashboardDialog";
 import ReservationDetailDialog from "./_components/Dashboard/_components/ReservationDetailDialog";
+import CreateNewReserve from "./_components/CreateNewReserve";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +17,7 @@ const MainOperationPage: FC = async () => {
       <Header />
       <Landing />
       <CategoriesView />
+      <CreateNewReserve />
       <TherapistsView />
       <TherapistDetailModal />
       <AuthDialog />
