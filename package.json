@@ -6,7 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "find:unused": "next-unused"
+  },
+  "next-unused": {
+    "alias": {},
+    "include": [
+      "src"
+    ],
+    "exclude": [],
+    "entrypoints": [
+      "src"
+    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -14,6 +25,7 @@
     "@tabler/icons-react": "^2.47.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/next-pwa": "^5.6.9",
+    "@vercel/speed-insights": "^1.0.10",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.5",
     "jalali-moment": "^3.3.11",
@@ -42,6 +54,7 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "next-unused": "^0.0.6",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

@@ -10,6 +10,7 @@ import SessionProvider from "@/providers/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Metadata } from "next";
 import { authOptions } from "./api/auth/[...nextauth]/options";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -22,6 +23,7 @@ const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
   return (
     <html lang="fa" dir="rtl">
       <body className={iranYekanFont.className}>
+        <SpeedInsights />
         <RouteLoadingProvider>
           <ToastifyProvider>
             <SessionProvider session={session}>{children}</SessionProvider>
