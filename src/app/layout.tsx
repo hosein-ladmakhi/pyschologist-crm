@@ -14,6 +14,7 @@ import { authOptions } from "./api/auth/[...nextauth]/options";
 export const metadata: Metadata = {
   manifest: "/manifest.json",
   themeColor: "#FFFFFF",
+  viewport: { initialScale: 1, maximumScale: 1 },
 };
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => {
