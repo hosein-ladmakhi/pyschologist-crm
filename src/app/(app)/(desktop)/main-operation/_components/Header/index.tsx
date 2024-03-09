@@ -26,7 +26,7 @@ const Header: FC = () => {
 
   return (
     <div className="container py-5">
-      <div className="flex justify-between items-center w-full">
+      <div className="flex lg:justify-between lg:items-center lg:flex-row w-full flex-col justify-start items-start gap-5 lg:gap-0">
         <div className="flex justify-start items-center gap-4">
           <div className="h-20 w-20 relative">
             <Image src="/icons/android/android-launchericon-512-512.png" fill alt="launcher" />

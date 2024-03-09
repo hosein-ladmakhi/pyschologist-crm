@@ -31,7 +31,7 @@ const AllCategoriesModal: FC<IAllCategoriesModalProps> = ({ content, handleClose
         </div>
         <div className="grid grid-cols-12 gap-3 mt-10">
           {content.map((category) => (
-            <div className="col-span-3">
+            <div className="xl:col-span-3 col-span-6 lg:col-span-4">
               <div className="w-full flex justify-center items-center flex-col hover:bg-main/10 transition-all p-5 cursor-pointer rounded-md">
                 <div className="bg-main/10 h-20 w-20 relative rounded mb-5">
                   <Image

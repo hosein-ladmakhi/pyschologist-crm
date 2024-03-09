@@ -28,7 +28,7 @@ const AllTherapistsList: FC<IAllTherapistsListProps> = ({ data, handleClose }) =
 
       <div className="w-full grid grid-cols-12 gap-7 mt-10">
         {data.map((therapist) => (
-          <div className="col-span-4" key={therapist.id}>
+          <div className="lg:col-span-4 col-span-12 md:col-span-6" key={therapist.id}>
             <div className="flex justify-start items-center gap-5">
               <div className="h-24 w-24 relative">
                 <Image

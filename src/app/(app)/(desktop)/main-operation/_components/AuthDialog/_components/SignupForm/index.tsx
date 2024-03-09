@@ -24,7 +24,7 @@ const AuthDialogSignupForm: FC<IAuthDialogSignupFormProps> = ({ handleClose }) =
   });
 
   return (
-    <form onSubmit={onSubmit} className="w-9/12 mx-auto my-7">
+    <form onSubmit={onSubmit} className="lg:w-9/12 w-full mx-auto my-7">
       <Input
         control={control}
         name="firstName"

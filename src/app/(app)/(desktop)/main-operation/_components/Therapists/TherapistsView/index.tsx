@@ -12,7 +12,7 @@ const TherapistsView: FC = async () => {
       <TherapistsViewHeader content={therapists.content} count={therapists.count} />
       <div className="grid grid-cols-12 gap-4 mt-10">
         {therapists.content.map((therapist) => (
-          <div className="col-span-3" key={therapist.id}>
+          <div className="xl:col-span-3 col-span-12 md:col-span-6" key={therapist.id}>
             <div className="flex justify-center items-center flex-col bg-main/5 p-5 rounded">
               <div className="relative h-32 w-32">
                 <Image

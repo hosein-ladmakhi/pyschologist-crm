@@ -21,8 +21,8 @@ const AuthDialog: FC = () => {
         <div className="col-span-6">
           <div className="flex justify-center items-center flex-col">
             <h1 className="font-bold text-lg">ورود به حساب کاربری</h1>
-            <AuthDialogLoginForm handleClose={handleCloseAuthDialog} />
           </div>
+          <AuthDialogLoginForm handleClose={handleCloseAuthDialog} />
         </div>
       </div>
     </Dialog>

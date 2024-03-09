@@ -43,7 +43,7 @@ const TherapistDetailModal: FC = () => {
   }, [selectedTherapistDetail]);
   if (!selectedTherapistDetail) return <></>;
   return (
-    <Dialog isOpen cardClass="h-5/6 !w-[700px] overflow-auto">
+    <Dialog isOpen cardClass="h-5/6 lg:!w-[700px] overflow-auto">
       <div className="w-full flex justify-between items-center mb-3">
         <h1 className="text-lg font-bold">مشخصات پزشک مورد نظر</h1>
         <div className="cursor-pointer" onClick={handleClose}>
