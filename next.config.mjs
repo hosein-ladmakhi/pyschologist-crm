@@ -26,9 +26,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  compiler: {
-    removeConsole: true,
-  },
   output: "standalone",
 };
 

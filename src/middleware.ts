@@ -1,12 +1,10 @@
 import { headers } from "next/headers";
 import { NextFetchEvent, NextRequest, NextResponse, userAgent } from "next/server";
-import { withAuth } from "next-auth/middleware";
+import { protectedMiddleware } from "./lib/nextAuth/middleware";
 
 const protectedRoute = ["/dashboard", "/tickets"];
 
 const routes = ["/dashboard", "/tickets", "/categories", "/therapists"];
-
-const protectedMiddleware = withAuth({});
 
 const withPlatform = (handler) => {
   return (request: NextRequest) => {

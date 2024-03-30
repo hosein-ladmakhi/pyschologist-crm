@@ -63,7 +63,7 @@ const Reservations: FC = () => {
               value: "active",
             },
             {
-              text: "نمایش رزرو عای گذشته",
+              text: "نمایش رزرو های گذشته",
               value: "disabled",
             },
           ]}

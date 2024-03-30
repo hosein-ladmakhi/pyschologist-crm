@@ -16,7 +16,7 @@ const HomePage = () => {
       <Landing />
       <div className="best-therapists">
         <HomeHeader
-          content="بیش از 2500 پزشک آماده پاسخگویی به شما هستند"
+          content="بیش از 100 پزشک آماده پاسخگویی به شما هستند"
           title="گفتگو و مشاوره با بهترین مختصصین"
         />
         <Suspense fallback={<TherapistsListLoading />}>
@@ -26,7 +26,7 @@ const HomePage = () => {
       <div className="categories-list">
         <HomeHeader
           title="تخصص های موحود در پزشک من"
-          content="بیش از 2500 تخصص در زمینه پزشکی موجود میباشد"
+          content="بیش از 100 تخصص در زمینه پزشکی موجود میباشد"
         />
         <Suspense fallback={<CategoriesListLoading />}>
           <CategoriesList />

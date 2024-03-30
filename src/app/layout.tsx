@@ -9,7 +9,7 @@ import ToastifyProvider from "@/providers/ToastifyProvider";
 import SessionProvider from "@/providers/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Metadata } from "next";
-import { authOptions } from "./api/auth/[...nextauth]/options";
+import { authOptions } from "../lib/nextAuth/options";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {

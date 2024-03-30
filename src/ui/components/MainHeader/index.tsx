@@ -29,7 +29,7 @@ const MainHeader: FC = () => {
     <>
       <header className="header">
         <Link href="/">
-          <h1 className="header__title">سایت روانشناسی</h1>
+          <h1 className="header__title">سایت پزشکی من</h1>
         </Link>
         <div className="header__icon" onClick={onChangeDrawerStatus}>
           <IconMenu fontSize="35px" />

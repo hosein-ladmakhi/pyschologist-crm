@@ -36,7 +36,7 @@ const AppInstallablePrompt: FC = () => {
               />
             </div>
             <div className="flex-1">
-              <h1 className="text-xs font-bold">اپلیکیشن روانشناسی من</h1>
+              <h1 className="text-xs font-bold">اپلیکیشن پزشکی من</h1>
               <p className="text-xs mt-1">دسترسی سریع تر و راحت تر به متخصصان و پزشکان</p>
             </div>
           </div>

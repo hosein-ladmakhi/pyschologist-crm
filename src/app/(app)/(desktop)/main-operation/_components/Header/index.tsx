@@ -32,9 +32,9 @@ const Header: FC = () => {
             <Image src="/icons/android/android-launchericon-512-512.png" fill alt="launcher" />
           </div>
           <div>
-            <h1 className="text-xl font-bold">سایت روانشناسی من</h1>
+            <h1 className="text-xl font-bold">سایت پزشک من</h1>
             <p className="mt-1 text-base">
-              ما به آرامش و زندگی شما اهمیت میدهیم و برای حال خوب شما تلاش میکنیم پس به ما اعتماد
+              ما به آرامش و سلامتی شما اهمیت میدهیم و برای حال خوب شما تلاش میکنیم پس به ما اعتماد
               کنید
             </p>
           </div>

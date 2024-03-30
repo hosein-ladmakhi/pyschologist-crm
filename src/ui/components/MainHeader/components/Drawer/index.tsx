@@ -25,7 +25,7 @@ const MainHeaderDrawer: FC<IMainHeaderDrawerProps> = ({ onClose, onOpenAuthDialo
   return (
     <div className="drawer">
       <motion.nav {...MAIN_HEADER_DRAWER_ANIMATION} className="drawer__content">
-        <h1 className="drawer__title">سایت روانشناسی</h1>
+        <h1 className="drawer__title">سایت پزشکی من</h1>
         <ul>
           {MAIN_HEADER_MENU.filter((item) => (item.when === "auth" ? isAuthCurrentUser : true)).map(
             (item) => (

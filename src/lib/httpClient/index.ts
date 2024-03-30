@@ -1,5 +1,5 @@
 import { TApiMethod, TApiOptions } from "./index.type";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { authOptions } from "@/lib/nextAuth/options";
 import { getServerSession } from "next-auth";
 import { getSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";

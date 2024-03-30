@@ -8,14 +8,6 @@ import { EGender } from "@/types/therapist.type";
 import { colorThemes } from "@/constants/color-theme.constant";
 import { IAllTherapistsListProps } from "./index.type";
 
-const NotFoundTherapistImage = () => {
-  return (
-    <div className="w-full h-full bg-main/10 rounded flex justify-center items-center">
-      <IconUser size="45px" color={colorThemes.main} />
-    </div>
-  );
-};
-
 const AllTherapistsList: FC<IAllTherapistsListProps> = ({ data, handleClose }) => {
   return (
     <>
@@ -33,7 +25,7 @@ const AllTherapistsList: FC<IAllTherapistsListProps> = ({ data, handleClose }) =
               <div className="h-24 w-24 relative">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}${therapist.image}`}
-                  notFoundLoader={<NotFoundTherapistImage />}
+                  notFoundLoader={<IconUser size="45px" color={colorThemes.main} />}
                   fill
                   alt={therapist.firstName}
                   className="rounded object-cover object-center"
