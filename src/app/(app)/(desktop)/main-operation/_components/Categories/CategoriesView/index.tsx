@@ -2,6 +2,7 @@ import { fetchTherapistsOfCategoriesApi } from "@/services/categories";
 import Image from "@/ui/kits/Image";
 import { FC } from "react";
 import CategoriesViewHeader from "../CategoriesViewHeader";
+import { IconArrowsRandom } from "@tabler/icons-react";
 
 const CategoriesView: FC = async () => {
   const categories = await fetchTherapistsOfCategoriesApi();
@@ -18,7 +19,7 @@ const CategoriesView: FC = async () => {
                   fill
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}/upload/${category.icon}`}
                   alt={category.enName}
-                  notFoundLoader={<>salam</>}
+                  notFoundLoader={<IconArrowsRandom size="45px" />}
                 />
               </div>
               <div>

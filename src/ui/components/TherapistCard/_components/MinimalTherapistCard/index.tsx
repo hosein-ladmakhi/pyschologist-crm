@@ -1,19 +1,10 @@
 import './index.css';
 
-import { colorThemes } from '@/constants/color-theme.constant';
 import Image from '@/ui/kits/Image';
 import { IconUserBolt } from '@tabler/icons-react';
 import Link from 'next/link';
 import { FC } from 'react';
 import { IMinimalTherapistCardProps } from './index.type';
-
-const NotFoundImage = () => {
-  return (
-    <div className="absolute top-0 left-0 h-full w-full bg-main/10 rounded flex justify-center items-center">
-      <IconUserBolt size="35px" color={colorThemes.main} />
-    </div>
-  );
-};
 
 const MinimalTherapistCard: FC<IMinimalTherapistCardProps> = ({
   therapist,
@@ -30,7 +21,7 @@ const MinimalTherapistCard: FC<IMinimalTherapistCardProps> = ({
             alt="category-therapist"
             fill
             className="minimal-therapist__img"
-            notFoundLoader={<NotFoundImage />}
+            notFoundLoader={<IconUserBolt size="35px" />}
           />
         </div>
         <h1 className="minimal-therapist__title">

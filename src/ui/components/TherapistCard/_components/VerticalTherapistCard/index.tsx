@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { IVerticalTherapistCardProps } from './index.type';
 import Link from 'next/link';
 import Image from '@/ui/kits/Image';
+import { IconUser } from '@tabler/icons-react';
 
 const VerticalTherapistCard: FC<IVerticalTherapistCardProps> = ({
   therapist,
@@ -16,6 +17,7 @@ const VerticalTherapistCard: FC<IVerticalTherapistCardProps> = ({
           fill
           alt="avatar"
           className="vertical-therapist__image"
+          notFoundLoader={<IconUser size="45px" />}
         />
       </div>
       <h1 className="vertical-therapist__title">

@@ -6,7 +6,6 @@ import Image from "@/ui/kits/Image";
 import Button from "@/ui/kits/Button";
 import dynamic from "next/dynamic";
 import { ICategory } from "@/types/category.type";
-import { colorThemes } from "@/constants/color-theme.constant";
 
 const CategoryDetailModal = dynamic(() => import("../CategoryDetailModal"));
 
@@ -39,7 +38,7 @@ const AllCategoriesModal: FC<IAllCategoriesModalProps> = ({ content, handleClose
                     fill
                     src={`${process.env.NEXT_PUBLIC_BASE_URL}/upload/${category.icon}`}
                     alt={category.enName}
-                    notFoundLoader={<IconArrowsRandom size="45px" color={colorThemes.main} />}
+                    notFoundLoader={<IconArrowsRandom size="45px" />}
                   />
                 </div>
                 <h1 className="font-bold text-base line-clamp-1">{category.faName}</h1>

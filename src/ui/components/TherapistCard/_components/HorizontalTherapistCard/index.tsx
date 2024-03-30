@@ -1,19 +1,10 @@
 import './index.css';
 
-import { colorThemes } from '@/constants/color-theme.constant';
 import Image from '@/ui/kits/Image';
 import { IconUserBolt } from '@tabler/icons-react';
 import Link from 'next/link';
 import { FC } from 'react';
 import { IHorizontalTherapistCardProps } from './index.type';
-
-const NotFoundImage = () => {
-  return (
-    <div className="flex justify-center items-center w-full bg-main/10 absolute top-0 left-0 h-full rounded">
-      <IconUserBolt size="35px" color={colorThemes.main} />
-    </div>
-  );
-};
 
 const HorizontalTherapistCard: FC<IHorizontalTherapistCardProps> = ({
   therapist,
@@ -30,7 +21,7 @@ const HorizontalTherapistCard: FC<IHorizontalTherapistCardProps> = ({
             alt="therapist image"
             fill
             className="horizontal-therapist__img"
-            notFoundLoader={<NotFoundImage />}
+            notFoundLoader={<IconUserBolt size="35px" />}
           />
         </div>
         <div className="horizontal-therapist__body">

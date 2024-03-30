@@ -12,8 +12,7 @@ import { IconX } from "@tabler/icons-react";
 import { useOperationContext } from "../../../_context/operation-context";
 import Button from "@/ui/kits/Button";
 import { useLoggedInUser } from "@/hooks/useLoggedInUser";
-
-const NotFoundImage: FC = () => <p>NOt Found</p>;
+import { IconUser } from "@tabler/icons-react";
 
 const TherapistDetailModal: FC = () => {
   const {
@@ -54,8 +53,8 @@ const TherapistDetailModal: FC = () => {
         <>
           <div className="relative h-24 w-24 mb-5">
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_URL!}${selectedTherapistDetail?.image}`}
-              notFoundLoader={<NotFoundImage />}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL!}${selectedTherapistDetail?.image}/s`}
+              notFoundLoader={<IconUser size="40px" />}
               alt={selectedTherapistDetail.firstName}
               fill
               className="rounded"

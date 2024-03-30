@@ -25,7 +25,7 @@ const AllTherapistsList: FC<IAllTherapistsListProps> = ({ data, handleClose }) =
               <div className="h-24 w-24 relative">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}${therapist.image}`}
-                  notFoundLoader={<IconUser size="45px" color={colorThemes.main} />}
+                  notFoundLoader={<IconUser size="45px" />}
                   fill
                   alt={therapist.firstName}
                   className="rounded object-cover object-center"

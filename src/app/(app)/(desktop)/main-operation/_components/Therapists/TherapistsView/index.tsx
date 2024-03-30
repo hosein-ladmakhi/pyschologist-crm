@@ -3,6 +3,7 @@ import Image from "@/ui/kits/Image";
 import { FC } from "react";
 import TherapistsViewHeader from "../TherapistsViewHeader";
 import TherapistItemButton from "../TherapistItemButton";
+import { IconUser } from "@tabler/icons-react";
 
 const TherapistsView: FC = async () => {
   const therapists = await fetchTherapistsApi();
@@ -21,9 +22,7 @@ const TherapistsView: FC = async () => {
                   alt={therapist.firstName}
                   fill
                   notFoundLoader={
-                    <>
-                      <h1>پیدا شد</h1>
-                    </>
+                   <IconUser size="40px"/>
                   }
                 />
               </div>
