@@ -22,7 +22,10 @@ const TherapistDetailModal: FC = () => {
   } = useOperationContext();
   const [schedules, setSchedules] = useState<ITherapistSchedulesPerDay[]>([]);
   const [schedulesLoading, setSchedulesLoading] = useState<boolean>(false);
-  const handleClose = () => handleSelectedTherapistDetailChange(undefined);
+  const handleClose = () => {
+    handleSelectedTherapistDetailChange(undefined);
+    setSchedules([]);
+  };
   const loggedInUser = useLoggedInUser();
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const TherapistDetailModal: FC = () => {
         <>
           <div className="relative h-24 w-24 mb-5">
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_URL!}${selectedTherapistDetail?.image}/s`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL!}${selectedTherapistDetail?.image}`}
               notFoundLoader={<IconUser size="40px" />}
               alt={selectedTherapistDetail.firstName}
               fill
@@ -111,10 +114,12 @@ const TherapistDetailModal: FC = () => {
                     <h1 className="text-sm mt-2">
                       بازه برگزاری : از ساعت {element.startHour} تا {element.endHour}
                     </h1>
-                    <h1 className="text-sm mt-2 leading-6">
-                      محل برگزاری : شهر {element.location.city} {element.location.address} اتاق{" "}
-                      {element.room}
-                    </h1>
+                    {element?.location && (
+                      <h1 className="text-sm mt-2 leading-6">
+                        محل برگزاری : شهر {element?.location?.city} {element?.location?.address}{" "}
+                        اتاق {element.room}
+                      </h1>
+                    )}
                     <h1 className="text-sm mt-2 leading-6">
                       نوع برگزاری : {transformScheduleType(element.type)}
                     </h1>
