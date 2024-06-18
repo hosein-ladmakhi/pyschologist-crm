@@ -8,6 +8,18 @@ import AuthDialog from "./_components/AuthDialog";
 import DashboardDialog from "./_components/Dashboard/_components/DashboardDialog";
 import ReservationDetailDialog from "./_components/Dashboard/_components/ReservationDetailDialog";
 import CreateNewReserve from "./_components/CreateNewReserve";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "سایت پزشک من",
+  description: "رزرو جلسات پزشکی از طریق سایت پزشک من",
+  authors: [{ name: "hosein ladmakhi nejad" }],
+  keywords: ["Doctor", "Online", "Therapist"],
+  robots: {
+    follow: true,
+    index: true,
+  },
+};
 
 export const dynamic = "force-dynamic";
 
