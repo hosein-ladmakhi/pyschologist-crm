@@ -2,10 +2,11 @@
 
 import "./index.css";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TDialogProps } from "./index.type";
 import Loading from "../Loading";
 import { motion } from "framer-motion";
+import { createPortal } from "react-dom";
 
 export const MOBILE_ANIMATION = {
   initial: { y: 1000 },
@@ -20,8 +21,25 @@ const Dialog: FC<TDialogProps> = ({
   isOpen = false,
   cardClass = "",
 }) => {
+  useEffect(() => {
+    const handleBodyScroll = () => {
+      const hasDialogOnDocument = document.getElementsByClassName("dialog").length > 0;
+      if (hasDialogOnDocument) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    };
+
+    handleBodyScroll();
+
+    return () => {
+      handleBodyScroll();
+    };
+  }, [isOpen]);
+
   if (!isOpen) return <></>;
-  return (
+  return createPortal(
     <div className="dialog">
       <motion.div {...MOBILE_ANIMATION} className={`dialog__card ${cardClass}`}>
         {loading && (
@@ -31,7 +49,8 @@ const Dialog: FC<TDialogProps> = ({
         )}
         {children}
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

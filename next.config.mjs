@@ -29,6 +29,6 @@ const nextConfig = {
   output: "standalone",
 };
 
-export default withPWA({ dest: "public", register: true, skipWaiting: true, cacheStartUrl: "/" })(
+export default withPWA({ dest: "public", register: true, skipWaiting: true, cacheStartUrl: "/", disableDevLogs:true })(
   nextConfig
 );

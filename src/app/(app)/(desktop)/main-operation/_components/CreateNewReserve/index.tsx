@@ -22,26 +22,33 @@ import { toast } from "react-toastify";
 const CreateNewReserve: FC = () => {
   const { scheduleToReserve, handleCloseScheduleToReserve, handleOpenDashboardDialog } =
     useOperationContext();
-  if (!scheduleToReserve) return <></>;
+
   const [loading, setLoading] = useState<boolean>(false);
   const loggedInUser = useLoggedInUser();
   const [preparedDates, setPreparedDates] = useState<string[]>([]);
-  const { control, watch } = useForm<any>({
-    defaultValues: {
-      day: DAYS[scheduleToReserve?.day - 1],
-      therapist:
-        scheduleToReserve?.therapist?.firstName + " " + scheduleToReserve?.therapist?.lastName,
-      time: `از ساعت ${scheduleToReserve.startHour} تا ${scheduleToReserve.endHour}`,
-      type:
-        scheduleToReserve.type === ETherapistScheduleType.both
-          ? undefined
-          : transformScheduleType(scheduleToReserve.type),
-    },
-  });
 
-  const therapistId = scheduleToReserve.therapist.id;
+  const { control, watch, setValue } = useForm<any>();
+
+  const therapistId = scheduleToReserve?.therapist?.id;
   const selectedDay = watch("day");
   const selectedTime = watch("time");
+
+  useEffect(() => {
+    if (scheduleToReserve) {
+      setValue("day", DAYS[scheduleToReserve?.day - 1]);
+      setValue(
+        "therapist",
+        scheduleToReserve?.therapist?.firstName + " " + scheduleToReserve?.therapist?.lastName
+      );
+      setValue("time", `از ساعت ${scheduleToReserve.startHour} تا ${scheduleToReserve.endHour}`);
+      setValue(
+        "type",
+        scheduleToReserve.type === ETherapistScheduleType.both
+          ? undefined
+          : transformScheduleType(scheduleToReserve.type)
+      );
+    }
+  }, [scheduleToReserve]);
 
   useEffect(() => {
     if (selectedDay && selectedTime && therapistId) {
@@ -56,23 +63,29 @@ const CreateNewReserve: FC = () => {
     }
   }, [selectedDay, selectedTime, therapistId]);
 
-  const handleSaveReserve = () => {
+  const handleProvideNewReserveData = () => {
     const categories = watch("categories");
     const date = watch("date");
     const type = watch("type");
-    const data: ISaveOwnOrderRequestBody = {
-      categories: [categories],
-      date,
-      day: scheduleToReserve.day,
-      endHour: scheduleToReserve.endHour,
-      startHour: scheduleToReserve.startHour,
-      location: scheduleToReserve.location.id,
-      room: scheduleToReserve.room,
-      type: scheduleToReserve.type !== ETherapistScheduleType.both ? scheduleToReserve.type : type,
-      patient: loggedInUser?.id,
-      therapist: scheduleToReserve.therapist.id,
-    };
+    return scheduleToReserve
+      ? {
+          categories: [categories],
+          date,
+          day: scheduleToReserve.day,
+          endHour: scheduleToReserve.endHour,
+          startHour: scheduleToReserve.startHour,
+          location: scheduleToReserve.location.id,
+          room: scheduleToReserve.room,
+          type:
+            scheduleToReserve.type !== ETherapistScheduleType.both ? scheduleToReserve.type : type,
+          patient: loggedInUser?.id,
+          therapist: scheduleToReserve.therapist.id,
+        }
+      : {};
+  };
 
+  const handleSaveReserve = () => {
+    const data = handleProvideNewReserveData() as ISaveOwnOrderRequestBody;
     setLoading(true);
     saveOwnReservationOrderMutationApi(data)
       .then((res) => {
@@ -94,36 +107,38 @@ const CreateNewReserve: FC = () => {
   };
 
   return (
-    <Dialog loading={loading} isOpen cardClass="max-h-fit">
+    <Dialog loading={loading} isOpen={!!scheduleToReserve} cardClass="max-h-fit">
       <div className="w-full">
         <div className="mb-5">
           <h1 className="text-base font-bold">اطلاعات تکمیلی</h1>
-          <form className="w-full grid grid-cols-12 gap-6 mt-2">
-            <div className="col-span-6">
-              <Select
-                control={control}
-                label="دلیل دریافت نوبت"
-                emptyPlaceholder="این جلسه رزرو شده در رابطه با کدام زمینه های زیر میباشد"
-                name="categories"
-                options={scheduleToReserve?.therapist?.workingFields?.map((element) => ({
-                  value: element.id,
-                  text: element.faName,
-                }))}
-              />
-            </div>
-            <div className="col-span-6">
-              <Select
-                control={control}
-                label="تاریخ برگزاری رزرو"
-                emptyPlaceholder="برای چه تاریخی شما این رزرو رو نیاز دارید"
-                name="date"
-                options={preparedDates.map((element) => ({
-                  text: moment(element).format("jYYYY-jMM-jDD"),
-                  value: element,
-                }))}
-              />
-            </div>
-          </form>
+          {scheduleToReserve && (
+            <form className="w-full grid grid-cols-12 gap-6 mt-2">
+              <div className="col-span-6">
+                <Select
+                  control={control}
+                  label="دلیل دریافت نوبت"
+                  emptyPlaceholder="این جلسه رزرو شده در رابطه با کدام زمینه های زیر میباشد"
+                  name="categories"
+                  options={scheduleToReserve?.therapist?.workingFields?.map((element) => ({
+                    value: element.id,
+                    text: element.faName,
+                  }))}
+                />
+              </div>
+              <div className="col-span-6">
+                <Select
+                  control={control}
+                  label="تاریخ برگزاری رزرو"
+                  emptyPlaceholder="برای چه تاریخی شما این رزرو رو نیاز دارید"
+                  name="date"
+                  options={preparedDates.map((element) => ({
+                    text: moment(element).format("jYYYY-jMM-jDD"),
+                    value: element,
+                  }))}
+                />
+              </div>
+            </form>
+          )}
         </div>
         <div className="mb-5">
           <h1 className="text-base font-bold">اطلاعات پایه این رزرو</h1>
@@ -156,7 +171,7 @@ const CreateNewReserve: FC = () => {
               />
             </div>
             <div className="col-span-6">
-              {scheduleToReserve.type === ETherapistScheduleType.both ? (
+              {scheduleToReserve?.type === ETherapistScheduleType.both ? (
                 <Select
                   control={control}
                   label="شیوه برگزاری"

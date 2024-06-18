@@ -43,9 +43,8 @@ const TherapistDetailModal: FC = () => {
         });
     }
   }, [selectedTherapistDetail]);
-  if (!selectedTherapistDetail) return <></>;
   return (
-    <Dialog isOpen cardClass="h-5/6 lg:!w-[700px] overflow-auto">
+    <Dialog isOpen={!!selectedTherapistDetail} cardClass="h-5/6 lg:!w-[700px] overflow-auto">
       <div className="w-full flex justify-between items-center mb-3">
         <h1 className="text-lg font-bold">مشخصات پزشک مورد نظر</h1>
         <div className="cursor-pointer" onClick={handleClose}>
@@ -58,7 +57,7 @@ const TherapistDetailModal: FC = () => {
             <Image
               src={`${process.env.NEXT_PUBLIC_BASE_URL!}${selectedTherapistDetail?.image}`}
               notFoundLoader={<IconUser size="40px" />}
-              alt={selectedTherapistDetail.firstName}
+              alt={selectedTherapistDetail?.firstName || "therapist image"}
               fill
               className="rounded"
             />
@@ -80,7 +79,8 @@ const TherapistDetailModal: FC = () => {
         <>
           <h1 className="font-bold text-lg mt-3 mb-1">مدرک تحصیلی</h1>
           <h3 className="text-base">
-            {transformDegreeOfEducation(selectedTherapistDetail?.degreeOfEducation)}
+            {selectedTherapistDetail?.degreeOfEducation &&
+              transformDegreeOfEducation(selectedTherapistDetail?.degreeOfEducation)}
           </h3>
         </>
         <>
@@ -129,7 +129,6 @@ const TherapistDetailModal: FC = () => {
                       <Button
                         onClick={() => {
                           handleOpenScheduleToReserve(element);
-                          handleClose();
                         }}
                         size="sm"
                         variant="main"
